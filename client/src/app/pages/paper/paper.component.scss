@@ -1,0 +1,17 @@
+.container {
+  background-color: #f6f6f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.paper {
+  width: 210mm;
+  height: 297mm;
+  background-color: #fff;
+  margin: 2rem auto;
+  padding: calc(297mm/12) calc(210mm/12);
+  outline: none;
+  min-height: fit-content;
+  overflow: scroll;
+}
