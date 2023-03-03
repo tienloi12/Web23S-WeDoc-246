@@ -1,0 +1,52 @@
+.nav {
+  background-color: #673ab7;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.2rem;
+}
+
+.nav p {
+  font-size: 0.8rem;
+}
+
+.nav span {
+  font-weight: 200;
+  transition: 0.5s;
+}
+
+.nav span:hover {
+  cursor: pointer;
+  color: #c2c2c2;
+  transition: 0.5s;
+}
+
+.block1,
+.block2,
+.block3 {
+  display: flex;
+  text-align: center;
+}
+
+.block1 div,
+.block2 div,
+.block3 div {
+  margin: 0 1rem;
+}
+
+
+.block1 .back {
+        display: flex;
+        align-items: center;
+}
+
+.block1 .zoom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.block1 .zoom select {
+  outline: none;
+  margin-top: 0.1875rem;
+}
