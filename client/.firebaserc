@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "wedoc-f1743": {
+      "hosting": {
+        "client": [
+          "wedoc-f1743"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "wedoc-f1743"
+  }
+}
