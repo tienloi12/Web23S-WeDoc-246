@@ -17,4 +17,9 @@ export class SidebarComponent {
   italic() {
     document.execCommand('italic', false, '');
   }
+
+  colorText($event: any) {
+    console.log($event);
+    document.execCommand('foreColor', false, `${$event.target.value}`);
+  }
 }
