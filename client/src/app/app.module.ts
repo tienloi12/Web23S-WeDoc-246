@@ -9,6 +9,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { authReducer } from './ngrx/reducers/auth.reducer';
+import { AuthEffects } from './ngrx/effects/auth.effect';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,9 +24,9 @@ import { authReducer } from './ngrx/reducers/auth.reducer';
       },
       {}
     ),
-    EffectsModule.forRoot([EffectsModule]),
+    EffectsModule.forRoot([AuthEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

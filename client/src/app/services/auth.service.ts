@@ -8,6 +8,7 @@ import {
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
+import { UserModel } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -24,8 +25,18 @@ export class AuthService {
     return from(
       new Promise(async (resolve, reject) => {
         try {
-          let UserCredential = await signInWithPopup(this.auth, new GoogleAuthProvider());
-          resolve(UserCredential);
+          let userCredential = await signInWithPopup(
+            this.auth,
+            new GoogleAuthProvider()
+          );
+          let user!: UserModel;
+          user = {
+            uid: userCredential.user?.uid,
+            email: userCredential.user?.email,
+            displayName: userCredential.user?.displayName,
+            photoURL: userCredential.user?.photoURL,
+          };
+          resolve(user);
         } catch (error) {
           reject(error);
         }

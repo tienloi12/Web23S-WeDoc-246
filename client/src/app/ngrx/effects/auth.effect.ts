@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { User } from '@angular/fire/auth';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { UserModel } from 'src/app/models/user.model';
@@ -10,11 +9,11 @@ export class AuthEffects {
   constructor(private actions$: Actions, private authService: AuthService) {}
 
   login$ = createEffect(() => {
-        console.log("login$");
+    console.log('login$');
     return this.actions$.pipe(
       ofType('[Auth] Login'),
       switchMap(() => this.authService.loginWithGoogle()),
-      map((user) => AuthActions.loginSuccess({ user: <User>user })),
+      map((user) => AuthActions.loginSuccess({ user: <UserModel>user })),
       catchError((error) => of(AuthActions.loginFailure({ error })))
     );
   });
