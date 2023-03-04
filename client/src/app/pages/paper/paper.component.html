@@ -1,6 +1,9 @@
-<app-navbar [(sidebarOpen)]="showSideBar"></app-navbar>
-<app-sidebar *ngIf="showSideBar"></app-sidebar>
-<div class="container">
-  <div class="paper" contenteditable="true">
-    <div>Than Hoang Anh Tuan</div>
+<div *ngIf="this.authService.checkUser()">
+  <app-navbar [(sidebarOpen)]="showSideBar"></app-navbar>
+  <app-sidebar *ngIf="showSideBar"></app-sidebar>
+  <div class="container" >
+    <div class="paper" contenteditable="true">
+      <div>Than Hoang Anh Tuan</div>
+  </div>
 </div>
+
