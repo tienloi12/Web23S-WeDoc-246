@@ -1,0 +1,123 @@
+
+.main{
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+}
+.text{
+    width: 100%;
+    height: 70%;
+    background-color: #F6F6F6;
+
+}
+.template { 
+    height: 90%;
+    width: 80%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.Start-text{ 
+    font-size: 1rem;
+    margin-left: 1.25rem;
+}
+.page-text-1{
+    margin-top: 5px;
+    font-size: 1rem;
+}.page-text-2{
+    font-size: 0.8rem;
+}
+.template-page {
+    display: flex;
+    width: 80%;
+    height: 80%;
+    background-color: #F6F6F6;
+}
+.page-1{
+    margin-top: 1rem;
+    margin-left: 1.25rem;
+    height: 11.25rem;
+    width: 8.125rem;
+    background-color: #F6F6F6;
+}
+.page {
+    margin-top: 1rem;
+    margin-left: 3.75rem;
+    height: 11.25rem;
+    width: 8.125rem;
+    background-color: #F6F6F6;
+}
+.page-text {
+    background-color: #F6F6F6; 
+}
+.page-page {
+    height: 10rem;
+    width: 8.125rem;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+}
+.icon-add{
+    width: 1.875rem;
+    height: 1.875rem;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.file {
+    width: 100%;
+}
+.file-title{
+    display: flex;
+}
+.file-name
+{
+    margin-top: 1rem;
+    margin-left:3.125rem;
+    font-size: 1rem;
+}
+.date{
+    margin-top: 1rem;
+    margin-left: 62.5rem;
+    font-size: 1rem;
+}
+.line{
+    margin-left: 2.25rem;
+    width: 95%;
+    margin-top: 0.625rem;
+    height: 0.0625rem;
+    background-color: #ccc;
+}
+.line-item-file{
+    margin-left: 2.25rem;
+    width: 95%;
+    height: 0.0625rem;
+    background-color: #ccc;
+}
+.file-item{
+    width: 100%;
+}
+.item-file{
+
+    display: flex;
+}
+.description-icon{
+    margin-top: 1rem;
+    margin-left: 2.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+.item-text{
+    width: 9.375rem;
+    margin-top: 1.125rem;
+    margin-left: 0.625rem;
+    font-size: 1rem;
+}
+.item-text-1{
+
+    margin-top: 1.125rem;
+    margin-left: 0.625rem;
+    font-size: 1rem;
+    margin-left: 56.625rem;
+}
