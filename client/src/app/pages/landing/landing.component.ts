@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { user } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AuthState } from 'src/app/ngrx/states/auth.state';
 import { AuthService } from 'src/app/services/auth.service';
 import * as AuthActions from "../../ngrx/actions/auth.action";
+import * as CreateUser from "../../ngrx/actions/createuser.action";
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
@@ -22,6 +24,6 @@ export class LandingComponent {
 
   loginWithGoogle() {
     this.store.dispatch(AuthActions.login());
-    console.log(this.login$);
   }
+  
 }
