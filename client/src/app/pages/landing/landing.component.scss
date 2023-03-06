@@ -3,6 +3,8 @@
     height: 100%;
     width: 100%;
     font-family: 'Source Sans Pro', sans-serif; 
+    animation: fadeIn 5s;
+
 }
 
 .container__left , .container__right{
@@ -67,12 +69,20 @@
     align-items: center;
     background-color: #ffff;
     font-size: 0.875rem;
-    padding: 0.9rem 1.25rem;
-    margin: 1.25rem 0.5rem 0 0 ; 
+    padding: 1rem 1.5rem;
+    margin: 2.5rem 0.5rem 0 0 ; 
     border-radius: 0.9rem;
     cursor: pointer;
-
 }
+
+
+button:hover {
+    background: transparent;
+    // border: 0.9rem solid #673AB7;
+    // color: #673AB7;
+    transform: scale(1.1);
+}
+
 
 .content__login img {
     margin-right: 0.5rem;
@@ -99,6 +109,8 @@
 .container__right img {
     width: 40.625rem;
     margin-top: 1.563rem;
+    animation: fadeIn 5s;
+
 }
 
 .container--center {
@@ -106,10 +118,57 @@
     z-index: 1;
 }
 
+// .image--center--1{
+//     animation: skew1 3s infinite;
+//     transform: skew(20deg);
+//     animation-direction: alternate;
+//     opacity: 1;
+// }
+
+// @keyframes skew1 {
+//     0% {
+//       transform: skewX(20deg);
+//     }
+//     100% {
+//       transform: skewX(-20deg);
+//     }
+//   }
+
+//   .image--center--2{
+//     animation: skew2 3s infinite;
+//     transform: skewX(40deg);
+//     animation-direction: alternate-reverse;
+//     opacity: 1;
+//   }
+
+//   @keyframes skew2 {
+//     0% {
+//       transform: skewX(20deg);
+//     }
+//     100% {
+//       transform: skewX(-20deg);
+//     }
+//   }
+
+
+
 .image--center--1 {
     position: relative;
     left: 45.5rem;
     top: 15rem;
+    animation: fadeIn 5s;
+
+}
+
+@keyframes fadeIn{
+    0% {
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+
+
 }
 
 
@@ -117,4 +176,6 @@
     position: relative;
     left: 37rem;
     top: 21rem;
+    animation: fadeIn 5s;
+
 }
