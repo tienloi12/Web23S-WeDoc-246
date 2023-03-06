@@ -3,7 +3,6 @@
     height: 100%;
     width: 100%;
     font-family: 'Source Sans Pro', sans-serif; 
-    animation: fadeIn 5s;
 
 }
 
@@ -73,6 +72,8 @@
     margin: 2.5rem 0.5rem 0 0 ; 
     border-radius: 0.9rem;
     cursor: pointer;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.25);
+
 }
 
 
@@ -81,6 +82,9 @@ button:hover {
     // border: 0.9rem solid #673AB7;
     // color: #673AB7;
     transform: scale(1.1);
+    transition: 0.45s;
+
+
 }
 
 
@@ -95,21 +99,27 @@ button:hover {
 
 .container__right button {
     display: flex;
+    flex-direction: row;
     padding: 0.8rem 1.25rem;
     font-weight: bold;
-    margin: 1.563rem 0 0 76%;
     font-size: 1.25rem;
     background-color: #673AB7;
     color: #ffff;
     border-radius: 0.9rem;
     border: 0.1rem #F6F6F6 solid;
     cursor: pointer;
+    box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.25);
+    transition: 0.45s;
 }
 
+
+
+
 .container__right img {
-    width: 40.625rem;
+    width: 100%;
+    height: 70%;
+    object-fit: contain;
     margin-top: 1.563rem;
-    animation: fadeIn 5s;
 
 }
 
@@ -118,37 +128,37 @@ button:hover {
     z-index: 1;
 }
 
-// .image--center--1{
-//     animation: skew1 3s infinite;
-//     transform: skew(20deg);
-//     animation-direction: alternate;
-//     opacity: 1;
-// }
+.image--center--1{
+    animation: skew1 3s infinite;
+    transform: skew(20deg);
+    animation-direction: alternate;
+    opacity: 1;
+}
 
-// @keyframes skew1 {
-//     0% {
-//       transform: skewX(20deg);
-//     }
-//     100% {
-//       transform: skewX(-20deg);
-//     }
-//   }
+@keyframes skew1 {
+    0% {
+      transform: skewX(20deg);
+    }
+    100% {
+      transform: skewX(-20deg);
+    }
+  }
 
-//   .image--center--2{
-//     animation: skew2 3s infinite;
-//     transform: skewX(40deg);
-//     animation-direction: alternate-reverse;
-//     opacity: 1;
-//   }
+  .image--center--2{
+    animation: skew2 3s infinite;
+    transform: skewX(40deg);
+    animation-direction: alternate-reverse;
+    opacity: 1;
+  }
 
-//   @keyframes skew2 {
-//     0% {
-//       transform: skewX(20deg);
-//     }
-//     100% {
-//       transform: skewX(-20deg);
-//     }
-//   }
+  @keyframes skew2 {
+    0% {
+      transform: skewX(20deg);
+    }
+    100% {
+      transform: skewX(-20deg);
+    }
+  }
 
 
 
@@ -156,26 +166,25 @@ button:hover {
     position: relative;
     left: 45.5rem;
     top: 15rem;
-    animation: fadeIn 5s;
+    // animation: fadeIn 5s;
 
 }
-
-@keyframes fadeIn{
-    0% {
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-    }
-
-
-}
-
 
 .image--center--2 {
     position: relative;
     left: 37rem;
     top: 21rem;
-    animation: fadeIn 5s;
+    // animation: fadeIn 5s;
+}
 
+.container__right .btn {
+    display: flex;
+    margin: 1rem;
+    justify-content: end;
+    transition: 0.45s;
+}
+
+
+.container__right .btn button:first-child {
+    margin-right: 1rem;
 }
