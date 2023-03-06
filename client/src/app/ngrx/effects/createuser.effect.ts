@@ -24,14 +24,14 @@ export class CreateUserEffects {
     );
   });
 
-  getUser$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType('[User] Get User'),
-      switchMap((action: any) => this.userService.get(action.id)),
-      map((user) => {
-        return CreateUser.getUserSuccess({ user: <UserModel>user });
-      }),
-      catchError((error) => of(CreateUser.getUserFailure({ error })))
-    );
-  });
+  // getUser$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType('[User] Get User'),
+  //     switchMap((action: any) => this.userService.get(action.id)),
+  //     map((user) => {
+  //       return CreateUser.getUserSuccess({ user: <UserModel>user });
+  //     }),
+  //     catchError((error) => of(CreateUser.getUserFailure({ error })))
+  //   );
+  // });
 }
