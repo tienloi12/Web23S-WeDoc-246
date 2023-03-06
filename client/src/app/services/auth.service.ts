@@ -1,27 +1,56 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   Auth,
   GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithPopup,
   signOut,
   User,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { from } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { from, Observable } from 'rxjs';
 import { UserModel } from '../models/user.model';
-
+import { AuthState } from '../ngrx/states/auth.state';
+import * as CreateUser from '../ngrx/actions/createuser.action';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private auth: Auth, private router: Router) {}
+  getUser$!: Observable<AuthState>;
+  constructor(
+    private auth: Auth,
+    private router: Router,
+    private store: Store<{ auth: AuthState }>
+  ) {
+    this.getUser$ = store.select('auth');
 
-  currentUser!: User | null;
+    // onAuthStateChanged(this.auth, (user: UserModel | null) => {
+    //   if (user) {
+    //     this.currentUser = {
+    //       uid: user.uid,
+    //       email: user.email,
+    //       displayName: user.displayName,
+    //       photoURL: user.photoURL,
+    //     };
+    //     this.userName = user.displayName;
+    //     this.photoUrl = user.photoURL;
+    //     console.log(this.currentUser);
+    //     this.store.dispatch(CreateUser.getUser({ id: user.uid }));
+    //   } else {
+    //     this.currentUser = null;
+    //     this.userName = null;
+    //     this.photoUrl = null;
+    //   }
+    // });
+  }
+
+  currentUser!: UserModel | null;
   userName!: string | null;
   photoUrl!: string | null;
 
   loginWithGoogle() {
-    console.log('loginWithGoogle');
     return from(
       new Promise(async (resolve, reject) => {
         try {
@@ -36,6 +65,11 @@ export class AuthService {
             displayName: userCredential.user?.displayName,
             photoURL: userCredential.user?.photoURL,
           };
+          // this.store.dispatch(CreateUser.getUser({ id: user.uid }));
+          this.store.dispatch(CreateUser.createUser({ user: user }));
+          console.log(user);
+
+          this.router.navigate(['/home']);
           resolve(user);
         } catch (error) {
           reject(error);

@@ -6,4 +6,6 @@ export const environment = {
     apiKey: 'AIzaSyC1CDFlOfv81eXiB-j9LTF3Hy3oX7x6Ku4',
     authDomain: 'wedoc-f1743.firebaseapp.com',
     messagingSenderId: '1092312971962',
-  },};
+  },
+  api_url: 'http://localhost:3000',
+};

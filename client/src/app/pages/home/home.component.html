@@ -12,3 +12,8 @@
 
 
 <router-outlet></router-outlet>
+<button (click)="logOut()">Logout</button>
+<div>{{ (userSerivce.user$ | async)?.photoURL }}</div>
+<div>{{ (userSerivce.user$ | async)?.displayName }}</div>
+<div>{{ (userSerivce.user$ | async)?.email }}</div>
+<div>{{ (userSerivce.user$ | async)?.uid }}</div>
