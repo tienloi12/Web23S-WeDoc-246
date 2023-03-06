@@ -9,7 +9,6 @@ export class AuthEffects {
   constructor(private actions$: Actions, private authService: AuthService) {}
 
   login$ = createEffect(() => {
-    console.log('login$');
     return this.actions$.pipe(
       ofType('[Auth] Login'),
       switchMap(() => this.authService.loginWithGoogle()),

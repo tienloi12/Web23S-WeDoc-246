@@ -27,7 +27,6 @@ export const authReducer = createReducer(
       loading: false,
       isSuccessful: true,
     };
-    console.log(newState);
     return newState;
   }),
   // on(loginSuccess, (state, { user }) => ({ ...state, user: user, loading: false, isSuccessful: true })),

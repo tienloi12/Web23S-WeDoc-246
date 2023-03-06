@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Auth, onAuthStateChanged, User } from '@angular/fire/auth';
+import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
@@ -18,10 +18,8 @@ export class AppComponent implements OnInit {
         this.authService.currentUser = user;
         this.authService.userName = user.displayName;
         this.authService.photoUrl = user.photoURL;
-        console.log(this.authService.currentUser);
       } else {
         this.authService.currentUser = null;
-        console.log(this.authService.currentUser);
         this.router.navigate(['/landing']);
       }
     });
