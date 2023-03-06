@@ -36,6 +36,7 @@ export class AuthService {
             displayName: userCredential.user?.displayName,
             photoURL: userCredential.user?.photoURL,
           };
+          this.router.navigate(['/home']);
           resolve(user);
         } catch (error) {
           reject(error);
