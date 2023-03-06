@@ -1,3 +1,14 @@
-<button (click)="logOut()">
-  Logout
-</button>
+<div class="container">
+<div class="one">
+  <app-home-sidebar></app-home-sidebar>
+</div>
+<div class="two">
+  <app-home-header></app-home-header>
+  <div class="three" >
+    <app-home-main></app-home-main>
+  </div>
+</div>
+
+
+
+<router-outlet></router-outlet>
