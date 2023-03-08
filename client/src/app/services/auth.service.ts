@@ -66,7 +66,9 @@ export class AuthService {
             photoURL: userCredential.user?.photoURL,
           };
           this.store.dispatch(CreateUser.createUser({ user: user }));
-          this.router.navigate(['/home']);
+          console.log(user);
+
+          this.router.navigate(['/home/main']);
           resolve(user);
         } catch (error) {
           reject(error);

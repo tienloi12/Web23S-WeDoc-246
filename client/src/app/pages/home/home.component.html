@@ -1,18 +1,64 @@
 <div class="container">
   <div class="one">
-    <app-home-sidebar></app-home-sidebar>
+    <div class="sidebar">
+      <div class="logo">
+        <div class="logo-text">
+          <div id="we">
+            <b>We</b>
+          </div>
+          <div id="doc">
+            <b>Doc</b>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-item">
+        <div (click)="select(i)" [class]="sideBarSelected == i ? 'side-item side-item-active' : 'side-item'"
+          *ngFor="let item of sideMenu; let i = index">
+          <div class="side-item-content">
+            <div class="side-icon">
+              <span class="material-symbols-rounded">
+                {{item.icon}}
+              </span>
+            </div>
+            <span class="side-label"> <b>{{item.title}}</b></span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar-info">
+        <div class="side-avatar">
+          <div class="avatar">
+            <div class="avatar-image"></div>
+            <span class="avatar-name"> <b>Name</b></span>
+          </div>
+        </div>
+        <button class="logout" (click)="logOut()">
+          <b>Logout</b>
+        </button>
+      </div>
+    </div>
   </div>
   <div class="two">
-    <app-home-header></app-home-header>
+    <div class="search">
+      <div class="input">
+        <div class="icon-search">
+          <span class="material-symbols-rounded">
+            search
+          </span>
+        </div>
+        <input type="text" class="input-search" placeholder="Search">
+      </div>
+    </div>
     <div class="three">
-      <app-home-main></app-home-main>
+      <router-outlet></router-outlet>
     </div>
   </div>
 
-  <router-outlet></router-outlet>
+
+
   <!-- <button (click)="logOut()">Logout</button>
 <div>{{ (userSerivce.user$ | async)?.photoURL }}</div>
 <div>{{ (userSerivce.user$ | async)?.displayName }}</div>
 <div>{{ (userSerivce.user$ | async)?.email }}</div>
 <div>{{ (userSerivce.user$ | async)?.uid }}</div> -->
-</div>
