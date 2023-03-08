@@ -12,10 +12,18 @@ body {
 }
 
 :root {
-  font-size: 16px;
-  --primary-color: #673AB7;
-  --primary-color-light: #d2b8ff;
+  --primary: #673ab7;
+  --secondary: #c2c2c2;
+  --base: #f6f6f6;
+  --black: #202020;
+  --danger: #ff3835;
+  --warning: #ffb405;
+  --info: #1681fc;
+  --success: #a6db08;
+  --shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.25);
 }
+
 body {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
+  overflow-x: hidden;
 }

@@ -1,9 +1,39 @@
-<div *ngIf="this.authService.checkUser()">
+<!-- <div *ngIf="this.authService.checkUser()">
   <app-navbar [(sidebarOpen)]="showSideBar"></app-navbar>
   <app-sidebar *ngIf="showSideBar"></app-sidebar>
-  <div class="container" >
+  <div class="container">
     <div class="paper" contenteditable="true">
       <div>Than Hoang Anh Tuan</div>
+    </div>
+  </div>
+</div> -->
+
+<div class="container">
+  <div class="content">
+    <form [formGroup]="form">
+      <div class="editor NgxEditor__Wrapper">
+        <ngx-editor-menu
+          [editor]="editor"
+          [toolbar]="toolbar"
+          [customMenuRef]="customMenu"
+        >
+        </ngx-editor-menu>
+        <ngx-editor [editor]="editor" formControlName="editorContent">
+          <ngx-editor-floating-menu
+            [editor]="editor"
+          ></ngx-editor-floating-menu>
+        </ngx-editor>
+      </div>
+    </form>
+
+    <!-- <div class="editor">
+      <ngx-editor [editor]="editor" [(ngModel)]="editordoc">
+      </ngx-editor>
+    </div> -->
+
+    <!-- custom menu -->
+    <ng-template #customMenu>
+      <app-custom-menu [editor]="editor"></app-custom-menu>
+    </ng-template>
   </div>
 </div>
-

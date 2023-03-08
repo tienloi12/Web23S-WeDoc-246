@@ -16,8 +16,13 @@ import {
   getUserReducer,
 } from './ngrx/reducers/createuser.reducer';
 import { CreateUserEffects } from './ngrx/effects/createuser.effect';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ColabDialogComponent } from './components/colab-dialog/colab-dialog.component';
+import { MatButtonModule } from '@angular/material/button';
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ColabDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,6 +39,9 @@ import { CreateUserEffects } from './ngrx/effects/createuser.effect';
       {}
     ),
     EffectsModule.forRoot([AuthEffects, CreateUserEffects]),
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

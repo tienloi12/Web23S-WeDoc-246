@@ -9,3 +9,9 @@ export const createUserFailure = createAction( '[User] Create User Failure', pro
 export const getUser = createAction( '[User] Get User', props<{ id: string | null }>() );
 export const getUserSuccess = createAction( '[User] Get User Success', props<{ user: UserModel }>() );
 export const getUserFailure = createAction( '[User] Get User Failure', props<{ error: string }>() );
+
+export const getAllUsers = createAction( '[User] Get All User');
+export const getAllUsersSuccess = createAction( '[User] Get All User Success', props<{ users: UserModel[] }>());
+export const getAllUsersFailure = createAction( '[User] Get All User Failure', props<{ error: string }>());
+
+

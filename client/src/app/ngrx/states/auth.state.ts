@@ -7,4 +7,11 @@ export interface AuthState {
   isSuccessful: boolean;
 }
 
+export interface AllUser {
+  users: UserModel[] | null;
+  loading: boolean;
+  error: string | null;
+  isSuccessful: boolean;
+}
+
 
