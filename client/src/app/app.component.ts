@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
         // );
       } else {
         this.authService.currentUser = null;
-        this.router.navigate(['/landing']);
+        // this.router.navigate(['/landing']);
       }
     });
   }

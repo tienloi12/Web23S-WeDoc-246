@@ -1,4 +1,5 @@
 export const environment = {
+  production: false,
   firebase: {
     projectId: 'wedoc-f1743',
     appId: '1:1092312971962:web:d61ff5fa47dda7144fe083',
