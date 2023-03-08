@@ -1,8 +1,16 @@
-import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { User } from 'src/schemas/user.schema';
 import { UserService } from 'src/services/user/user.service';
 
-@Controller('user')
+@Controller('v1/user')
 export class UserController {
   constructor(private userService: UserService) {}
   @Get('/all')
@@ -11,13 +19,13 @@ export class UserController {
     return users;
   }
 
-  @Get()
-  async getUserById(@Query('id') id: string) {
+  @Get(':id')
+  async getUserById(@Param(`id`) id: string) {
     let user = await this.userService.getUserById(id);
     return user;
   }
 
-  @Post()
+  @Post('/create')
   async createUser(@Body() user: User) {
     return this.userService.createUser(user);
   }

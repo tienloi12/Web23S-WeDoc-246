@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {
   Auth,
   GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithPopup,
   signOut,
   User,
@@ -24,6 +25,25 @@ export class AuthService {
     private store: Store<{ auth: AuthState }>
   ) {
     this.getUser$ = store.select('auth');
+
+    // onAuthStateChanged(this.auth, (user: UserModel | null) => {
+    //   if (user) {
+    //     this.currentUser = {
+    //       uid: user.uid,
+    //       email: user.email,
+    //       displayName: user.displayName,
+    //       photoURL: user.photoURL,
+    //     };
+    //     this.userName = user.displayName;
+    //     this.photoUrl = user.photoURL;
+    //     console.log(this.currentUser);
+    //     this.store.dispatch(CreateUser.getUser({ id: user.uid }));
+    //   } else {
+    //     this.currentUser = null;
+    //     this.userName = null;
+    //     this.photoUrl = null;
+    //   }
+    // });
   }
 
   currentUser!: UserModel | null;
@@ -45,10 +65,7 @@ export class AuthService {
             displayName: userCredential.user?.displayName,
             photoURL: userCredential.user?.photoURL,
           };
-          this.store.dispatch(CreateUser.getUser({ id: user.uid }));
-          // this.store.dispatch(CreateUser.createUser({ user: user }));
-          console.log(user);
-
+          this.store.dispatch(CreateUser.createUser({ user: user }));
           this.router.navigate(['/home']);
           resolve(user);
         } catch (error) {
