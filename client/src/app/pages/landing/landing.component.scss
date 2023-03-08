@@ -2,11 +2,12 @@
     display: flex;
     height: 100%;
     width: 100%;
-    font-family: 'Source Sans Pro', sans-serif; 
+    font-family: 'Source Sans Pro', sans-serif;
 
 }
 
-.container__left , .container__right{
+.container__left,
+.container__right {
     width: 50%;
 
 }
@@ -50,17 +51,17 @@
 }
 
 .introduction__content p {
-    color : #9E9E9E;
+    color: #9E9E9E;
     font-size: 1.375rem;
     margin-bottom: 1.75rem;
 }
 
-.content__login { 
+.content__login {
     display: flex;
     align-items: center;
     width: 30rem;
-  justify-content: space-between;
- 
+    justify-content: space-between;
+
 }
 
 .content__login button {
@@ -69,7 +70,7 @@
     background-color: #ffff;
     font-size: 0.875rem;
     padding: 1rem 1.5rem;
-    margin: 2.5rem 0.5rem 0 0 ; 
+    margin: 2.5rem 0.5rem 0 0;
     border-radius: 0.9rem;
     cursor: pointer;
     box-shadow: 2px 4px 8px 2px rgba(0, 0, 0, 0.25);
@@ -90,14 +91,14 @@ button:hover {
 
 .content__login img {
     margin-right: 0.5rem;
-    width: 1.25rem;    
+    width: 1.25rem;
 }
 
 .container__right {
     background-color: #673AB7;
 }
 
-.container__right button {
+.container__right .btn button {
     display: flex;
     flex-direction: row;
     padding: 0.8rem 1.25rem;
@@ -128,37 +129,21 @@ button:hover {
     z-index: 1;
 }
 
-.image--center--1{
-    animation: skew1 3s infinite;
-    transform: skew(20deg);
-    animation-direction: alternate;
-    opacity: 1;
+.image--center--2 {
+    animation: image2 4s infinite;
 }
 
-@keyframes skew1 {
+@keyframes image2 {
     0% {
-      transform: skewX(20deg);
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(100px);
     }
     100% {
-      transform: skewX(-20deg);
+        transform: translateY(0);
     }
-  }
-
-  .image--center--2{
-    animation: skew2 3s infinite;
-    transform: skewX(40deg);
-    animation-direction: alternate-reverse;
-    opacity: 1;
-  }
-
-  @keyframes skew2 {
-    0% {
-      transform: skewX(20deg);
-    }
-    100% {
-      transform: skewX(-20deg);
-    }
-  }
+}
 
 
 
@@ -166,8 +151,20 @@ button:hover {
     position: relative;
     left: 45.5rem;
     top: 15rem;
-    // animation: fadeIn 5s;
+    animation: image1 4s infinite;
+    animation-delay: 1s;
+}
 
+@keyframes image1 {
+    0% {
+        transform: translateY(0 10px);
+    }
+    50% {
+        transform: translateY(100px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 .image--center--2 {
@@ -187,4 +184,6 @@ button:hover {
 
 .container__right .btn button:first-child {
     margin-right: 1rem;
+    border: none;
+    box-shadow: none;
 }
