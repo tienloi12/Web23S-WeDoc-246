@@ -12,14 +12,18 @@ export class UserService {
   constructor(private httpCLient: HttpClient) {}
 
   post(user: UserModel) {
-    console.log(user);
     return this.httpCLient.post('http://localhost:3000/v1/user/create', user);
   }
 
   getProfile(uid: string) {
-    console.log(uid);
     return this.httpCLient.get<UserModel>(
       `http://localhost:3000/v1/user/${uid}`
+    );
+  }
+
+  getAllUsers() {
+    return this.httpCLient.get<UserModel[]>(
+      `http://localhost:3000/v1/user/all`
     );
   }
 }

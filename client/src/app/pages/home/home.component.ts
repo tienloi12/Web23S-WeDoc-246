@@ -27,5 +27,6 @@ export class HomeComponent {
     this.store.dispatch({ type: '[Auth] Logout' });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 }

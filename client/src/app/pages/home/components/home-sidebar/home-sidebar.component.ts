@@ -32,6 +32,7 @@ export class HomeSidebarComponent implements OnInit{
   ]
   sideBarSelected: number = 0;
   auth$: Observable<AuthState>;
+  name !: string | undefined;
   constructor(
     public authService: AuthService,
     public router: Router,
@@ -40,7 +41,12 @@ export class HomeSidebarComponent implements OnInit{
     this.auth$ = store.select('auth');
   }
   ngOnInit(): void {
-    
+    this.store.dispatch({ type: '[Auth] Get User' });
+    this.auth$.subscribe((data) => {
+      if (data.user) {
+        this.name = data.user.displayName?.slice(0, data.user.displayName.indexOf(' '));
+      }
+    });
   }
   select(index: number) {
     this.sideBarSelected = index;
