@@ -1,18 +1,106 @@
+// .container {
+//   background-color: #f6f6f6;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .paper {
+//   width: 210mm;
+//   height: 297mm;
+//   background-color: #fff;
+//   margin: 2rem auto;
+//   padding: calc(297mm/12) calc(210mm/12);
+//   outline: none;
+//   min-height: fit-content;
+//   overflow: scroll;
+// }
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
 .container {
-  background-color: #f6f6f6;
+  width: 100%;
+  height: fit-content;
+  max-width: 900px;
+  min-width: 320px;
+  margin: 20px auto;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
+  .content {
+    width: 100%;
+
+    .display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      .logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 0.5rem;
+      }
+
+      .badges {
+        img {
+          &:not(:last-child) {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
 }
 
-.paper {
-  width: 210mm;
-  height: 297mm;
-  background-color: #fff;
-  margin: 2rem auto;
-  padding: calc(297mm/12) calc(210mm/12);
-  outline: none;
-  min-height: fit-content;
-  overflow: scroll;
+.editor {
+  .cm-editor {
+    border: 1px solid #ddd;
+    height: auto;
+    margin-bottom: 0.7rem;
+  }
 }
 
+.NgxEditor__Wrapper {
+  border: none !important;
+  .NgxEditor__MenuBar {
+    background-color: var(--primary);
+    color: var(--base);
+    justify-content: space-evenly;
+  }
+
+  .NgxEditor {
+    box-shadow: var(--shadow);
+    margin: 20px 0;
+  }
+}
+
+.NgxEditor__Dropdown .NgxEditor__Dropdown--Selected,
+.NgxEditor__Dropdown .NgxEditor__Dropdown--Open {
+  color: var(--base) !important;
+  background-color: var(--primary) !important;
+}
+
+.NgxEditor__Dropdown .NgxEditor__Dropdown--DropdownMenu {
+  background-color: var(--primary) !important;
+  color: var(--base) !important;
+}
+
+.NgxEditor__MenuItem .NgxEditor__MenuItem--Hover {
+  background-color: var(--base) !important;
+  color: var(--primary) !important;
+  border-radius: 10px;
+}
+
+.NgxEditor__MenuItem .NgxEditor__MenuItem--Active {
+  background-color: var(--base) !important;
+  color: var(--primary) !important;
+  border-radius: 3px;
+}
