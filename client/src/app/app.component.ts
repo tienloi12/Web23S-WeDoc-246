@@ -21,15 +21,13 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
-        console.log(user);
         this.authService.currentUser = user;
         this.authService.userName = user.displayName;
         this.authService.photoUrl = user.photoURL;
-        console.log(this.authService.currentUser);
 
-        this.userService.user$ = this.userService.getProfile(
-          this.authService.currentUser?.uid || ''
-        );
+        // this.userService.user$ = this.userService.getProfile(
+        //   this.authService.currentUser?.uid || ''
+        // );
       } else {
         this.authService.currentUser = null;
         this.router.navigate(['/landing']);

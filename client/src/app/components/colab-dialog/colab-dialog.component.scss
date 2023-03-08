@@ -1,0 +1,32 @@
+button {
+  background-color: #673ab7;
+  color: #fff !important;
+}
+
+label {
+        font-size: 1rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+  padding: 0.5rem;
+}
+
+form input {
+  outline: none;
+  border: none;
+  background-color: #f6f6f6;
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+
+.mat-mdc-dialog-actions {
+        display: flex;
+        justify-content: space-evenly;
+}
