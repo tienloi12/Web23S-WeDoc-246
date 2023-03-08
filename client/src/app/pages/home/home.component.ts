@@ -14,6 +14,27 @@ import { UserService } from 'src/app/services/user.service';
 export class HomeComponent {
   auth$: Observable<AuthState>;
 
+  sideMenu = [
+    {
+      // id: 0,
+      title: 'Home',
+      icon: 'home',
+      link: '/main'
+    },
+    {
+      // id: 1,
+      title: 'Share',
+      icon: 'share',
+      link: '/shared'
+    },
+    {
+      // id: 2,
+      title: 'Save',
+      icon: 'save',
+      link: '/saved'
+    },
+  ]
+  sideBarSelected: number = 0;
   constructor(
     public authService: AuthService,
     public userSerivce: UserService,
@@ -28,4 +49,11 @@ export class HomeComponent {
   }
 
   ngOnInit() {}
+
+  select(index: number) {
+    this.sideBarSelected = index;
+    this.router.navigate(["/home"+this.sideMenu[index].link]);
+
+
+  }
 }

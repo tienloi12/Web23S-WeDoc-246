@@ -69,7 +69,7 @@ export class AuthService {
           this.store.dispatch(CreateUser.createUser({ user: user }));
           console.log(user);
 
-          this.router.navigate(['/home']);
+          this.router.navigate(['/home/main']);
           resolve(user);
         } catch (error) {
           reject(error);
