@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AuthState } from 'src/app/ngrx/states/auth.state';
@@ -12,7 +17,10 @@ import { Validators, Editor, Toolbar, DEFAULT_TOOLBAR } from 'ngx-editor';
 import jsonDoc from './doc';
 import schema from './schema';
 import nodeViews from '../../nodeviews';
-
+import { FileService } from 'src/app/services/file.service';
+import { FileState } from 'src/app/ngrx/states/file.state';
+import * as FileActions from 'src/app/ngrx/actions/file.action';
+import { FileModel } from 'src/app/models/file.model';
 @Component({
   selector: 'app-paper',
   templateUrl: './paper.component.html',
@@ -21,13 +29,21 @@ import nodeViews from '../../nodeviews';
 })
 export class PaperComponent implements OnInit, OnDestroy {
   showSideBar = false;
+  user: any;
 
   auth$: Observable<AuthState>;
+  file$: Observable<FileState>;
+  content!: string | null | undefined;
   constructor(
     public authService: AuthService,
-    private store: Store<{ auth: AuthState }>
+    public fileService: FileService,
+    private store: Store<{ auth: AuthState; getfile: FileState }>
   ) {
-    this.auth$ = store.select('auth');
+    this.auth$ = this.store.select('auth');
+    this.file$ = this.store.select('getfile');
+    this.store.dispatch(FileActions.getFile({ fileId: '1678328583349' }));
+    console.log(this.file$);
+    this.store.subscribe((data) => console.log(data));
   }
 
   isProdMode = environment.production;
@@ -45,6 +61,7 @@ export class PaperComponent implements OnInit, OnDestroy {
   });
 
   get doc(): AbstractControl {
+    console.log(this.form.get('editorContent'));
     return this.form.get('editorContent') ?? new FormControl();
   }
 
@@ -61,9 +78,13 @@ export class PaperComponent implements OnInit, OnDestroy {
         resizeImage: true,
       },
     });
+    
   }
+
 
   ngOnDestroy(): void {
     this.editor.destroy();
   }
 }
+
+

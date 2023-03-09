@@ -31,4 +31,7 @@
     </div>
   </div>
 </div>
-F
+
+<div class="ThanTuan" *ngFor="let item of (this.file$|async)?.fileId?.content">
+  <div class="ThanTuan1">{{item}}</div>
+</div>

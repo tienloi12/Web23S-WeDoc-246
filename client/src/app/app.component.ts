@@ -13,11 +13,9 @@ export class AppComponent implements OnInit {
   constructor(
     private auth: Auth,
     private authService: AuthService,
-    private router: Router,
     private userService: UserService
   ) {}
   title = 'client';
-
   ngOnInit(): void {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {

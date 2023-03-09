@@ -35,6 +35,7 @@ export class HomeComponent {
     },
   ]
   sideBarSelected: number = 0;
+  user: any;
   constructor(
     public authService: AuthService,
     public userSerivce: UserService,
@@ -42,6 +43,8 @@ export class HomeComponent {
     private store: Store<{ auth: AuthState }>
   ) {
     this.auth$ = store.select('auth');
+    this.user = history.state.data;
+    this.router.navigate(['/paper'], { state: { data: this.user } });
   }
 
   logOut() {
@@ -53,7 +56,5 @@ export class HomeComponent {
   select(index: number) {
     this.sideBarSelected = index;
     this.router.navigate(["/home"+this.sideMenu[index].link]);
-
-
   }
 }
