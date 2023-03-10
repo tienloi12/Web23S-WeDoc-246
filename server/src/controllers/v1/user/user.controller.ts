@@ -1,10 +1,5 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { check } from 'prettier';
 import { User } from 'src/schemas/user.schema';
 import { UserService } from 'src/services/user/user.service';
 
@@ -31,6 +26,13 @@ export class UserController {
 
   @Post('create')
   async createUser(@Body() user: User) {
-    return this.userService.createUser(user);
+    let checkUser = await this.getUserById(user.uid);
+    console.log(checkUser);
+    if (!checkUser) {
+      console.log('User does not exist, creating user...');
+      return this.userService.createUser(user);
+    }
+    console.log('User already exists, returning user...');
+    return user;
   }
 }
