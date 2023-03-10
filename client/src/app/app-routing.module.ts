@@ -3,14 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'paper',
-    loadChildren: () =>
-      import('./pages/paper/paper.module').then((m) => m.PaperModule),
-  },
-  {
     path: '',
     redirectTo: 'landing',
     pathMatch: 'full',
+  },
+  {
+    path: 'paper',
+    loadChildren: () =>
+      import('./pages/paper/paper.module').then((m) => m.PaperModule),
   },
   {
     path: 'home',

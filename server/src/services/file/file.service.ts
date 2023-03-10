@@ -9,10 +9,11 @@ export class FileService {
 
   async createFile(file: File): Promise<File | any> {
     try {
-      let data: any;
-      data = await this.fileModel.create(file);
-      return data as File;
+      let data = await this.fileModel.create(file);
+      console.log(data);
+      return data;
     } catch (error) {
+      console.log(error);
       return null;
     }
   }
@@ -25,7 +26,7 @@ export class FileService {
       return null;
     }
   }
-  
+
   async getFiles(): Promise<File[] | null> {
     try {
       let data = await this.fileModel.find().exec();

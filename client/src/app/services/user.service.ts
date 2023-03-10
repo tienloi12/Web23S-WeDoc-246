@@ -7,9 +7,8 @@ import { UserModel } from '../models/user.model';
   providedIn: 'root',
 })
 export class UserService {
-  user$ !: Observable<UserModel>;
-  constructor(private httpCLient: HttpClient) {
-  }
+  user$!: Observable<UserModel>;
+  constructor(private httpCLient: HttpClient) {}
 
   post(user: UserModel) {
     return this.httpCLient.post('http://localhost:3000/v1/user/create', user);
@@ -21,7 +20,7 @@ export class UserService {
     );
   }
 
-  getProfileByEmail(email: string) {
+  getProfileByEmail(email: string | null) {
     return this.httpCLient.get<UserModel>(
       `http://localhost:3000/v1/user/${email}`
     );

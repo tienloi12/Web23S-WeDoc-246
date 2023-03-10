@@ -1,6 +1,10 @@
+import { DocumentFile } from './file.model';
+
 export interface UserModel {
-  uid: string | null;
-  email: string | null;
-  displayName: string | null;
-  photoURL: string | null;
+  _id: string;
+  uid: string;
+  email: string;
+  displayName: string;
+  photoURL: string;
+  // documentFiles: DocumentFile[];
 }

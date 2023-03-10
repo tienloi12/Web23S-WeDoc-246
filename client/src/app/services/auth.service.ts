@@ -6,26 +6,22 @@ import {
   onAuthStateChanged,
   signInWithPopup,
   signOut,
-  User,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { from, Observable } from 'rxjs';
 import { UserModel } from '../models/user.model';
 import { AuthState } from '../ngrx/states/auth.state';
-import * as CreateUser from '../ngrx/actions/createuser.action';
+import * as UserActions from '../ngrx/actions/user.action';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  getUser$!: Observable<AuthState>;
   constructor(
     private auth: Auth,
     private router: Router,
-    private store: Store<{ auth: AuthState }>
+    private store: Store
   ) {
-    this.getUser$ = store.select('auth');
-
     // onAuthStateChanged(this.auth, (user: UserModel | null) => {
     //   if (user) {
     //     this.currentUser = {
@@ -46,7 +42,8 @@ export class AuthService {
     // });
   }
 
-  currentUser!: UserModel | null;
+  userId!: string;
+  currentUser!: UserModel;
   userName!: string | null;
   photoUrl!: string | null;
 
@@ -60,13 +57,14 @@ export class AuthService {
           );
           let user!: UserModel;
           user = {
+            _id: '',
             uid: userCredential.user?.uid,
-            email: userCredential.user?.email,
-            displayName: userCredential.user?.displayName,
-            photoURL: userCredential.user?.photoURL,
+            email: userCredential.user?.email || '',
+            displayName: userCredential.user?.displayName || '',
+            photoURL: userCredential.user?.photoURL || '',
+            // documentFiles: [],
           };
-          this.store.dispatch(CreateUser.createUser({ user: user }));
-          this.router.navigate(['/home/main'], { state: { data: user }});
+          this.store.dispatch(UserActions.createUser({ user: user }));
           resolve(user);
         } catch (error) {
           reject(error);
@@ -86,12 +84,5 @@ export class AuthService {
         }
       })
     );
-  }
-
-  checkUser() {
-    if (this.currentUser) {
-      return true;
-    }
-    return false;
   }
 }

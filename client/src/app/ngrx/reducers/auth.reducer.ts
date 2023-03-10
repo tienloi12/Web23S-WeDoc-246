@@ -11,7 +11,6 @@ import {
 import { AuthState } from '../states/auth.state';
 
 export const initialState: AuthState = {
-  user: null,
   loading: false,
   error: '',
   isSuccessful: false,
@@ -19,18 +18,23 @@ export const initialState: AuthState = {
 
 export const authReducer = createReducer(
   initialState,
-  on(login, (state) => ({ ...state, user: null, error: '', isSuccessful: false, loading: true })),
-  on(loginSuccess, (state, { user }) => {
+  on(login, (state) => ({
+    ...state,
+    user: null,
+    error: '',
+    isSuccessful: false,
+    loading: true,
+  })),
+  on(loginSuccess, (state, aciton) => {
+    console.log(aciton.type);
     let newState = {
       ...state,
-      user: user,
       error: '',
       loading: false,
       isSuccessful: true,
     };
     return newState;
   }),
-  // on(loginSuccess, (state, { user }) => ({ ...state, user: user, loading: false, isSuccessful: true })),
   on(loginFailure, (state, { error }) => ({
     ...state,
     user: null,

@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
 import { User } from './user.schema';
 
 export type FileDocument = HydratedDocument<File>;
@@ -8,17 +8,26 @@ export type FileDocument = HydratedDocument<File>;
   timestamps: true,
 })
 export class File {
-  @Prop()
+  @Prop({
+    require: true,
+  })
   fileId: string;
 
-  @Prop()
-  uidMain: string;
+  @Prop({
+    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'users',
+  })
+  authorId: User;
 
   @Prop()
   content: string;
 
-  @Prop()
-  users: User[];
+  @Prop({
+    default: Array,
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }],
+  })
+  collaborators: User[];
 }
 
 export const FileSchema = SchemaFactory.createForClass(File);

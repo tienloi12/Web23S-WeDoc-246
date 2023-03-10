@@ -41,7 +41,9 @@
         <div class="side-avatar">
           <div class="avatar">
             <div class="avatar-image"></div>
-            <span class="avatar-name"> <b>{{user.displayName ?? null}}</b></span>
+            <span class="avatar-name">
+              <b>{{ (user$ | async)?.displayName }}</b></span
+            >
           </div>
         </div>
         <button class="logout" (click)="logOut()">

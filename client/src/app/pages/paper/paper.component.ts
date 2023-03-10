@@ -1,26 +1,19 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AuthState } from 'src/app/ngrx/states/auth.state';
 import { AuthService } from 'src/app/services/auth.service';
-
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
-
 import { Validators, Editor, Toolbar, DEFAULT_TOOLBAR } from 'ngx-editor';
-
 import jsonDoc from './doc';
 import schema from './schema';
 import nodeViews from '../../nodeviews';
 import { FileService } from 'src/app/services/file.service';
-import { FileState } from 'src/app/ngrx/states/file.state';
+// import { FileState } from 'src/app/ngrx/states/file.state';
 import * as FileActions from 'src/app/ngrx/actions/file.action';
-import { FileModel } from 'src/app/models/file.model';
+import { UserState } from 'src/app/ngrx/states/user.state';
+import { UserModel } from 'src/app/models/user.model';
 @Component({
   selector: 'app-paper',
   templateUrl: './paper.component.html',
@@ -29,21 +22,19 @@ import { FileModel } from 'src/app/models/file.model';
 })
 export class PaperComponent implements OnInit, OnDestroy {
   showSideBar = false;
-  user: any;
+  user$ = this.store.select('user', 'user');
 
-  auth$: Observable<AuthState>;
-  file$: Observable<FileState>;
+  // file$: Observable<FileState>;
   content!: string | null | undefined;
   constructor(
     public authService: AuthService,
     public fileService: FileService,
-    private store: Store<{ auth: AuthState; getfile: FileState }>
+    private store: Store<{ user: UserState }>
   ) {
-    this.auth$ = this.store.select('auth');
-    this.file$ = this.store.select('getfile');
-    this.store.dispatch(FileActions.getFile({ fileId: '1678328583349' }));
-    console.log(this.file$);
-    this.store.subscribe((data) => console.log(data));
+    // this.file$ = this.store.select('getfile');
+    // this.store.dispatch(FileActions.getFile({ fileId: '1678328583349' }));
+    // console.log(this.file$);
+    // this.store.subscribe((data) => console.log(data));
   }
 
   isProdMode = environment.production;
@@ -55,7 +46,7 @@ export class PaperComponent implements OnInit, OnDestroy {
 
   form = new FormGroup({
     editorContent: new FormControl(
-      { value: jsonDoc, disabled: false },
+      { value: '', disabled: false },
       Validators.required(schema)
     ),
   });
@@ -78,13 +69,9 @@ export class PaperComponent implements OnInit, OnDestroy {
         resizeImage: true,
       },
     });
-    
   }
-
 
   ngOnDestroy(): void {
     this.editor.destroy();
   }
 }
-
-

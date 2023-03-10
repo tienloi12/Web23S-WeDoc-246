@@ -11,16 +11,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { authReducer } from './ngrx/reducers/auth.reducer';
 import { AuthEffects } from './ngrx/effects/auth.effect';
 import { HttpClientModule } from '@angular/common/http';
-import {
-  createUserReducer,
-  getUserReducer,
-} from './ngrx/reducers/createuser.reducer';
-import { CreateUserEffects } from './ngrx/effects/createuser.effect';
+import { userReducer } from './ngrx/reducers/user.reducer';
+import { UserEffects } from './ngrx/effects/user.effect';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ColabDialogComponent } from './components/colab-dialog/colab-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
-import { createFileReducer, getFileReducer } from './ngrx/reducers/file.reducer';
+import { createFileReducer } from './ngrx/reducers/file.reducer';
 import { getFilesReducer } from './ngrx/reducers/file.reducer';
 import { FileEffects } from './ngrx/effects/file.effect';
 
@@ -35,20 +32,17 @@ import { FileEffects } from './ngrx/effects/file.effect';
     StoreModule.forRoot(
       {
         auth: authReducer,
-        createUser: createUserReducer,
-        getUser: getUserReducer,
+        user: userReducer,
         createfile: createFileReducer,
-        getFile: getFileReducer,
         getFiles: getFilesReducer,
       },
 
       {}
     ),
-    EffectsModule.forRoot([AuthEffects, CreateUserEffects, FileEffects]),
+    EffectsModule.forRoot([AuthEffects, UserEffects, FileEffects]),
     BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent],

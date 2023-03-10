@@ -1,25 +1,20 @@
 import { createReducer, on } from '@ngrx/store';
-import {
-  createFile,
-  createFileFailure,
-  createFileSuccess,
-  getFile,
-  getFileFailure,
-  getFileSuccess,
-} from '../actions/file.action';
-import { FileState } from '../states/file.state';
+import { CreateFileState } from '../states/file.state';
+import * as FileActions from '../actions/file.action';
+import { GetFilesState } from '../states/file.state';
 
-export const initialState: FileState = {
-  fileId: null,
-  loading: false,
+export const initialState: CreateFileState = {
+  isLoading: false,
+  isSuccess: false,
   error: '',
-  isSuccessful: false,
+  file: [],
 };
 
 export const createFileReducer = createReducer(
   initialState,
-  on(createFile, (state) => ({ ...state, loading: true })),
-  on(createFileSuccess, (state, action) => {
+  on(FileActions.createFile, (state) => ({ ...state, loading: true })),
+  on(FileActions.createFileSuccess, (state, action) => {
+    console.log(action.type);
     let newState = {
       ...state,
       fileId: action.file,
@@ -28,7 +23,7 @@ export const createFileReducer = createReducer(
     };
     return newState;
   }),
-  on(createFileFailure, (state, { error }) => ({
+  on(FileActions.createFileFailure, (state, { error }) => ({
     ...state,
     error: error,
     loading: false,
@@ -36,29 +31,25 @@ export const createFileReducer = createReducer(
   }))
 );
 
-export const getFileReducer = createReducer(
-  initialState,
-  on(getFile, (state) => ({ ...state, loading: true })),
-  on(getFileSuccess, (state, action) => {
-    let newState = {
-      ...state,
-      fileId: action.file,
-      loading: false,
-      isSuccessful: true,
-    };
-    return newState;
-  }
-  ),
-  on(getFileFailure, (state, { error }) => ({
-    ...state,
-    error: error,
-    loading: false,
-    isSuccessful: false,
-  }))
-);
-
-import * as FileActions from '../actions/file.action';
-import { GetFilesState } from '../states/file.state';
+// export const getFileReducer = createReducer(
+//   initialState,
+//   on(FileActions.getFile, (state) => ({ ...state, loading: true })),
+//   on(FileActions.getFileSuccess, (state, action) => {
+//     let newState = {
+//       ...state,
+//       fileId: action.file,
+//       loading: false,
+//       isSuccessful: true,
+//     };
+//     return newState;
+//   }),
+//   on(FileActions.getFileFailure, (state, { error }) => ({
+//     ...state,
+//     error: error,
+//     loading: false,
+//     isSuccessful: false,
+//   }))
+// );
 
 export const initialGetFilesState: GetFilesState = {
   isLoading: false,

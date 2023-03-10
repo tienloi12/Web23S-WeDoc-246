@@ -1,4 +1,4 @@
-<div *ngIf="this.authService.checkUser()">
+<div *ngIf="user$ | async">
   <app-navbar></app-navbar>
 
   <div class="container">
@@ -32,6 +32,9 @@
   </div>
 </div>
 
-<div class="ThanTuan" *ngFor="let item of (this.file$|async)?.fileId?.content">
-  <div class="ThanTuan1">{{item}}</div>
-</div>
+<!-- <div
+  class="ThanTuan"
+  *ngFor="let item of (this.file$ | async)?.fileId?.content"
+>
+  <div class="ThanTuan1">{{ item }}</div>
+</div> -->

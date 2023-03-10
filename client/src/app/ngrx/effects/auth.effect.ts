@@ -10,9 +10,9 @@ export class AuthEffects {
 
   login$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType('[Auth] Login'),
+      ofType(AuthActions.login),
       switchMap(() => this.authService.loginWithGoogle()),
-      map((user) => AuthActions.loginSuccess({ user: <UserModel>user })),
+      map(() => AuthActions.loginSuccess()),
       catchError((error) => of(AuthActions.loginFailure({ error })))
     );
   });

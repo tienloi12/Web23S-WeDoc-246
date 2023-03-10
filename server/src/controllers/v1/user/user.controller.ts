@@ -1,10 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { User } from 'src/schemas/user.schema';
 import { UserService } from 'src/services/user/user.service';
 
@@ -23,7 +17,7 @@ export class UserController {
     return user;
   }
 
-  @Get(':email')
+  @Get('info/:email')
   async getUserByEmail(@Param(`email`) email: string) {
     let user = await this.userService.getUserByEmail(email);
     return user;

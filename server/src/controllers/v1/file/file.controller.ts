@@ -8,6 +8,7 @@ export class FileController {
 
   @Post('/create')
   async createFile(@Body() file: File) {
+    console.log(file);
     return this.fileService.createFile(file);
   }
 
