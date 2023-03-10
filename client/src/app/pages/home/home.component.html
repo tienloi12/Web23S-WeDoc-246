@@ -39,10 +39,8 @@
 
       <div class="sidebar-info">
         <div class="side-avatar">
-          <div class="avatar">
-            <div class="avatar-image"></div>
-            <span class="avatar-name"> <b>{{user.displayName ?? null}}</b></span>
-          </div>
+            <div class="avatar-image"> <img class="image-avatar"  [src]= "(userSerivce.user$ | async)?.photoURL" alt=""> </div>
+            <span class="avatar-name"> <b>{{ (userSerivce.user$ | async)?.displayName }}</b></span>
         </div>
         <button class="logout" (click)="logOut()">
           <b>Logout</b>

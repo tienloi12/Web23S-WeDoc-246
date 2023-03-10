@@ -13,13 +13,13 @@
         <div class="line">
 
         </div>
-        <div class="saved-content">
+        <div *ngFor="let file of files$ | async" class="saved-content">
             <div class="content">
             <div class="content-1">
                 12/12/2020
             </div>
             <div class="content-2">
-                Report
+                {{ file._id }}
             </div>
             <div class="content-3">
                 <div class="user">
@@ -34,26 +34,5 @@
     </div>
     <div class="line">
     </div>
-    <div class="saved-content">
-        <div class="content">
-        <div class="content-1">
-            12/12/2020
         </div>
-        <div class="content-2">
-            Report
-        </div>
-        <div class="content-3">
-            <div class="user">
-                <div class="user-img">
-                    <img src="" alt="">
-                </div>
-                <div class="user-name">
-                    <b>John Doe</b>
-                </div>
-            </div>
-    </div>
-</div>
-<div class="line">
-</div>
-
 </div>

@@ -1,59 +1,58 @@
 .shared-container {
     background-color: #ffffff;
     width: 100%;
-    height: 44.8rem;
+    height: 40rem;
 }
+
 .shared-title {
     display: flex;
-    height: 5rem;
     width: 100%;
     background-color: #ffffff;
     align-items: center;
 
     .shared-file-name {
+        margin-top: 1rem;
         margin-left: 6rem;
-        font-size: 1.25rem;
+        font-size: 1rem;
         font-weight: 500;
         color: #000000;
     }
 
     .shared-type {
+        margin-top: 1rem;
         margin-left: 30rem;
-        font-size: 1.25rem;
+        font-size: 1rem;
         font-weight: 500;
         color: #000000;
     }
 
     .shared-shared {
+        margin-top: 1rem;
         margin-left: 11rem;
-        font-size: 1.25rem;
+        font-size: 1rem;
         font-weight: 500;
         color: #000000;
     }
 
     .shared-date-created {
+        margin-top: 1rem;
         margin-left: 10rem;
-        font-size: 1.25rem;
+        font-size: 1rem;
         font-weight: 500;
         color: #000000;
     }
 }
 
 .line {
+    margin-top: 1rem;
     margin-left: 1.5rem;
-    width: 96.5rem;
+    width: 85rem;
     height: 0.0625rem;
     background-color: #ccc;
 }
-.shared-file{
-    background-color: #ffffff; 
-    width: 100%; 
-    height: 40.7rem;
-}
-.file-1 {
+.file {
     background-color: #ffffff;
     width: 100%;
-    height: 12rem;
 
     .item {
         display: flex;
@@ -70,7 +69,7 @@
         }
 
         .item-type {
-            margin-left: 2rem;
+            margin-left: 0.5rem;
             font-size: 1rem;
             font-weight: 500;
             color: #000000;
@@ -115,18 +114,20 @@
                 }
             }
         }
+
         .item-date-created {
-            margin-left: 7.5rem;
+            margin-top: 1rem;
+            margin-left: 6rem;
             font-size: 1rem;
             font-weight: 500;
             color: #000000;
         }
-       
+
     }
 
     .line-card {
         margin-left: 1rem;
-        width: 95%;
+        width: 96%;
         height: 0.1rem;
         background-color: #f6f6f6;
     }
