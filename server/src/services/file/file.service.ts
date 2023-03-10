@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { FileDocument, File } from 'src/schemas/file.schema';
+import { File, FileDocument } from 'src/schemas/file.schema';
 
 @Injectable()
 export class FileService {
@@ -20,6 +20,15 @@ export class FileService {
   async getFileById(fileId: string): Promise<File | any> {
     try {
       let data = await this.fileModel.findOne({ fileId: fileId }).exec();
+      return data as File;
+    } catch (error) {
+      return null;
+    }
+  }
+  
+  async getFiles(): Promise<File[] | null> {
+    try {
+      let data = await this.fileModel.find().exec();
       return data;
     } catch (error) {
       return null;

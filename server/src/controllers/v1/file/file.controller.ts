@@ -16,4 +16,10 @@ export class FileController {
     let file = await this.fileService.getFileById(id);
     return file;
   }
+
+  @Get('all')
+  async getFiles() {
+    let files = await this.fileService.getFiles();
+    return files;
+  }
 }

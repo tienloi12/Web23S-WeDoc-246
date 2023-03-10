@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { FileService } from 'src/app/services/file.service';
-import * as FileActions from '../actions/file.action';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { FileModel } from 'src/app/models/file.model';
+import { DocumentFile } from 'src/app/models/file.model';
+import * as FileActions from '../actions/file.action';
 
 @Injectable()
 export class FileEffects {
@@ -32,6 +33,20 @@ export class FileEffects {
         return FileActions.getFileSuccess({ file: <FileModel>file });
       }),
       catchError((error) => of(FileActions.getFileFailure({ error })))
+    );
+  });
+  getFiles$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FileActions.getFiles),
+      switchMap(() => {
+        return this.fileService.getFiles();
+      }),
+      map((files) => {
+        return FileActions.getFilesSuccess({ files: <DocumentFile[]>files });
+      }),
+      catchError((error) => {
+        return of(FileActions.getFilesFailure({ error: error }));
+      })
     );
   });
 }

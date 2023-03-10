@@ -23,12 +23,12 @@ export class AppComponent implements OnInit {
         this.authService.userName = user.displayName;
         this.authService.photoUrl = user.photoURL;
 
-        // this.userService.user$ = this.userService.getProfile(
-        //   this.authService.currentUser?.uid || ''
-        // );
+        this.userService.user$ = this.userService.getProfile(
+          this.authService.currentUser?.uid || ''
+        );
       } else {
         this.authService.currentUser = null;
-        // this.router.navigate(['/landing']);
+        this.router.navigate(['/landing']);
       }
     });
   }

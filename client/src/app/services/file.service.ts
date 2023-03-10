@@ -11,8 +11,8 @@ import { UserModel } from '../models/user.model';
   providedIn: 'root',
 })
 export class FileService {
-  content !: string;
-  saveFile !: any;
+  content!: string;
+  saveFile!: any;
   file$: Observable<FileState>;
   userMain!: UserModel;
   constructor(
@@ -27,9 +27,14 @@ export class FileService {
   }
 
   getFile(fileId: string) {
-    return this.httpClient.get<FileModel>( `http://localhost:3000/v1/file/${fileId}`);
+    return this.httpClient.get<FileModel>(
+      `http://localhost:3000/v1/file/${fileId}`
+    );
   }
 
+  getFiles() {
+    return this.httpClient.get('http://localhost:3000/v1/file/all');
+  }
 
   save(user: UserModel) {
     this.content = document.querySelector(

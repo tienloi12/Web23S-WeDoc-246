@@ -17,7 +17,7 @@ export class UserService {
 
   getProfile(uid: string) {
     return this.httpCLient.get<UserModel>(
-      `http://localhost:3000/v1/user/${uid}`
+      `http://localhost:3000/v1/user/info/${uid}`
     );
   }
 
