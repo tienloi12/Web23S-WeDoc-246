@@ -104,3 +104,17 @@
   color: var(--primary) !important;
   border-radius: 3px;
 }
+
+.NgxEditor__MenuItem.NgxEditor__MenuItem--Icon:hover, .NgxEditor__Dropdown--Text:hover, .NgxEditor__MenuItem.NgxEditor__MenuItem--Text:hover {
+  color: var(--primary) !important;
+  cursor: pointer;
+}
+
+.NgxEditor__Dropdown--Text.NgxEditor__Dropdown--Selected {
+  color: var(--primary) !important;
+  cursor: pointer;
+}
+
+
+
+

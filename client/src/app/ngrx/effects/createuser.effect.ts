@@ -33,14 +33,14 @@ export class CreateUserEffects {
     );
   });
 
-  getAllUser$ = createEffect(() => {
+  getUserByGmail$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType('[User] Get All User'),
-      switchMap(() => this.userService.getAllUsers()),
+      ofType('[User] Get User'),
+      switchMap((action: any) => this.userService.getProfileByEmail(action.email)),
       map((user) => {
-        return CreateUser.getAllUsersSuccess({ users: <Array<UserModel>>user });
+        return CreateUser.getUserSuccess({ user: <UserModel>user });
       }),
-      catchError((error) => of(CreateUser.getAllUsersFailure({ error })))
+      catchError((error) => of(CreateUser.getUserFailure({ error })))
     );
   });
 }

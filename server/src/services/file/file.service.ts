@@ -7,6 +7,25 @@ import { File, FileDocument } from 'src/schemas/file.schema';
 export class FileService {
   constructor(@InjectModel(File.name) private fileModel: Model<FileDocument>) {}
 
+  async createFile(file: File): Promise<File | any> {
+    try {
+      let data: any;
+      data = await this.fileModel.create(file);
+      return data as File;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  async getFileById(fileId: string): Promise<File | any> {
+    try {
+      let data = await this.fileModel.findOne({ fileId: fileId }).exec();
+      return data as File;
+    } catch (error) {
+      return null;
+    }
+  }
+  
   async getFiles(): Promise<File[] | null> {
     try {
       let data = await this.fileModel.find().exec();
