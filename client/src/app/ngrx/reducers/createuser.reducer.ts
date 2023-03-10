@@ -3,14 +3,11 @@ import {
   createUser,
   createUserFailure,
   createUserSuccess,
-  getAllUsers,
-  getAllUsersFailure,
-  getAllUsersSuccess,
   getUser,
   getUserFailure,
   getUserSuccess,
 } from '../actions/createuser.action';
-import { AllUser, AuthState } from '../states/auth.state';
+import {AuthState } from '../states/auth.state';
 
 export const initialState: AuthState = {
   user: null,
@@ -18,14 +15,6 @@ export const initialState: AuthState = {
   error: '',
   isSuccessful: false,
 };
-
-export const initialAllState: AllUser = {
-  users: [],
-  loading: false,
-  error: '',
-  isSuccessful: false,
-};
-
 
 export const createUserReducer = createReducer(
   initialState,
@@ -67,19 +56,19 @@ export const getUserReducer = createReducer(
   }))
 );
 
-export const getAllUsersReducer = createReducer(
-  initialAllState,
-  on(getAllUsers, (state) => ({ ...state, loading: true })),
-  on(getAllUsersSuccess, (state, action) => {
+export const getUserByGmailReducer = createReducer(
+  initialState,
+  on(getUser, (state) => ({ ...state, loading: true })),
+  on(getUserSuccess, (state, action) => {
     let newState = {
       ...state,
-      user: action.users,
+      user: action.user,
       loading: false,
       isSuccessful: true,
     };
     return newState;
   }),
-  on(getAllUsersFailure, (state, { error }) => ({
+  on(getUserFailure, (state, { error }) => ({
     ...state,
     error: error,
     loading: false,

@@ -6,8 +6,8 @@ import { UserService } from './services/user/user.service';
 import { UserController } from './controllers/v1/user/user.controller';
 import { User, UserSchema } from './schemas/user.schema';
 import { FileService } from './services/file/file.service';
-import { FileController } from './controllers/v1/file/file.controller';
 import { File, FileSchema } from './schemas/file.schema';
+import { FileController } from './controllers/v1/file/file.controller';
 
 @Module({
   imports: [

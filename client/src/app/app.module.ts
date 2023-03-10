@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ColabDialogComponent } from './components/colab-dialog/colab-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
+import { createFileReducer, getFileReducer } from './ngrx/reducers/file.reducer';
 import { getFilesReducer } from './ngrx/reducers/file.reducer';
 import { FileEffects } from './ngrx/effects/file.effect';
 
@@ -36,6 +37,8 @@ import { FileEffects } from './ngrx/effects/file.effect';
         auth: authReducer,
         createUser: createUserReducer,
         getUser: getUserReducer,
+        createfile: createFileReducer,
+        getFile: getFileReducer,
         getFiles: getFilesReducer,
       },
 
@@ -45,6 +48,7 @@ import { FileEffects } from './ngrx/effects/file.effect';
     BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

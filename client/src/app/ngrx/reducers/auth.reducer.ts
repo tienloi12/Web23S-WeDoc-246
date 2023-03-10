@@ -11,7 +11,7 @@ import {
 import { AuthState } from '../states/auth.state';
 
 export const initialState: AuthState = {
-  user: <UserModel>{},
+  user: null,
   loading: false,
   error: '',
   isSuccessful: false,
@@ -19,11 +19,12 @@ export const initialState: AuthState = {
 
 export const authReducer = createReducer(
   initialState,
-  on(login, (state) => ({ ...state, loading: true })),
+  on(login, (state) => ({ ...state, user: null, error: '', isSuccessful: false, loading: true })),
   on(loginSuccess, (state, { user }) => {
     let newState = {
       ...state,
       user: user,
+      error: '',
       loading: false,
       isSuccessful: true,
     };
@@ -32,6 +33,7 @@ export const authReducer = createReducer(
   // on(loginSuccess, (state, { user }) => ({ ...state, user: user, loading: false, isSuccessful: true })),
   on(loginFailure, (state, { error }) => ({
     ...state,
+    user: null,
     error: error,
     loading: false,
     isSuccessful: false,

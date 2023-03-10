@@ -1,11 +1,9 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
   Param,
   Post,
-  Query,
 } from '@nestjs/common';
 import { User } from 'src/schemas/user.schema';
 import { UserService } from 'src/services/user/user.service';
@@ -22,6 +20,12 @@ export class UserController {
   @Get('info/:id')
   async getUserById(@Param(`id`) id: string) {
     let user = await this.userService.getUserById(id);
+    return user;
+  }
+
+  @Get(':email')
+  async getUserByEmail(@Param(`email`) email: string) {
+    let user = await this.userService.getUserByEmail(email);
     return user;
   }
 

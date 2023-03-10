@@ -25,7 +25,16 @@ export class UserService {
     }
   }
 
-  async createUser(user: User): Promise<User | null> {
+  async getUserByEmail(email: string): Promise<User | null> {
+    try {
+      let data = await this.userModel.findOne({ email: email }).exec();
+      return data;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  async createUser(user: User): Promise<User | any> {
     try {
       let data: any;
       data = await this.userModel.create(user);
