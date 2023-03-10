@@ -1,5 +1,134 @@
-.shared-container{
-    background-color: black;
-    width: 89rem;
-    height: 41rem;
+.shared-container {
+    background-color: #ffffff;
+    width: 100%;
+    height: 44.8rem;
+}
+.shared-title {
+    display: flex;
+    height: 5rem;
+    width: 100%;
+    background-color: #ffffff;
+    align-items: center;
+
+    .shared-file-name {
+        margin-left: 6rem;
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: #000000;
+    }
+
+    .shared-type {
+        margin-left: 30rem;
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: #000000;
+    }
+
+    .shared-shared {
+        margin-left: 11rem;
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: #000000;
+    }
+
+    .shared-date-created {
+        margin-left: 10rem;
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: #000000;
+    }
+}
+
+.line {
+    margin-left: 1.5rem;
+    width: 96.5rem;
+    height: 0.0625rem;
+    background-color: #ccc;
+}
+.shared-file{
+    background-color: #ffffff; 
+    width: 100%; 
+    height: 40.7rem;
+}
+.file-1 {
+    background-color: #ffffff;
+    width: 100%;
+    height: 12rem;
+
+    .item {
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+
+        .item-file-name {
+            margin-left: 6rem;
+            height: 100%;
+            width: 34.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #000000;
+        }
+
+        .item-type {
+            margin-left: 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #000000;
+        }
+
+        .item-avatar {
+            margin-left: 11rem;
+            display: flex;
+            width: 8rem;
+            height: 5rem;
+            background-color: #ffffff;
+
+            .avatar {
+                display: flex;
+                background-color: #ffffff;
+                width: 8rem;
+                height: 2.5rem;
+                margin-top: 1.3rem;
+                position: absolute;
+
+                .avatar-1,
+                .avatar-2,
+                .avatar-3 {
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    border-radius: 50%;
+                    position: absolute;
+                }
+
+                .avatar-1 {
+                    background-color: blue;
+                }
+
+                .avatar-2 {
+                    margin-left: 1.8rem;
+                    background-color: orange;
+                }
+
+                .avatar-3 {
+                    margin-left: 3.6rem;
+                    background-color: red;
+                }
+            }
+        }
+        .item-date-created {
+            margin-left: 7.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #000000;
+        }
+       
+    }
+
+    .line-card {
+        margin-left: 1rem;
+        width: 95%;
+        height: 0.1rem;
+        background-color: #f6f6f6;
+    }
+
 }

@@ -4,6 +4,9 @@ import { GetFilesState } from 'src/app/ngrx/states/file.state';
 import * as FileActions from 'src/app/ngrx/actions/file.action';
 import { Observable } from 'rxjs';
 import { DocumentFile } from 'src/app/models/file.model';
+
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-home-main',
   templateUrl: './home-main.component.html',
@@ -12,11 +15,18 @@ import { DocumentFile } from 'src/app/models/file.model';
 export class HomeMainComponent implements OnInit {
   files$: Observable<DocumentFile[]>;
 
-  constructor(private store: Store<{ getFiles: GetFilesState }>) {
+  constructor(
+    private store: Store<{ getFiles: GetFilesState }>,
+    private router: Router
+  ) {
     this.files$ = store.select('getFiles', 'files');
     this.store.select('getFiles', 'files').subscribe((data) => {
       console.log(data);
     });
+  }
+
+  newPage() {
+    this.router.navigate(['/paper']);
   }
 
   ngOnInit(): void {
