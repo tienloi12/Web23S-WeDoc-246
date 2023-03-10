@@ -1,47 +1,40 @@
 <div class="shared-container">
-    <div class="shared-title">
-        <div class="shared-file-name">
-            <b>File Name</b>
-        </div>
-        <div class="shared-type">
-            <b>Type</b>
-        </div>
-        <div class="shared-shared">
-            <b>Shared</b>
-        </div>
-        <div class="shared-date-created">
-            <b>Date Created</b>
-        </div>
+  <div class="shared-title">
+    <div class="shared-file-name">
+      <b>File Name</b>
     </div>
-    <div class="line">
+    <div class="shared-type">
+      <b>Type</b>
     </div>
-        <div *ngFor="let file of files$ | async" class="file">
-            <div   class="item">
-            <div class="item-file-name">
-                {{ file._id }}
-            </div>
-            <div class="item-type">
-                pdf
-            </div>
-            <div class="item-avatar">
-                <div class="avatar">
-                    <div class="avatar-1">
-                        <img src="" alt="">
-                    </div>
-                    <div class="avatar-2">
-                        <img src="" alt="">
-                    </div>
-                    <div class="avatar-3">
-                        <img src="" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="item-date-created">
-                12/01/2020
-            </div>
-        </div>
-        <div class="line-card">
-
-        </div>
-        </div>
+    <div class="shared-shared">
+      <b>Shared</b>
     </div>
+    <div class="shared-date-created">
+      <b>Date Created</b>
+    </div>
+  </div>
+  <div class="line"></div>
+  <div *ngFor="let file of files$ | async" class="file">
+    <div class="item">
+      <div class="item-file-name">
+        {{ file.fileId }}
+      </div>
+      <div class="item-type">pdf</div>
+      <div class="item-avatar">
+        <div class="avatar">
+          <div class="avatar-1">
+            <img src="" alt="" />
+          </div>
+          <div class="avatar-2">
+            <img src="" alt="" />
+          </div>
+          <div class="avatar-3">
+            <img src="" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="item-date-created">12/01/2020</div>
+    </div>
+    <div class="line-card"></div>
+  </div>
+</div>

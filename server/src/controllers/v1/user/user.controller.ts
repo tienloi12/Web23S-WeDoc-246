@@ -25,13 +25,6 @@ export class UserController {
 
   @Post('create')
   async createUser(@Body() user: User) {
-    let checkUser = await this.getUserById(user.uid);
-    console.log(checkUser);
-    if (!checkUser) {
-      console.log('User does not exist, creating user...');
-      return this.userService.createUser(user);
-    }
-    console.log('User already exists, returning user...');
-    return user;
+    await this.userService.createUser(user);
   }
 }

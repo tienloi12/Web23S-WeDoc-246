@@ -42,11 +42,6 @@ export class AuthService {
     // });
   }
 
-  userId!: string;
-  currentUser!: UserModel;
-  userName!: string | null;
-  photoUrl!: string | null;
-
   loginWithGoogle() {
     return from(
       new Promise(async (resolve, reject) => {
@@ -62,9 +57,9 @@ export class AuthService {
             email: userCredential.user?.email || '',
             displayName: userCredential.user?.displayName || '',
             photoURL: userCredential.user?.photoURL || '',
-            // documentFiles: [],
           };
           this.store.dispatch(UserActions.createUser({ user: user }));
+
           resolve(user);
         } catch (error) {
           reject(error);

@@ -14,7 +14,6 @@ export const createFileReducer = createReducer(
   initialState,
   on(FileActions.createFile, (state) => ({ ...state, loading: true })),
   on(FileActions.createFileSuccess, (state, action) => {
-    console.log(action.type);
     let newState = {
       ...state,
       fileId: action.file,

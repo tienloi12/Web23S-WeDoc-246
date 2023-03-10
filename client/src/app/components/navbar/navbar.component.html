@@ -1,82 +1,18 @@
-<header class="header">
-  <nav class="nav">
-    <div class="block1">
-      <span (click)="backHome()" class="material-symbols-outlined back">
-        arrow_back_ios_new
-      </span>
-      <div class="view">
-        <span class="material-symbols-outlined"> view_sidebar </span>
-        <p>View</p>
-      </div>
-      <div class="zoom">
-        <select>
-          <option value="400">400%</option>
-          <option value="300">300%</option>
-          <option value="200">200%</option>
-          <option value="150">150%</option>
-          <option value="100" selected>100%</option>
-          <option value="75">75%</option>
-          <option value="50">50%</option>
-          <option value="25">25%</option>
-        </select>
-        <p>Zoom</p>
-      </div>
-      <div class="add">
-        <span class="material-symbols-outlined"> add_box </span>
-        <p>Add Page</p>
-      </div>
+<span class="header">
+  <div class="back">
+    <span (click)="backHome()" class="material-symbols-outlined back">
+      arrow_back_ios_new
+    </span>
+  </div>
+
+  <div class="block2">
+    <div (click)="save()" class="item">
+      <span class="material-symbols-outlined"> save </span>
+      <p>Save</p>
     </div>
-    <div class="block2">
-      <div class="insert">
-        <span class="material-symbols-outlined"> format_paragraph </span>
-        <p>Insert</p>
-      </div>
-      <div class="table">
-        <span class="material-symbols-outlined"> table </span>
-        <p>Table</p>
-      </div>
-      <div class="chart">
-        <span class="material-symbols-outlined"> pie_chart </span>
-        <p>Chart</p>
-      </div>
-      <div class="text">
-        <span class="material-symbols-outlined"> font_download </span>
-        <p>Text</p>
-      </div>
-      <div class="shape">
-        <span class="material-symbols-outlined"> shapes </span>
-        <p>Shape</p>
-      </div>
-      <div class="media">
-        <span class="material-symbols-outlined"> image </span>
-        <p>Media</p>
-      </div>
-      <div class="comment">
-        <span class="material-symbols-outlined"> chat </span>
-        <p>Comment</p>
-      </div>
+    <div (click)="openDialog()" class="item">
+      <span class="material-symbols-outlined"> people </span>
+      <p>Collaborate</p>
     </div>
-    <div class="block3">
-      <div class="save">
-        <span (click)="save()" class="material-symbols-outlined"> save </span>
-        <p>Save</p>
-      </div>
-      <div class="collaborate">
-        <span (click)="openDialog()" class="material-symbols-outlined">
-          people
-        </span>
-        <p>Collaborate</p>
-      </div>
-      <div class="format">
-        <span (click)="onclick()" class="material-symbols-outlined">
-          format_paint
-        </span>
-        <p>Format</p>
-      </div>
-      <div class="document">
-        <span class="material-symbols-outlined"> description </span>
-        <p>Document</p>
-      </div>
-    </div>
-  </nav>
-</header>
+  </div>
+</span>

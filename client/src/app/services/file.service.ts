@@ -12,6 +12,7 @@ import { UserModel } from '../models/user.model';
 })
 export class FileService {
   content!: string;
+  title!: string;
   saveFile!: any;
   // file$: Observable<FileState>;
   userMain!: UserModel;
@@ -46,6 +47,7 @@ export class FileService {
       fileId: Date.now().toString(),
       authorId: user._id,
       authorName: user.displayName,
+      title: this.title,
       content: this.content,
       collaborators: [user],
       createdAt: new Date().toString(),

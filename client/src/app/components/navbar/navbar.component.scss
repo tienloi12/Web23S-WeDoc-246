@@ -1,58 +1,50 @@
-
 .header {
-  height: 4rem;
-}
-.nav {
-  height: 100%;
-  background-color: #673ab7;
-  color: #fff;
+  width: 100%;
+  background-color: var(--primary);
+  color: var(--base);
   display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 0.2rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
 }
-
-.nav p {
-  font-size: 0.8rem;
-}
-
-.nav span {
-  font-weight: 200;
-  transition: 0.5s;
-}
-
-.nav span:hover {
+.back {
+  position: absolute;
+  left: 0;
+  top: 1%;
+  font-size: 1.2rem;
+  padding: 0.5rem;
   cursor: pointer;
-  color: #c2c2c2;
-  transition: 0.5s;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    color: var(--secondary);
+  }
 }
 
-.block1,
-.block2,
-.block3 {
+.block2 {
   display: flex;
-  text-align: center;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-.block1 div,
-.block2 div,
-.block3 div {
-  margin: 0 1rem;
-}
-
-
-.block1 .back {
-        display: flex;
-        align-items: center;
-}
-
-.block1 .zoom {
+.item {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.5rem;
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    color: var(--secondary);
+  }
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
-.block1 .zoom select {
-  outline: none;
-  margin-top: 0.1875rem;
+p {
+  margin: 0;
+  padding: 0;
 }
-

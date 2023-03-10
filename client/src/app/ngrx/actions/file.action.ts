@@ -5,10 +5,12 @@ export const createFile = createAction(
   '[File] Create File',
   props<{ file: DocumentFile }>()
 );
+
 export const createFileSuccess = createAction(
   '[File] Create File Success',
   props<{ file: DocumentFile }>()
 );
+
 export const createFileFailure = createAction(
   '[File] Create File Failure',
   props<{ error: string }>()

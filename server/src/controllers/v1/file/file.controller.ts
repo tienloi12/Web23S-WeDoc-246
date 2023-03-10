@@ -12,7 +12,7 @@ export class FileController {
     return this.fileService.createFile(file);
   }
 
-  @Get(':id')
+  @Get('info/:id')
   async getFileById(@Param(`id`) id: string) {
     let file = await this.fileService.getFileById(id);
     return file;

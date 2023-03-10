@@ -20,6 +20,12 @@ export class File {
   })
   authorId: User;
 
+  @Prop({
+    required: true,
+    default: 'Untitled',
+  })
+  title: string;
+
   @Prop()
   content: string;
 

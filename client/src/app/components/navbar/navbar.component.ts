@@ -49,10 +49,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   @Output()
   sidebarOpenChange = new EventEmitter<boolean>();
 
-  onclick() {
-    this.sidebarOpenChange.emit(!this.sidebarOpen);
-  }
-
   backHome() {
     this.router.navigate(['/home/main']);
   }

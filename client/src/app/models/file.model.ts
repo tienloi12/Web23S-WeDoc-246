@@ -10,6 +10,7 @@ export interface DocumentFile {
   fileId: string;
   authorId: string;
   authorName: string;
+  title: string;
   content: string;
   collaborators: UserModel[];
   createdAt: string;
