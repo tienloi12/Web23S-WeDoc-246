@@ -52,7 +52,7 @@ export class PaperComponent implements OnInit, OnDestroy {
   });
 
   get doc(): AbstractControl {
-    console.log(this.form.get('editorContent'));
+    // console.log(this.form.get('editorContent'));
     return this.form.get('editorContent') ?? new FormControl();
   }
 
