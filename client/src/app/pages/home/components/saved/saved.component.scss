@@ -5,24 +5,23 @@
 }
 .saved-text{
     display: flex;
-    height: 5rem;
     width: 100%;
     background-color: #ffffff;
     align-items: center;
 }
 .text-1{
     margin-left: 5rem;
-    font-size: 1.25rem;
+    font-size: 1rem;
     margin-top: 1rem;
 }
 .text-2{
     margin-left: 17rem;
-    font-size: 1.25rem;
+    font-size: 1rem;
     margin-top: 1rem;
 }
 .text-3{
     margin-left:30rem;
-    font-size: 1.25rem;
+    font-size: 1rem;
     margin-top: 1rem;
 }
 .line{
@@ -34,21 +33,25 @@
 }
 .content{
     display: flex;
+    align-items: center;
 }
 .content-1{
     margin-left: 5.5rem;
     font-size: 0.875rem;
-    margin-top: 1.3rem;
+    margin-top: 0.8rem;
+    width: 20%;
 }
 .content-2{
-    margin-left: 20rem;
+    margin-left: 2rem ;
     font-size: 0.875rem;
-    margin-top: 1.3rem;
+    margin-top: 0.6rem;
+    width: 29%;
 }
 .content-3{
-    margin-left:27rem;
+    margin-left: 2rem ;
     font-size: 0.875rem;
-    margin-top: 0.75rem;
+    margin-top: 0.6rem;
+    width: 29%;
 }
 .user{
     display: flex;

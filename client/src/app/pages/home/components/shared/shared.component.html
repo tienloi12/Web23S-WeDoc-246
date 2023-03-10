@@ -15,11 +15,10 @@
     </div>
     <div class="line">
     </div>
-    <div class="shared-file">
-        <div class="file-1">
-            <div class="item">
+        <div *ngFor="let file of files$ | async" class="file">
+            <div   class="item">
             <div class="item-file-name">
-                File Name 1 2 3
+                {{ file._id }}
             </div>
             <div class="item-type">
                 pdf
@@ -44,7 +43,5 @@
         <div class="line-card">
 
         </div>
-        </div>
-
         </div>
     </div>
