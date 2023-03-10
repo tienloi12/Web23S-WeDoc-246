@@ -42,8 +42,8 @@ export class PaperComponent implements OnInit, OnDestroy {
     this.auth$ = this.store.select('auth');
     this.file$ = this.store.select('getfile');
     this.store.dispatch(FileActions.getFile({ fileId: '1678328583349' }));
-    console.log(this.file$);
-    this.store.subscribe((data) => console.log(data));
+    // console.log(this.file$);
+    // this.store.subscribe((data) => console.log(data));
   }
 
   isProdMode = environment.production;
@@ -61,7 +61,7 @@ export class PaperComponent implements OnInit, OnDestroy {
   });
 
   get doc(): AbstractControl {
-    console.log(this.form.get('editorContent'));
+    // console.log(this.form.get('editorContent'));
     return this.form.get('editorContent') ?? new FormControl();
   }
 
