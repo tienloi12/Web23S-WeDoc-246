@@ -19,21 +19,21 @@ export class HomeComponent {
       // id: 0,
       title: 'Home',
       icon: 'home',
-      link: '/main'
+      link: '/main',
     },
     {
       // id: 1,
       title: 'Share',
       icon: 'share',
-      link: '/shared'
+      link: '/shared',
     },
     {
       // id: 2,
       title: 'Save',
       icon: 'save',
-      link: '/saved'
+      link: '/saved',
     },
-  ]
+  ];
   sideBarSelected: number = 0;
   constructor(
     public authService: AuthService,
@@ -52,8 +52,6 @@ export class HomeComponent {
 
   select(index: number) {
     this.sideBarSelected = index;
-    this.router.navigate(["/home"+this.sideMenu[index].link]);
-
-
+    this.router.navigate(['/home' + this.sideMenu[index].link]);
   }
 }

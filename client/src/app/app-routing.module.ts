@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'paper',
+    redirectTo: 'landing',
     pathMatch: 'full',
   },
   {
@@ -22,7 +22,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/landing/landing.module').then((m) => m.LandingModule),
   },
-  { path: 'about', loadChildren: () => import('./pages/about/about.module').then(m => m.AboutModule) },
+  {
+    path: 'about',
+    loadChildren: () =>
+      import('./pages/about/about.module').then((m) => m.AboutModule),
+  },
 ];
 
 @NgModule({
