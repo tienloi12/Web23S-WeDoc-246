@@ -53,7 +53,5 @@ export class HomeComponent {
   select(index: number) {
     this.sideBarSelected = index;
     this.router.navigate(["/home"+this.sideMenu[index].link]);
-
-
   }
 }

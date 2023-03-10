@@ -5,8 +5,8 @@
     background-color: #ffffff;
 }
 .text{
-    width: 100%;
-    height: 70%;
+    width: 100rem;
+    height: 20rem;
     background-color: #F6F6F6;
 
 }
@@ -41,12 +41,16 @@
     width: 8.125rem;
     background-color: #F6F6F6;
 }
+.page-1,.page:hover{
+    cursor: pointer;
+}
 .page {
     margin-top: 1rem;
     margin-left: 3.75rem;
     height: 11.25rem;
     width: 8.125rem;
     background-color: #F6F6F6;
+    
 }
 .page-text {
     background-color: #F6F6F6; 
@@ -66,6 +70,7 @@
     transform: translate(-50%,-50%);
 }
 .file {
+    height: 25.8rem;
     width: 100%;
 }
 .file-title{
@@ -96,6 +101,7 @@
     background-color: #ccc;
 }
 .file-item{
+    height: 22.8rem;
     width: 100%;
 }
 .item-file{
