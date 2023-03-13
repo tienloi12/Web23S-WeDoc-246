@@ -22,13 +22,16 @@ export const userReducer = createReducer(
     };
     return newState;
   }),
+
   on(UserActions.createUserFailure, (state, { error }) => ({
     ...state,
     error: error,
     loading: false,
     isSuccessful: false,
   })),
+
   on(UserActions.getUserById, (state) => ({ ...state, loading: true })),
+
   on(UserActions.getUserByIdSuccess, (state, action) => {
     console.log(action.type);
     let newState = {
@@ -39,13 +42,16 @@ export const userReducer = createReducer(
     };
     return newState;
   }),
+
   on(UserActions.getUserByIdFailure, (state, { error }) => ({
     ...state,
     error: error,
     loading: false,
     isSuccessful: false,
   })),
+
   on(UserActions.getUserByGmail, (state) => ({ ...state, loading: true })),
+
   on(UserActions.getUserByGmailSuccess, (state, action) => {
     console.log(action.type);
     let newState = {
@@ -56,12 +62,14 @@ export const userReducer = createReducer(
     };
     return newState;
   }),
+
   on(UserActions.getUserByGmailFailure, (state, { error }) => ({
     ...state,
     error: error,
     loading: false,
     isSuccessful: false,
   })),
+
   on(UserActions.clearUser, (state, action) => {
     console.log(action.type);
 

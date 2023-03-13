@@ -37,6 +37,13 @@ export class FileService {
     return this.httpClient.get('http://localhost:3000/v1/file/all');
   }
 
+  getFilesByAuthorId(authorId: string) {
+    console.log(authorId);
+    return this.httpClient.get(
+      `http://localhost:3000/v1/file/author/${authorId}`
+    );
+  }
+
   save(user: UserModel) {
     console.log(user);
     this.content = document.querySelector(
