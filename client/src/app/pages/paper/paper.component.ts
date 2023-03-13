@@ -21,7 +21,7 @@ import { FileService } from 'src/app/services/file.service';
 import * as FileActions from 'src/app/ngrx/actions/file.action';
 import { UserState } from 'src/app/ngrx/states/user.state';
 import { UserModel } from 'src/app/models/user.model';
-import { GetFileState } from 'src/app/ngrx/states/file.state';
+import { GetFileDetailState } from 'src/app/ngrx/states/file.state';
 import { DocumentFile } from 'src/app/models/file.model';
 import { ActivatedRoute } from '@angular/router';
 @Component({
@@ -42,7 +42,7 @@ export class PaperComponent implements OnInit, OnDestroy {
   constructor(
     public authService: AuthService,
     public fileService: FileService,
-    private fileStore: Store<{ getFile: GetFileState }>,
+    private fileStore: Store<{ getFile: GetFileDetailState }>,
     private activedRoute: ActivatedRoute
   ) {}
 
@@ -77,7 +77,9 @@ export class PaperComponent implements OnInit, OnDestroy {
       },
     });
     this.fileStore.dispatch(
-      FileActions.getFile({ fileId: this.activedRoute.snapshot.params['id'] })
+      FileActions.getFileDetail({
+        fileId: this.activedRoute.snapshot.params['id'],
+      })
     );
     this.file$.subscribe((file) => {
       if (file) {

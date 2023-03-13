@@ -27,7 +27,7 @@ export class FileService {
     return this.httpClient.post('http://localhost:3000/v1/file/create', file);
   }
 
-  getFile(fileId: string) {
+  getFileDetail(fileId: string) {
     return this.httpClient.get(`http://localhost:3000/v1/file/info/${fileId}`);
   }
 
@@ -35,12 +35,13 @@ export class FileService {
     return this.httpClient.get('http://localhost:3000/v1/file/all');
   }
 
-  updateFile(file: DocumentFile) {
-    return this.httpClient.put(
-      `http://localhost:3000/v1/file/update/${file.fileId}`,
-      file
-    );
-  }
+  // updateFile(file: DocumentFile) {
+  //   return this.httpClient.put(
+  //     `http://localhost:3000/v1/file/update/${file.fileId}`,
+  //     file
+  //   );
+  // }
+
   getFilesByAuthorId(authorId: string) {
     return this.httpClient.get(
       `http://localhost:3000/v1/file/author/${authorId}`
@@ -67,5 +68,4 @@ export class FileService {
       })
     );
   }
-
 }

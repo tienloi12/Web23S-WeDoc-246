@@ -24,14 +24,16 @@ export class FileEffects {
 
   getFile$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(FileActions.getFile),
+      ofType(FileActions.getFileDetail),
       switchMap((action: any) => {
-        return this.fileService.getFile(action.fileId);
+        return this.fileService.getFileDetail(action.fileId);
       }),
       map((file) => {
-        return FileActions.getFileSuccess({ file: <DocumentFile>file });
+        return FileActions.getFileDetailSuccess({ file: <DocumentFile>file });
       }),
-      catchError((error) => of(FileActions.getFileFailure({ error: error})))
+      catchError((error) =>
+        of(FileActions.getFileDetailFailure({ error: error }))
+      )
     );
   });
 
