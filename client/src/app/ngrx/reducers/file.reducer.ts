@@ -130,3 +130,27 @@ export const getFilesReducer = createReducer(
     };
   })
 );
+
+export const fileReducers = createReducer(
+  initialState,
+  on(FileActions.createFile, (state) => ({ ...state, loading: true })),
+
+  on(FileActions.createFileSuccess, (state, action) => {
+    console.log(action.type);
+
+    let newState = {
+      ...state,
+      fileId: action.file,
+      loading: false,
+      isSuccessful: true,
+    };
+    return newState;
+  }),
+
+  on(FileActions.createFileFailure, (state, { error }) => ({
+    ...state,
+    error: error,
+    loading: false,
+    isSuccessful: false,
+  }))
+);

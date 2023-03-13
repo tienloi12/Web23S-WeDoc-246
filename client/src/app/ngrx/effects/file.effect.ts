@@ -25,7 +25,7 @@ export class FileEffects {
   getFile$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(FileActions.getFileDetail),
-      switchMap((action: any) => {
+      switchMap((action) => {
         return this.fileService.getFileDetail(action.fileId);
       }),
       map((file) => {
@@ -65,6 +65,21 @@ export class FileEffects {
       }),
       catchError((error) => {
         return of(FileActions.getFilesByAuthorIdFailure({ error: error }));
+      })
+    );
+  });
+
+  updateFile$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FileActions.updateFile),
+      switchMap((action) => {
+        return this.fileService.updateFile(action.fileId, action.file);
+      }),
+      map((file) => {
+        return FileActions.updateFileSuccess({ file: <DocumentFile>file });
+      }),
+      catchError((error) => {
+        return of(FileActions.updateFileFailure({ error: error }));
       })
     );
   });

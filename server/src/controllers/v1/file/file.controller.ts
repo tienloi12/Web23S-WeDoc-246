@@ -12,8 +12,8 @@ export class FileController {
   }
 
   @Put('/update/:id')
-  async updateFile(@Param(`id`) id: string, @Body() file: File) {
-    return this.fileService.updateFile(id, file);
+  async updateFile(@Param(`id`) fileId: string, @Body() file: File) {
+    return this.fileService.updateFile(fileId, file);
   }
 
   @Get('info/:id')

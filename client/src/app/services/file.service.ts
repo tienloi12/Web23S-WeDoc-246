@@ -13,18 +13,31 @@ import { UserModel } from '../models/user.model';
 export class FileService {
   content!: string;
   title!: string;
-  saveFile!: any;
-  // file$: Observable<FileState>;
+  // saveFile!: any;
+  // file$: Observable<DocumentFile>;
+  // file!: DocumentFile;
   userMain!: UserModel;
   constructor(
     private httpClient: HttpClient,
     private store: Store<{ file: CreateFileState }>
   ) {
-    // this.file$ = store.select('file');
+    // this.file$ = store.select('file', 'file');
+    // this.store.select('file', 'file').subscribe((data) => {
+    //   console.log(data.content);
+    //   return data;
+    // });
+    // console.log('file service')
   }
 
   createFile(file: DocumentFile) {
     return this.httpClient.post('http://localhost:3000/v1/file/create', file);
+  }
+
+  updateFile(fileId: string, file: DocumentFile) {
+    return this.httpClient.put(
+      `http://localhost:3000/v1/file/update/${fileId}`,
+      file
+    );
   }
 
   getFileDetail(fileId: string) {
@@ -34,13 +47,6 @@ export class FileService {
   getFiles() {
     return this.httpClient.get('http://localhost:3000/v1/file/all');
   }
-
-  // updateFile(file: DocumentFile) {
-  //   return this.httpClient.put(
-  //     `http://localhost:3000/v1/file/update/${file.fileId}`,
-  //     file
-  //   );
-  // }
 
   getFilesByAuthorId(authorId: string) {
     return this.httpClient.get(
@@ -61,11 +67,16 @@ export class FileService {
       content: this.content,
       collaborators: [user],
       createdAt: new Date().toString(),
+      updatedAt: new Date().toString(),
     };
     this.store.dispatch(
       FileActions.createFile({
         file: file,
       })
     );
+  }
+
+  update(user: UserModel) {
+    //update service
   }
 }

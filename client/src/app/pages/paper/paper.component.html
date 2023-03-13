@@ -12,18 +12,17 @@
           >
           </ngx-editor-menu>
           <ngx-editor [editor]="editor" formControlName="editorContent">
-            <ngx-editor-floating-menu
+            <!-- <ngx-editor-floating-menu
             [editor]="editor"
             >
-          </ngx-editor-floating-menu>
+          </ngx-editor-floating-menu> -->
           </ngx-editor>
         </div>
       </form>
 
       <div class="editor">
-      <ngx-editor [editor]="editor" [(ngModel)]="editordoc">
-      </ngx-editor>
-    </div>
+        <ngx-editor [editor]="editor" [(ngModel)]="editordoc"> </ngx-editor>
+      </div>
 
       <!-- custom menu -->
       <ng-template #customMenu>
