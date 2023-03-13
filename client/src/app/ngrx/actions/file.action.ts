@@ -57,3 +57,19 @@ export const getFilesFailure = createAction(
   '[File] Get Files Failure',
   props<{ error: string }>()
 );
+
+// GET FILES BY AUTHOR ID
+export const getFilesByAuthorId = createAction(
+  '[File] Get Files By Author Id',
+  props<{ authorId: string }>()
+);
+
+export const getFilesByAuthorIdSuccess = createAction(
+  '[File] Get Files By Author Id Success',
+  props<{ files: DocumentFile[] }>()
+);
+
+export const getFilesByAuthorIdFailure = createAction(
+  '[File] Get Files By Author Id Failure',
+  props<{ error: string }>()
+);

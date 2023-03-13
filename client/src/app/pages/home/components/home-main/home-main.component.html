@@ -60,11 +60,11 @@
     </div>
     <div class="line"></div>
     <div *ngFor="let file of files$ | async" class="file-item">
-      <div class="item-file">
+      <div class="item-file" (click)="openFile(file)">
         <div class="description-icon">
           <span class="material-symbols-rounded"> description </span>
         </div>
-        <div class="item-text">{{ file.fileId }}</div>
+        <div class="item-text">{{ file.title }}</div>
         <div class="item-text-1">January 12</div>
       </div>
       <div class="line-item-file"></div>

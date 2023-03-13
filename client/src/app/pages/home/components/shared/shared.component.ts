@@ -8,7 +8,7 @@ import * as FileActions from 'src/app/ngrx/actions/file.action';
 @Component({
   selector: 'app-shared',
   templateUrl: './shared.component.html',
-  styleUrls: ['./shared.component.scss']
+  styleUrls: ['./shared.component.scss'],
 })
 export class SharedComponent implements OnInit {
   files$: Observable<DocumentFile[]>;

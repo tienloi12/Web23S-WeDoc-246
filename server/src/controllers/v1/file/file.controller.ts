@@ -27,4 +27,10 @@ export class FileController {
     let files = await this.fileService.getFiles();
     return files;
   }
+
+  @Get('author/:id')
+  async getFilesByAuthorId(@Param(`id`) id: string) {
+    let files = await this.fileService.getFilesByAuthorId(id);
+    return files;
+  }
 }

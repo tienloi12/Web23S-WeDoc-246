@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { File, FileDocument } from 'src/schemas/file.schema';
@@ -44,6 +44,15 @@ export class FileService {
       return data;
     } catch (error) {
       return null;
+    }
+  }
+
+  async getFilesByAuthorId(authorId: string): Promise<File[] | null> {
+    try {
+      let data = await this.fileModel.find({ authorId: authorId }).exec();
+      return data;
+    } catch (error) {
+      return new HttpException(error.message, HttpStatus.BAD_REQUEST) as any;
     }
   }
 }

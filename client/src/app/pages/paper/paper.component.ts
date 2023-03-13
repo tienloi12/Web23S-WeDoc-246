@@ -23,6 +23,7 @@ import { UserState } from 'src/app/ngrx/states/user.state';
 import { UserModel } from 'src/app/models/user.model';
 import { GetFileState } from 'src/app/ngrx/states/file.state';
 import { DocumentFile } from 'src/app/models/file.model';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-paper',
   templateUrl: './paper.component.html',
@@ -41,18 +42,11 @@ export class PaperComponent implements OnInit, OnDestroy {
   constructor(
     public authService: AuthService,
     public fileService: FileService,
-    private fileStore: Store<{ getFile: GetFileState }>
-  ) {
-    this.fileStore.dispatch(FileActions.getFile({ fileId: '1678675445247' }));
-    this.file$.subscribe((file) => {
-      if (file) {
-        this.editor.setContent(toDoc(file.file.content));
-      }
-    });
-  }
+    private fileStore: Store<{ getFile: GetFileState }>,
+    private activedRoute: ActivatedRoute
+  ) {}
 
   isProdMode = environment.production;
-
 
   editor: Editor = new Editor();
   toolbar: Toolbar = DEFAULT_TOOLBAR;
@@ -81,6 +75,14 @@ export class PaperComponent implements OnInit, OnDestroy {
         linkOnPaste: true,
         resizeImage: true,
       },
+    });
+    this.fileStore.dispatch(
+      FileActions.getFile({ fileId: this.activedRoute.snapshot.params['id'] })
+    );
+    this.file$.subscribe((file) => {
+      if (file) {
+        this.editor.setContent(toDoc(file.file.content));
+      }
     });
   }
 

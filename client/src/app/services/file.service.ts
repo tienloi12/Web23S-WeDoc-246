@@ -41,9 +41,13 @@ export class FileService {
       file
     );
   }
+  getFilesByAuthorId(authorId: string) {
+    return this.httpClient.get(
+      `http://localhost:3000/v1/file/author/${authorId}`
+    );
+  }
 
   save(user: UserModel) {
-    console.log(user);
     this.content = document.querySelector(
       '.ProseMirror.NgxEditor__Content'
     )!.innerHTML;
@@ -63,4 +67,5 @@ export class FileService {
       })
     );
   }
+
 }

@@ -49,4 +49,21 @@ export class FileEffects {
       })
     );
   });
+
+  getFilesByAuthorId$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FileActions.getFilesByAuthorId),
+      switchMap((action) => {
+        return this.fileService.getFilesByAuthorId(action.authorId);
+      }),
+      map((files) => {
+        return FileActions.getFilesByAuthorIdSuccess({
+          files: <DocumentFile[]>files,
+        });
+      }),
+      catchError((error) => {
+        return of(FileActions.getFilesByAuthorIdFailure({ error: error }));
+      })
+    );
+  });
 }

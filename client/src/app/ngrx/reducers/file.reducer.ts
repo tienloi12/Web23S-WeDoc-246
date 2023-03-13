@@ -93,5 +93,36 @@ export const getFilesReducer = createReducer(
       isSuccess: false,
       error: error,
     };
+  }),
+
+  // Get files by author id
+  on(FileActions.getFilesByAuthorId, (state) => {
+    return {
+      ...state,
+      isLoading: true,
+      isSuccess: false,
+      error: '',
+    };
+  }),
+
+  on(FileActions.getFilesByAuthorIdSuccess, (state, action) => {
+    console.log(action);
+
+    return {
+      ...state,
+      isLoading: false,
+      isSuccess: true,
+      error: '',
+      files: action.files,
+    };
+  }),
+
+  on(FileActions.getFilesByAuthorIdFailure, (state, { error }) => {
+    return {
+      ...state,
+      isLoading: false,
+      isSuccess: false,
+      error: error,
+    };
   })
 );
