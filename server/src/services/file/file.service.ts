@@ -7,6 +7,7 @@ import { File, FileDocument } from 'src/schemas/file.schema';
 export class FileService {
   constructor(@InjectModel(File.name) private fileModel: Model<FileDocument>) {}
 
+  // CREATE FILE
   async createFile(file: File): Promise<File | any> {
     try {
       let data = await this.fileModel.create(file);
@@ -17,18 +18,19 @@ export class FileService {
     }
   }
 
-  async updateFile(fileId: string, file: File): Promise<File | any> {
+  // UPDATE FILE
+  async updateFile(_id: string, file: File): Promise<File | any> {
     try {
-      let data = await this.fileModel
-        .findOneAndUpdate({ fileId: fileId }, file)
+      let updateFile = await this.fileModel
+        .findOneAndUpdate({ fileId: _id }, file, { new: true })
         .exec();
-        console.log(data);
-      return data;
+      return updateFile;
     } catch (error) {
       return null;
     }
   }
 
+  // GET FILE DETAIL
   async getFileById(fileId: string): Promise<File | any> {
     try {
       let data = await this.fileModel.findOne({ fileId: fileId }).exec();
@@ -38,6 +40,7 @@ export class FileService {
     }
   }
 
+  // GET FILES
   async getFiles(): Promise<File[] | null> {
     try {
       let data = await this.fileModel.find().exec();
@@ -47,6 +50,7 @@ export class FileService {
     }
   }
 
+  // GET FILES BY AUTHOR ID
   async getFilesByAuthorId(authorId: string): Promise<File[] | null> {
     try {
       let data = await this.fileModel.find({ authorId: authorId }).exec();

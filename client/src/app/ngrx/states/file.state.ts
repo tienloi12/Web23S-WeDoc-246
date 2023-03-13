@@ -4,24 +4,15 @@ export interface CreateFileState {
   isLoading: boolean;
   isSuccess: boolean;
   error: string;
-  file: DocumentFile[];
+  file: DocumentFile;
 }
 
-
-export interface UpdateFileState {
-  isLoading: boolean;
-  isSuccess: boolean;
-  error: string;
-  file: DocumentFile[];
-}
-
-export interface GetFileState {
+export interface GetFileDetailState {
   isLoading: boolean;
   isSuccess: boolean;
   error: string;
   file: DocumentFile;
 }
-
 
 export interface GetFilesState {
   isLoading: boolean;
