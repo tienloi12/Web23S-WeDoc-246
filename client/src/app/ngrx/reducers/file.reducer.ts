@@ -1,7 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
-import { CreateFileState } from '../states/file.state';
+import { CreateFileState, GetFileState } from '../states/file.state';
 import * as FileActions from '../actions/file.action';
 import { GetFilesState } from '../states/file.state';
+import { DocumentFile } from 'src/app/models/file.model';
 
 export const initialState: CreateFileState = {
   isLoading: false,
@@ -30,25 +31,32 @@ export const createFileReducer = createReducer(
   }))
 );
 
-// export const getFileReducer = createReducer(
-//   initialState,
-//   on(FileActions.getFile, (state) => ({ ...state, loading: true })),
-//   on(FileActions.getFileSuccess, (state, action) => {
-//     let newState = {
-//       ...state,
-//       fileId: action.file,
-//       loading: false,
-//       isSuccessful: true,
-//     };
-//     return newState;
-//   }),
-//   on(FileActions.getFileFailure, (state, { error }) => ({
-//     ...state,
-//     error: error,
-//     loading: false,
-//     isSuccessful: false,
-//   }))
-// );
+export const initialGetFileState: GetFileState = {
+  isLoading: false,
+  isSuccess: false,
+  error: '',
+  file: <DocumentFile>{},
+};
+
+export const getFileReducer = createReducer(
+  initialState,
+  on(FileActions.getFile, (state) => ({ ...state, loading: true })),
+  on(FileActions.getFileSuccess, (state, action: any) => {
+    let newState = {
+      ...state,
+      file: action.file,
+      loading: false,
+      isSuccess: true,
+    };
+    return newState;
+  }),
+  on(FileActions.getFileFailure, (state, { error }) => ({
+    ...state,
+    error: error,
+    loading: false,
+    isSuccess: false,
+  }))
+);
 
 export const initialGetFilesState: GetFilesState = {
   isLoading: false,
@@ -98,7 +106,7 @@ export const getFilesReducer = createReducer(
   }),
 
   on(FileActions.getFilesByAuthorIdSuccess, (state, action) => {
-    console.log(action.type);
+    console.log(action);
 
     return {
       ...state,

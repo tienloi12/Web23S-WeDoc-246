@@ -14,7 +14,6 @@ export const userReducer = createReducer(
   initialState,
   on(UserActions.createUser, (state) => ({ ...state, loading: true })),
   on(UserActions.createUserSuccess, (state, action) => {
-    console.log(action.type);
     let newState = {
       ...state,
       loading: false,
@@ -33,7 +32,6 @@ export const userReducer = createReducer(
   on(UserActions.getUserById, (state) => ({ ...state, loading: true })),
 
   on(UserActions.getUserByIdSuccess, (state, action) => {
-    console.log(action.type);
     let newState = {
       ...state,
       user: action.user,
@@ -53,7 +51,6 @@ export const userReducer = createReducer(
   on(UserActions.getUserByGmail, (state) => ({ ...state, loading: true })),
 
   on(UserActions.getUserByGmailSuccess, (state, action) => {
-    console.log(action.type);
     let newState = {
       ...state,
       user: action.user,
@@ -71,8 +68,6 @@ export const userReducer = createReducer(
   })),
 
   on(UserActions.clearUser, (state, action) => {
-    console.log(action.type);
-
     return {
       ...state,
       user: <UserModel>{},

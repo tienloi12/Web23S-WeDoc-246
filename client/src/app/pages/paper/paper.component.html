@@ -1,4 +1,4 @@
-<div *ngIf="user$ | async">
+<div>
   <app-navbar></app-navbar>
 
   <div class="container">
@@ -13,16 +13,17 @@
           </ngx-editor-menu>
           <ngx-editor [editor]="editor" formControlName="editorContent">
             <ngx-editor-floating-menu
-              [editor]="editor"
-            ></ngx-editor-floating-menu>
+            [editor]="editor"
+            >
+          </ngx-editor-floating-menu>
           </ngx-editor>
         </div>
       </form>
 
-      <!-- <div class="editor">
+      <div class="editor">
       <ngx-editor [editor]="editor" [(ngModel)]="editordoc">
       </ngx-editor>
-    </div> -->
+    </div>
 
       <!-- custom menu -->
       <ng-template #customMenu>
@@ -31,10 +32,3 @@
     </div>
   </div>
 </div>
-
-<!-- <div
-  class="ThanTuan"
-  *ngFor="let item of (this.file$ | async)?.fileId?.content"
->
-  <div class="ThanTuan1">{{ item }}</div>
-</div> -->

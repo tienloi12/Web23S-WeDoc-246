@@ -10,7 +10,6 @@ export class FileService {
   async createFile(file: File): Promise<File | any> {
     try {
       let data = await this.fileModel.create(file);
-      console.log(data);
       return data;
     } catch (error) {
       console.log(error);
@@ -18,10 +17,22 @@ export class FileService {
     }
   }
 
+  async updateFile(fileId: string, file: File): Promise<File | any> {
+    try {
+      let data = await this.fileModel
+        .findOneAndUpdate({ fileId: fileId }, file)
+        .exec();
+        console.log(data);
+      return data;
+    } catch (error) {
+      return null;
+    }
+  }
+
   async getFileById(fileId: string): Promise<File | any> {
     try {
       let data = await this.fileModel.findOne({ fileId: fileId }).exec();
-      return data as File;
+      return data;
     } catch (error) {
       return null;
     }

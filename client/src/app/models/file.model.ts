@@ -6,6 +6,7 @@ import { UserModel } from './user.model';
 //   content: string;
 //   users: UserModel[];
 // }
+
 export interface DocumentFile {
   fileId: string;
   authorId: string;
