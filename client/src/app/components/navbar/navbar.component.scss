@@ -48,3 +48,17 @@ p {
   margin: 0;
   padding: 0;
 }
+
+.title {
+  position: absolute;
+  left: 5%;
+  top: 2%;
+  outline: none;
+  background-color: transparent;
+  color: var(--base);
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+  width: fit-content;
+}
