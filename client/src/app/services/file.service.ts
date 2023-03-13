@@ -27,11 +27,9 @@ export class FileService {
     return this.httpClient.post('http://localhost:3000/v1/file/create', file);
   }
 
-  // getFile(fileId: string) {
-  //   return this.httpClient.get<DocumentFile>(
-  //     `http://localhost:3000/v1/file/${fileId}`
-  //   );
-  // }
+  getFile(fileId: string) {
+    return this.httpClient.get(`http://localhost:3000/v1/file/info/${fileId}`);
+  }
 
   getFiles() {
     return this.httpClient.get('http://localhost:3000/v1/file/all');

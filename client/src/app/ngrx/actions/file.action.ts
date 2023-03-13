@@ -16,18 +16,18 @@ export const createFileFailure = createAction(
   props<{ error: string }>()
 );
 
-// export const getFile = createAction(
-//   '[File] Get File',
-//   props<{ fileId: string }>()
-// );
-// export const getFileSuccess = createAction(
-//   '[File] Get File Success',
-//   props<{ file: DocumentFile }>()
-// );
-// export const getFileFailure = createAction(
-//   '[File] Get File Failure',
-//   props<{ error: string }>()
-// );
+export const getFile = createAction(
+  '[File] Get File',
+  props<{ fileId: string }>()
+);
+export const getFileSuccess = createAction(
+  '[File] Get File Success',
+  props<{ file: DocumentFile }>()
+);
+export const getFileFailure = createAction(
+  '[File] Get File Failure',
+  props<{ error: string }>()
+);
 
 // GET FILES
 export const getFiles = createAction('[File] Get Files');

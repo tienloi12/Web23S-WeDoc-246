@@ -22,18 +22,18 @@ export class FileEffects {
     );
   });
 
-  // getFile$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(FileActions.getFile),
-  //     switchMap((action: any) => {
-  //       return this.fileService.getFile(action.fileId);
-  //     }),
-  //     map((file) => {
-  //       return FileActions.getFileSuccess({ file: <FileModel>file });
-  //     }),
-  //     catchError((error) => of(FileActions.getFileFailure({ error })))
-  //   );
-  // });
+  getFile$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FileActions.getFile),
+      switchMap((action: any) => {
+        return this.fileService.getFile(action.fileId);
+      }),
+      map((file) => {
+        return FileActions.getFileSuccess({ file: <DocumentFile>file });
+      }),
+      catchError((error) => of(FileActions.getFileFailure({ error: error})))
+    );
+  });
 
   getFiles$ = createEffect(() => {
     return this.actions$.pipe(
