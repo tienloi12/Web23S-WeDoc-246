@@ -19,7 +19,7 @@ import { ColabDialogComponent } from './components/colab-dialog/colab-dialog.com
 import { MatButtonModule } from '@angular/material/button';
 import {
   createFileReducer,
-  fileReducers,
+  // fileReducers,
   getFileReducer,
 } from './ngrx/reducers/file.reducer';
 import { getFilesReducer } from './ngrx/reducers/file.reducer';
@@ -40,7 +40,7 @@ import { FileEffects } from './ngrx/effects/file.effect';
         createfile: createFileReducer,
         getFiles: getFilesReducer,
         getFile: getFileReducer,
-        file: fileReducers,
+        // file: fileReducers,
       },
 
       {}

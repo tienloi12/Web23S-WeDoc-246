@@ -12,7 +12,7 @@ import { UserModel } from '../models/user.model';
 })
 export class FileService {
   content!: string;
-  title!: string;
+  title !: string | null;
   // saveFile!: any;
   // file$: Observable<DocumentFile>;
   // file!: DocumentFile;
@@ -55,9 +55,16 @@ export class FileService {
   }
 
   save(user: UserModel) {
+    console.log('save');
     this.content = document.querySelector(
       '.ProseMirror.NgxEditor__Content'
     )!.innerHTML;
+    let input = document.querySelector('#title') as HTMLInputElement;
+    if (input.value === 'Untitled') {
+      this.title = 'Untitled';
+    } else {
+      this.title = input.value;
+    }
     let file!: DocumentFile;
     file = {
       fileId: Date.now().toString(),
@@ -69,6 +76,7 @@ export class FileService {
       createdAt: new Date().toString(),
       updatedAt: new Date().toString(),
     };
+    console.log(file);
     this.store.dispatch(
       FileActions.createFile({
         file: file,

@@ -84,6 +84,8 @@ export class PaperComponent implements OnInit, OnDestroy {
     this.file$.subscribe((file) => {
       if (file) {
         this.editor.setContent(toDoc(file.file.content));
+        let title = document.querySelector('#title') as HTMLInputElement;
+        title.value = file.file.title;
       }
     });
   }
