@@ -16,6 +16,22 @@ export const createFileFailure = createAction(
   props<{ error: string }>()
 );
 
+export const updateFile = createAction(
+  '[File] Update File',
+  props<{ file: DocumentFile }>()
+);
+
+export const updateFileSuccess = createAction(
+  '[File] Update File Success',
+  props<{ file: DocumentFile }>()
+);
+
+export const updateFileFailure = createAction(
+  '[File] Update File Failure',
+  props<{ error: string }>()
+);
+
+
 export const getFile = createAction(
   '[File] Get File',
   props<{ fileId: string }>()

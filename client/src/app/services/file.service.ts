@@ -35,6 +35,13 @@ export class FileService {
     return this.httpClient.get('http://localhost:3000/v1/file/all');
   }
 
+  updateFile(file: DocumentFile) {
+    return this.httpClient.put(
+      `http://localhost:3000/v1/file/update/${file.fileId}`,
+      file
+    );
+  }
+
   save(user: UserModel) {
     console.log(user);
     this.content = document.querySelector(

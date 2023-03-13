@@ -10,7 +10,6 @@ export class FileService {
   async createFile(file: File): Promise<File | any> {
     try {
       let data = await this.fileModel.create(file);
-      console.log(data);
       return data;
     } catch (error) {
       console.log(error);

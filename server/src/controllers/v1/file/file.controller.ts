@@ -8,17 +8,12 @@ export class FileController {
 
   @Post('/create')
   async createFile(@Body() file: File) {
-    let f = await this.fileService.getFileById(file.fileId);
-    if (f) {
-      return this.fileService.updateFile(file.fileId, file);
-    }
     return this.fileService.createFile(file);
   }
 
   @Put('/update/:id')
   async updateFile(@Param(`id`) id: string, @Body() file: File) {
-    let updatedFile = await this.fileService.updateFile(id, file);
-    return updatedFile;
+    return this.fileService.updateFile(id, file);
   }
 
   @Get('info/:id')
