@@ -13,7 +13,7 @@ import {
   toHTML,
   toDoc,
 } from 'ngx-editor';
-import jsonDoc from './doc';
+// import jsonDoc from './doc';
 import schema from './schema';
 import nodeViews from '../../nodeviews';
 import { FileService } from 'src/app/services/file.service';
@@ -37,7 +37,7 @@ export class PaperComponent implements OnInit, OnDestroy {
   file$ = this.fileStore.select('getFile');
 
   // file$: Observable<FileState>;
-  editordoc = jsonDoc;
+  editordoc = '';
   content!: string | null | undefined;
   constructor(
     public authService: AuthService,
