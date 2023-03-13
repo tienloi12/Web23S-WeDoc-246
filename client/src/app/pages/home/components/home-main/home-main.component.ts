@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { GetFilesState, GetFileState } from 'src/app/ngrx/states/file.state';
+import { GetFilesState } from 'src/app/ngrx/states/file.state';
 import * as FileActions from 'src/app/ngrx/actions/file.action';
 import { Observable } from 'rxjs';
 import { DocumentFile } from 'src/app/models/file.model';
@@ -19,8 +19,6 @@ export class HomeMainComponent implements OnInit {
   files$: Observable<DocumentFile[]>;
   user$: Observable<UserModel>;
 
-  file$ !: Observable<GetFileState>;
-
   user!: UserModel;
 
   constructor(
@@ -31,7 +29,6 @@ export class HomeMainComponent implements OnInit {
     }>,
     private httpClient: HttpClient,
     private router: Router,
-    private fileStore: Store<{ files: GetFilesState, file: GetFileState }>
   ) {
     this.user$ = store.select('user', 'user');
     this.store.select('user', 'user').subscribe((data) => {
@@ -42,9 +39,6 @@ export class HomeMainComponent implements OnInit {
     });
 
     this.files$ = store.select('getFiles', 'files');
-    this.file$ = fileStore.select('file');
-    console.log(this.file$);
-
     // this.store.select('getFiles', 'files').subscribe((data) => {
     //   console.log(data);
     // });
@@ -55,21 +49,7 @@ export class HomeMainComponent implements OnInit {
   }
 
   newPage() {
-    let file = <DocumentFile>{};
-    file.authorId = this.user._id;
-    file.authorName = this.user.displayName;
-    file.collaborators = [];    
-    file.title = 'Untitled';
-    file.content = '';
-    file.createdAt = new Date().toDateString();
-    file.fileId = '';
-    this.store.dispatch(FileActions.createFile({ file: file}));
-    this.store.dispatch(FileActions.getFile({ fileId: file.fileId }));
-    console.log(this.file$);
-    this.file$.subscribe((data) => {
-      console.log(data);
-      this.router.navigate(['/paper', data.file.fileId]);
-    });
+    this.router.navigate(['/paper']);
   }
 
   ngOnInit(): void {
@@ -77,6 +57,8 @@ export class HomeMainComponent implements OnInit {
   }
 
   openFile($event: any) {
+    console.log($event);
     this.router.navigate(['/paper', $event.fileId]);
+    //   this.openFile($event);
   }
 }
