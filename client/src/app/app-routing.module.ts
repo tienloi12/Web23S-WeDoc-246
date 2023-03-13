@@ -8,6 +8,11 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'paper',
+    loadChildren: () =>
+      import('./pages/paper/paper.module').then((m) => m.PaperModule),
+  },
+  {
     path: 'paper/:id',
     loadChildren: () =>
       import('./pages/paper/paper.module').then((m) => m.PaperModule),
