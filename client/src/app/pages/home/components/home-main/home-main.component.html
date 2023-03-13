@@ -1,75 +1,61 @@
-<div class="main">
+<div class="container">
   <div class="template">
-    <div class="Start-text">Start your document</div>
-    <div class="template-page">
-      <div class="page-1">
-        <div (click)="newPage()" class="page-page">
-          <div class="icon-add">
-            <span class="material-symbols-rounded"> add </span>
-          </div>
-        </div>
-        <div class="page-text">
-          <div class="page-text-1">Blank</div>
-        </div>
+    <div class="desc">
+      <p>Start your document</p>
+    </div>
+    <div class="paper">
+      <div>
+        <span class="material-symbols-rounded"> add </span>
       </div>
-      <div (click)="newPage()" class="page">
-        <div class="page-page"></div>
-        <div class="page-text">
-          <div class="page-text-1">Essay</div>
-          <div class="page-text-2">Paperback</div>
-        </div>
+      <p>Blank</p>
+    </div>
+    <div class="paper">
+      <div>
+        <span class="material-symbols-rounded"> add </span>
       </div>
-      <div (click)="newPage()" class="page">
-        <div class="page-page"></div>
-        <div class="page-text">
-          <div class="page-text-1">Report</div>
-          <div class="page-text-2">Simple</div>
-        </div>
+      <p>Essay</p>
+      <p>Paperback</p>
+    </div>
+    <div class="paper">
+      <div>
+        <span class="material-symbols-rounded"> add </span>
       </div>
-      <div (click)="newPage()" class="page">
-        <div class="page-page"></div>
-        <div class="page-text">
-          <div class="page-text-1">Report</div>
-          <div class="page-text-2">Luxe</div>
-        </div>
+      <p>Report</p>
+      <p>Simple</p>
+    </div>
+    <div class="paper">
+      <div>
+        <span class="material-symbols-rounded"> add </span>
       </div>
-      <div (click)="newPage()" class="page">
-        <div class="page-page"></div>
-        <div class="page-text">
-          <div class="page-text-1">Report</div>
-          <div class="page-text-2">by WeDoc</div>
-        </div>
+      <p>Report</p>
+      <p>Luxe</p>
+    </div>
+    <div class="paper">
+      <div>
+        <span class="material-symbols-rounded"> add </span>
       </div>
-      <div (click)="newPage()" class="page">
-        <div class="page-page"></div>
-        <div class="page-text">
-          <div class="page-text-1">CV</div>
-          <div class="page-text-2">Simple</div>
-        </div>
+      <p>Report</p>
+      <p>by WeDoc</p>
+    </div>
+    <div class="paper">
+      <div>
+        <span class="material-symbols-rounded"> add </span>
       </div>
+      <p>CV</p>
+      <p>Simple</p>
     </div>
   </div>
   <div class="file">
-    <div class="file-title">
-      <div class="file-name">
-        <b>File Name</b>
-      </div>
-      <div class="date">
-        <b>Date modified</b>
-      </div>
+    <div class="mess">
+      <p>File Name</p>
+      <p>Date Modified</p>
     </div>
-    <div class="line"></div>
-    <div *ngFor="let file of files$ | async" class="file-item">
-      <div class="item-file" (click)="openFile(file)">
-        <div class="description-icon">
-          <span class="material-symbols-rounded"> description </span>
-        </div>
-        <div class="item-text">{{ file.title }}</div>
-        <div class="item-text-1">January 12</div>
-      </div>
-      <div class="line-item-file"></div>
+    <div class="file-item" *ngFor="let item of (files$|async)">
+      <p>
+        <span></span>
+        {{item.title}}
+      </p>
+      <p>{{item.createdAt}}</p>
     </div>
   </div>
 </div>
-
-<!-- <router-outlet></router-outlet> -->
