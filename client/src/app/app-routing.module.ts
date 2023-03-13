@@ -3,14 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'landing',
+    pathMatch: 'full',
+  },
+  {
     path: 'paper',
     loadChildren: () =>
       import('./pages/paper/paper.module').then((m) => m.PaperModule),
   },
   {
-    path: '',
-    redirectTo: 'paper',
-    pathMatch: 'full',
+    path: 'paper/:id',
+    loadChildren: () =>
+      import('./pages/paper/paper.module').then((m) => m.PaperModule),
   },
   {
     path: 'home',
@@ -22,7 +27,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/landing/landing.module').then((m) => m.LandingModule),
   },
-  { path: 'about', loadChildren: () => import('./pages/about/about.module').then(m => m.AboutModule) },
+  {
+    path: 'about',
+    loadChildren: () =>
+      import('./pages/about/about.module').then((m) => m.AboutModule),
+  },
 ];
 
 @NgModule({

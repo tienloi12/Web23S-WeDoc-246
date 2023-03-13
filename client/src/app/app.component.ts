@@ -3,6 +3,9 @@ import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
+import * as UserActions from './ngrx/actions/user.action';
+import { Store } from '@ngrx/store';
+import { UserState } from './ngrx/states/user.state';
 
 @Component({
   selector: 'app-root',
@@ -12,25 +15,20 @@ import { UserService } from './services/user.service';
 export class AppComponent implements OnInit {
   constructor(
     private auth: Auth,
-    private authService: AuthService,
+
     private router: Router,
-    private userService: UserService
+    private store: Store<{ user: UserState }>
   ) {}
   title = 'client';
 
   ngOnInit(): void {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
-        this.authService.currentUser = user;
-        this.authService.userName = user.displayName;
-        this.authService.photoUrl = user.photoURL;
-
-        // this.userService.user$ = this.userService.getProfile(
-        //   this.authService.currentUser?.uid || ''
-        // );
+        this.store.dispatch(UserActions.getUserById({ id: user.uid }));
+        // this.router.navigate(['/home/main']);
       } else {
-        this.authService.currentUser = null;
-        // this.router.navigate(['/landing']);
+        this.store.dispatch(UserActions.clearUser());
+        this.router.navigate(['/landing']);
       }
     });
   }

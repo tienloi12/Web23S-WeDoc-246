@@ -3,16 +3,27 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AuthState } from 'src/app/ngrx/states/auth.state';
 import { AuthService } from 'src/app/services/auth.service';
-
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
-
-import { Validators, Editor, Toolbar, DEFAULT_TOOLBAR } from 'ngx-editor';
-
-import jsonDoc from './doc';
+import {
+  Validators,
+  Editor,
+  Toolbar,
+  DEFAULT_TOOLBAR,
+  toHTML,
+  toDoc,
+} from 'ngx-editor';
+// import jsonDoc from './doc';
 import schema from './schema';
 import nodeViews from '../../nodeviews';
-
+import { FileService } from 'src/app/services/file.service';
+// import { FileState } from 'src/app/ngrx/states/file.state';
+import * as FileActions from 'src/app/ngrx/actions/file.action';
+import { UserState } from 'src/app/ngrx/states/user.state';
+import { UserModel } from 'src/app/models/user.model';
+import { GetFileState } from 'src/app/ngrx/states/file.state';
+import { DocumentFile } from 'src/app/models/file.model';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-paper',
   templateUrl: './paper.component.html',
@@ -21,30 +32,34 @@ import nodeViews from '../../nodeviews';
 })
 export class PaperComponent implements OnInit, OnDestroy {
   showSideBar = false;
+  // user$ = this.store.select('user', 'user');
 
-  auth$: Observable<AuthState>;
+  file$ = this.fileStore.select('getFile');
+
+  // file$: Observable<FileState>;
+  editordoc = '';
+  content!: string | null | undefined;
   constructor(
     public authService: AuthService,
-    private store: Store<{ auth: AuthState }>
-  ) {
-    this.auth$ = store.select('auth');
-  }
+    public fileService: FileService,
+    private fileStore: Store<{ getFile: GetFileState }>,
+    private activedRoute: ActivatedRoute
+  ) {}
 
   isProdMode = environment.production;
-
-  editordoc = jsonDoc;
 
   editor: Editor = new Editor();
   toolbar: Toolbar = DEFAULT_TOOLBAR;
 
   form = new FormGroup({
     editorContent: new FormControl(
-      { value: jsonDoc, disabled: false },
+      { value: '', disabled: false },
       Validators.required(schema)
     ),
   });
 
   get doc(): AbstractControl {
+    // console.log(this.form.get('editorContent'));
     return this.form.get('editorContent') ?? new FormControl();
   }
 
@@ -60,6 +75,14 @@ export class PaperComponent implements OnInit, OnDestroy {
         linkOnPaste: true,
         resizeImage: true,
       },
+    });
+    this.fileStore.dispatch(
+      FileActions.getFile({ fileId: this.activedRoute.snapshot.params['id'] })
+    );
+    this.file$.subscribe((file) => {
+      if (file) {
+        this.editor.setContent(toDoc(file.file.content));
+      }
     });
   }
 

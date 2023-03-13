@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { user, User } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { UserModel } from '../models/user.model';
 
@@ -8,7 +7,7 @@ import { UserModel } from '../models/user.model';
   providedIn: 'root',
 })
 export class UserService {
-  user$: Observable<UserModel> | undefined;
+  user$!: Observable<UserModel>;
   constructor(private httpCLient: HttpClient) {}
 
   post(user: UserModel) {
@@ -17,13 +16,13 @@ export class UserService {
 
   getProfile(uid: string) {
     return this.httpCLient.get<UserModel>(
-      `http://localhost:3000/v1/user/${uid}`
+      `http://localhost:3000/v1/user/info/${uid}`
     );
   }
 
-  getAllUsers() {
-    return this.httpCLient.get<UserModel[]>(
-      `http://localhost:3000/v1/user/all`
+  getProfileByEmail(email: string | null) {
+    return this.httpCLient.get<UserModel>(
+      `http://localhost:3000/v1/user/${email}`
     );
   }
 }

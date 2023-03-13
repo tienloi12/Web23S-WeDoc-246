@@ -1,3 +1,33 @@
 <div class="saved-container">
-
+  <div class="saved-text">
+    <div class="text-1">
+      <b>Date Modified</b>
+    </div>
+    <div class="text-2">
+      <b>File name</b>
+    </div>
+    <div class="text-3">
+      <b>User</b>
+    </div>
+  </div>
+  <div class="line"></div>
+  <div *ngFor="let file of files$ | async" class="saved-content">
+    <div class="content">
+      <div class="content-1">12/12/2020</div>
+      <div class="content-2">
+        {{ file.fileId }}
+      </div>
+      <div class="content-3">
+        <div class="user">
+          <div class="user-img">
+            <img src="" alt="" />
+          </div>
+          <div class="user-name">
+            <b>John Doe</b>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="line"></div>
+  </div>
 </div>

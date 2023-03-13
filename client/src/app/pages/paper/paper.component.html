@@ -1,39 +1,34 @@
-<!-- <div *ngIf="this.authService.checkUser()">
-  <app-navbar [(sidebarOpen)]="showSideBar"></app-navbar>
-  <app-sidebar *ngIf="showSideBar"></app-sidebar>
+<div>
+  <app-navbar></app-navbar>
+
   <div class="container">
-    <div class="paper" contenteditable="true">
-      <div>Than Hoang Anh Tuan</div>
-    </div>
-  </div>
-</div> -->
-
-<div class="container">
-  <div class="content">
-    <form [formGroup]="form">
-      <div class="editor NgxEditor__Wrapper">
-        <ngx-editor-menu
-          [editor]="editor"
-          [toolbar]="toolbar"
-          [customMenuRef]="customMenu"
-        >
-        </ngx-editor-menu>
-        <ngx-editor [editor]="editor" formControlName="editorContent">
-          <ngx-editor-floating-menu
+    <div class="content">
+      <form [formGroup]="form">
+        <div class="editor NgxEditor__Wrapper">
+          <ngx-editor-menu
             [editor]="editor"
-          ></ngx-editor-floating-menu>
-        </ngx-editor>
-      </div>
-    </form>
+            [toolbar]="toolbar"
+            [customMenuRef]="customMenu"
+          >
+          </ngx-editor-menu>
+          <ngx-editor [editor]="editor" formControlName="editorContent">
+            <ngx-editor-floating-menu
+            [editor]="editor"
+            >
+          </ngx-editor-floating-menu>
+          </ngx-editor>
+        </div>
+      </form>
 
-    <!-- <div class="editor">
+      <div class="editor">
       <ngx-editor [editor]="editor" [(ngModel)]="editordoc">
       </ngx-editor>
-    </div> -->
+    </div>
 
-    <!-- custom menu -->
-    <ng-template #customMenu>
-      <app-custom-menu [editor]="editor"></app-custom-menu>
-    </ng-template>
+      <!-- custom menu -->
+      <ng-template #customMenu>
+        <app-custom-menu [editor]="editor"></app-custom-menu>
+      </ng-template>
+    </div>
   </div>
 </div>
