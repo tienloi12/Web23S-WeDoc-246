@@ -28,7 +28,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-paper',
   templateUrl: './paper.component.html',
   styleUrls: ['./paper.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class PaperComponent implements OnInit, OnDestroy {
   showSideBar = false;

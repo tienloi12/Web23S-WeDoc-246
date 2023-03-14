@@ -15,4 +15,5 @@ export interface DocumentFile {
   content: string;
   collaborators: UserModel[];
   createdAt: string;
+  updatedAt: string;
 }

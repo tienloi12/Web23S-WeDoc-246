@@ -16,21 +16,6 @@ export const createFileFailure = createAction(
   props<{ error: string }>()
 );
 
-// export const updateFile = createAction(
-//   '[File] Update File',
-//   props<{ file: DocumentFile }>()
-// );
-
-// export const updateFileSuccess = createAction(
-//   '[File] Update File Success',
-//   props<{ file: DocumentFile }>()
-// );
-
-// export const updateFileFailure = createAction(
-//   '[File] Update File Failure',
-//   props<{ error: string }>()
-// );
-
 // GET FILE DETAIL
 export const getFileDetail = createAction(
   '[File] Get  File Detail',
@@ -71,5 +56,21 @@ export const getFilesByAuthorIdSuccess = createAction(
 
 export const getFilesByAuthorIdFailure = createAction(
   '[File] Get Files By Author Id Failure',
+  props<{ error: string }>()
+);
+
+// UPDATE FILE
+export const updateFile = createAction(
+  '[File] Update File',
+  props<{ fileId: string; file: DocumentFile }>()
+);
+
+export const updateFileSuccess = createAction(
+  '[File] Update File Success',
+  props<{ file: DocumentFile }>()
+);
+
+export const updateFileFailure = createAction(
+  '[File] Update File Failure',
   props<{ error: string }>()
 );

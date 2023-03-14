@@ -3,7 +3,7 @@
     <div class="desc">
       <p>Start your document</p>
     </div>
-    <div class="paper">
+    <div class="paper" (click)="newPaper()">
       <div>
         <span class="material-symbols-rounded"> add </span>
       </div>
@@ -14,35 +14,30 @@
         <span class="material-symbols-rounded"> add </span>
       </div>
       <p>Essay</p>
-      <p>Paperback</p>
     </div>
     <div class="paper">
       <div>
         <span class="material-symbols-rounded"> add </span>
       </div>
       <p>Report</p>
-      <p>Simple</p>
     </div>
     <div class="paper">
       <div>
         <span class="material-symbols-rounded"> add </span>
       </div>
       <p>Report</p>
-      <p>Luxe</p>
     </div>
     <div class="paper">
       <div>
         <span class="material-symbols-rounded"> add </span>
       </div>
       <p>Report</p>
-      <p>by WeDoc</p>
     </div>
     <div class="paper">
       <div>
         <span class="material-symbols-rounded"> add </span>
       </div>
       <p>CV</p>
-      <p>Simple</p>
     </div>
   </div>
   <div class="file">
@@ -50,12 +45,11 @@
       <p>File Name</p>
       <p>Date Modified</p>
     </div>
-    <div class="file-item" *ngFor="let item of (files$|async)">
-      <p>
-        <span></span>
-        {{item.title}}
+    <div class="file-item" *ngFor="let item of files$ | async">
+      <p (click)="openFile(item.fileId)">
+        {{ item.title }}
       </p>
-      <p>{{item.createdAt}}</p>
+      <p>{{ item.createdAt | date : "mediumDate" }}</p>
     </div>
   </div>
 </div>

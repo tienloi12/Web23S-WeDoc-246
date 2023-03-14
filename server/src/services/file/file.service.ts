@@ -19,14 +19,16 @@ export class FileService {
   }
 
   // UPDATE FILE
-  async updateFile(_id: string, file: File): Promise<File | any> {
+  async updateFile(fileId: string, file: File): Promise<File | any> {
     try {
       let updateFile = await this.fileModel
-        .findOneAndUpdate({ fileId: _id }, file, { new: true })
+        .findOneAndUpdate({ fileId: fileId }, file, { new: true })
         .exec();
-      return updateFile;
+      console.log(updateFile);
+
+      return { updateFile, message: 'File updated successfully' };
     } catch (error) {
-      return null;
+      return new HttpException(error.message, HttpStatus.BAD_REQUEST) as any;
     }
   }
 

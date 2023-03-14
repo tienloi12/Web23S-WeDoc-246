@@ -13,8 +13,10 @@
         "
         *ngFor="let item of sideMenu; let i = index"
       >
-          <span class="material-symbols-rounded">{{ item.icon }}</span>
-          <span class="side-label"><b>{{ item.title }}</b></span>
+        <span class="material-symbols-rounded">{{ item.icon }}</span>
+        <span class="side-label"
+          ><b>{{ item.title }}</b></span
+        >
       </div>
     </div>
 
@@ -26,12 +28,10 @@
   </div>
 
   <div class="navbar">
-
     <div class="search">
       <span class="material-symbols-rounded"> search </span>
       <input type="text" class="input-search" placeholder="Search" />
     </div>
-
   </div>
   <div class="main">
     <router-outlet></router-outlet>

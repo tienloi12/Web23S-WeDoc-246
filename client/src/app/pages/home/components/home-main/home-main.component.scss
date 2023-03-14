@@ -2,7 +2,7 @@
   display: grid;
   grid-template-rows: 1fr;
   background-color: #f6f6f6;
-  padding: 0 10rem;
+  padding: 0 5rem;
 }
 
 .desc {
@@ -17,19 +17,26 @@
 }
 
 .paper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   div {
-    height: 11rem;
-    width: 8rem;
+    height: 52mm;
+    width: 37mm;
     background-color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    border: 1px solid rgba($color: #000000, $alpha: 0.1);
+    box-shadow: var(--shadow);
   }
 
   p {
-    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
     margin-bottom: 0;
   }
 
@@ -39,21 +46,26 @@
 }
 
 .file {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.mess, .file-item {
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 2.5rem;
-    border-bottom: 1px solid rgba($color: #000000, $alpha: 0.2);
-    p {
-        font-weight: 500;
-        margin: 0;
-    }
+.mess,
+.file-item {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2.5rem;
+  border-bottom: 1px solid rgba($color: #000000, $alpha: 0.2);
+  p {
+    font-weight: 500;
+    margin: 0;
+  }
+}
+
+.file-item {
+  cursor: pointer;
 }

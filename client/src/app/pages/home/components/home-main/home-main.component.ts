@@ -27,8 +27,7 @@ export class HomeMainComponent implements OnInit {
       getByAuthorId: GetFilesState;
       user: UserState;
     }>,
-    private httpClient: HttpClient,
-    private router: Router,
+    private router: Router
   ) {
     this.user$ = store.select('user', 'user');
     this.store.select('user', 'user').subscribe((data) => {
@@ -48,7 +47,7 @@ export class HomeMainComponent implements OnInit {
     // });
   }
 
-  newPage() {
+  newPaper() {
     this.router.navigate(['/paper']);
   }
 
@@ -57,8 +56,8 @@ export class HomeMainComponent implements OnInit {
   }
 
   openFile($event: any) {
-    console.log($event);
-    this.router.navigate(['/paper', $event.fileId]);
+    // console.log($event);
+    this.router.navigate(['/paper/' + $event]);
     //   this.openFile($event);
   }
 }
