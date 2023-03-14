@@ -13,9 +13,18 @@ export const initialState: CreateFileState = {
 
 export const createFileReducer = createReducer(
   initialState,
-  on(FileActions.createFile, (state) => ({ ...state, loading: true })),
+  on(FileActions.createFile, (state) => {
+    console.log(state.file);
+    let newState = {
+      ...state,
+      loading: true,
+    };
+    console.log(newState);
+    return newState;
+  }),
 
   on(FileActions.createFileSuccess, (state, action) => {
+    console.log(action);
     let newState = {
       ...state,
       fileId: action.file,
@@ -133,21 +142,21 @@ export const getFilesReducer = createReducer(
 
 export const fileReducers = createReducer(
   initialState,
-  on(FileActions.createFile, (state) => ({ ...state, loading: true })),
+  on(FileActions.updateFile, (state) => ({ ...state, loading: true })),
 
-  on(FileActions.createFileSuccess, (state, action) => {
-    console.log(action.type);
-
+  on(FileActions.updateFileSuccess, (state, action) => {
+    console.log(action.file);
     let newState = {
       ...state,
       fileId: action.file,
       loading: false,
       isSuccessful: true,
     };
+    console.log(newState);
     return newState;
   }),
 
-  on(FileActions.createFileFailure, (state, { error }) => ({
+  on(FileActions.updateFileFailure, (state, { error }) => ({
     ...state,
     error: error,
     loading: false,

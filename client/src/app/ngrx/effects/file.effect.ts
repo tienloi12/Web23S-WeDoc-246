@@ -13,9 +13,11 @@ export class FileEffects {
     return this.actions$.pipe(
       ofType(FileActions.createFile),
       switchMap((action) => {
+        console.log(action);
         return this.fileService.createFile(action.file);
       }),
       map((file) => {
+        console.log(file);
         return FileActions.createFileSuccess({ file: <DocumentFile>file });
       }),
       catchError((error) => of(FileActions.createFileFailure({ error })))

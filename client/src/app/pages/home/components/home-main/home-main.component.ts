@@ -15,7 +15,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './home-main.component.html',
   styleUrls: ['./home-main.component.scss'],
 })
-export class HomeMainComponent implements OnInit {
+export class HomeMainComponent {
   files$: Observable<DocumentFile[]>;
   user$: Observable<UserModel>;
 
@@ -33,6 +33,7 @@ export class HomeMainComponent implements OnInit {
     this.store.select('user', 'user').subscribe((data) => {
       if (data) {
         this.user = data;
+        console.log('test');
         store.dispatch(FileActions.getFilesByAuthorId({ authorId: data._id }));
       }
     });
@@ -51,9 +52,9 @@ export class HomeMainComponent implements OnInit {
     this.router.navigate(['/paper']);
   }
 
-  ngOnInit(): void {
-    this.store.dispatch(FileActions.getFiles());
-  }
+  // ngOnInit(): void {
+  //   this.store.dispatch(FileActions.getFiles());
+  // }
 
   openFile($event: any) {
     // console.log($event);
