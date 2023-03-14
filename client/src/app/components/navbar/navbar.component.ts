@@ -66,6 +66,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   update() {
+    
+    this.fileService.update(this.user);
     //update func
   }
 }

@@ -24,8 +24,6 @@ export class FileService {
       let updateFile = await this.fileModel
         .findOneAndUpdate({ fileId: fileId }, file, { new: true })
         .exec();
-      console.log(updateFile);
-
       return { updateFile, message: 'File updated successfully' };
     } catch (error) {
       return new HttpException(error.message, HttpStatus.BAD_REQUEST) as any;

@@ -140,26 +140,26 @@ export const getFilesReducer = createReducer(
   })
 );
 
-// export const fileReducers = createReducer(
-//   initialState,
-//   on(FileActions.createFile, (state) => ({ ...state, loading: true })),
+export const fileReducers = createReducer(
+  initialState,
+  on(FileActions.updateFile, (state) => ({ ...state, loading: true })),
 
-//   on(FileActions.createFileSuccess, (state, action) => {
-//     console.log(action.file);
-//     let newState = {
-//       ...state,
-//       fileId: action.file,
-//       loading: false,
-//       isSuccessful: true,
-//     };
-//     console.log(newState);
-//     return newState;
-//   }),
+  on(FileActions.updateFileSuccess, (state, action) => {
+    console.log(action.file);
+    let newState = {
+      ...state,
+      fileId: action.file,
+      loading: false,
+      isSuccessful: true,
+    };
+    console.log(newState);
+    return newState;
+  }),
 
-//   on(FileActions.createFileFailure, (state, { error }) => ({
-//     ...state,
-//     error: error,
-//     loading: false,
-//     isSuccessful: false,
-//   }))
-// );
+  on(FileActions.updateFileFailure, (state, { error }) => ({
+    ...state,
+    error: error,
+    loading: false,
+    isSuccessful: false,
+  }))
+);
