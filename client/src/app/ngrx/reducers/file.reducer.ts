@@ -77,6 +77,7 @@ export const initialGetFilesState: GetFilesState = {
   isSuccess: false,
   error: '',
   files: [],
+  sharedFiles: [],
 };
 
 export const getFilesReducer = createReducer(
@@ -136,6 +137,37 @@ export const getFilesReducer = createReducer(
       isSuccess: false,
       error: error,
       files: [],
+    };
+  }),
+
+  // Get files by collaborator id
+  on(FileActions.getFilesByCollaboratorId, (state) => {
+    return {
+      ...state,
+      isLoading: true,
+      isSuccess: false,
+      error: '',
+    };
+  }),
+
+  on(FileActions.getFilesByCollaboratorIdSuccess, (state, action) => {
+    console.log(action.type);
+    return {
+      ...state,
+      isLoading: false,
+      isSuccess: true,
+      error: '',
+      sharedFiles: action.files,
+    };
+  }),
+
+  on(FileActions.getFilesByCollaboratorIdFailure, (state, { error }) => {
+    return {
+      ...state,
+      isLoading: false,
+      isSuccess: false,
+      error: error,
+      sharedFiles: [],
     };
   })
 );

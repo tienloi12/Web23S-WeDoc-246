@@ -1,23 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { GetFilesState } from 'src/app/ngrx/states/file.state';
 import { DocumentFile } from 'src/app/models/file.model';
 import * as FileActions from 'src/app/ngrx/actions/file.action';
+import { UserState } from 'src/app/ngrx/states/user.state';
 @Component({
   selector: 'app-shared',
   templateUrl: './shared.component.html',
   styleUrls: ['./shared.component.scss'],
 })
-export class SharedComponent implements OnInit {
-  files$: Observable<DocumentFile[]>;
-
-  constructor(private store: Store<{ getFiles: GetFilesState }>) {
-    this.files$ = store.select('getFiles', 'files');
-    this.store.select('getFiles', 'files');
+export class SharedComponent implements OnInit, OnDestroy {
+  userSubscribtion!: Subscription;
+  user$ = this.store.select('user', 'user');
+  files$ = this.store.select('getFiles', 'sharedFiles');
+  constructor(
+    private store: Store<{ getFiles: GetFilesState; user: UserState }>
+  ) {}
+  ngOnDestroy(): void {
+    this.userSubscribtion.unsubscribe();
   }
   ngOnInit(): void {
-    // this.store.dispatch(FileActions.getFiles());
+    this.store.select('getFiles', 'sharedFiles');
+    this.userSubscribtion = this.user$.subscribe((user) => {
+      console.log(user);
+      if (user._id) {
+        this.store.dispatch(
+          FileActions.getFilesByCollaboratorId({ collaboratorId: user._id })
+        );
+      }
+    });
+
+    this.files$.subscribe((files) => {
+      console.log(files);
+    });
   }
 }

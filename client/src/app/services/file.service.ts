@@ -59,6 +59,12 @@ export class FileService {
     return this.httpClient.get(environment.URL + `/v1/file/author/${authorId}`);
   }
 
+  getFilesByCollaboratorId(collaboratorId: string) {
+    return this.httpClient.get(
+      environment.URL + `/v1/file/file-colab/${collaboratorId}`
+    );
+  }
+
   inviteCollaborator(file: DocumentFile, email: string | null) {
     return this.httpClient.put(
       environment.URL + `/v1/file/invite/${email}`,
@@ -83,7 +89,7 @@ export class FileService {
       authorName: user.displayName,
       title: this.title,
       content: this.content,
-      collaborators: [user],
+      collaborators: [],
       createdAt: new Date().toString(),
       updatedAt: new Date().toString(),
     };
@@ -114,7 +120,7 @@ export class FileService {
       authorName: user.displayName,
       title: this.title,
       content: this.content,
-      collaborators: [user],
+      collaborators: [],
       createdAt: new Date().toString(),
       updatedAt: new Date().toString(),
     };

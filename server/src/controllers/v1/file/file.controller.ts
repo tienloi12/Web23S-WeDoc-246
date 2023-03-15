@@ -48,6 +48,12 @@ export class FileController {
     return file;
   }
 
+  @Get('file-colab/:id')
+  async getFilesByCollaboratorId(@Param(`id`) id: string) {
+    let files = await this.fileService.getFilesByCollaboratorId(id);
+    return files;
+  }
+
   @Put('invite/:email')
   async inviteCollaborator(
     @Body() file: FileDocument,

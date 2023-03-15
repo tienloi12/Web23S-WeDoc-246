@@ -2,6 +2,7 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { File, FileDocument } from 'src/schemas/file.schema';
+import { User, UserDocument } from 'src/schemas/user.schema';
 import { UserService } from '../user/user.service';
 
 @Injectable()
@@ -9,6 +10,7 @@ export class FileService {
   constructor(
     private userService: UserService,
     @InjectModel(File.name) private fileModel: Model<FileDocument>,
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
   ) {}
 
   // CREATE FILE
@@ -70,6 +72,21 @@ export class FileService {
       return 'successfully deleted';
     } catch (error) {
       ('unsuccessfully deleted');
+    }
+  }
+
+  // GET FILES BY COLLABORATOR ID
+  async getFilesByCollaboratorId(
+    collaboratorId: string,
+  ): Promise<File[] | null> {
+    try {
+      let data = await this.fileModel
+        .find({ collaborators: { $eq: Object(collaboratorId) } })
+        .populate('collaborators', 'photoURL', this.userModel)
+        .exec();
+      return data;
+    } catch (error) {
+      return new HttpException(error.message, HttpStatus.BAD_REQUEST) as any;
     }
   }
 

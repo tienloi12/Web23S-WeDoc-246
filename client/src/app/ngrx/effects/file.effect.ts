@@ -59,8 +59,6 @@ export class FileEffects {
         return this.fileService.getFilesByAuthorId(action.authorId);
       }),
       map((files) => {
-        console.log(files);
-
         return FileActions.getFilesByAuthorIdSuccess({
           files: <DocumentFile[]>files,
         });
@@ -97,6 +95,26 @@ export class FileEffects {
       }),
       catchError((error) => {
         return of(FileActions.deteleFileFailure({ error: error }));
+      })
+    );
+  });
+
+  getfilesByCollaboratorId$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FileActions.getFilesByCollaboratorId),
+      switchMap((action) => {
+        return this.fileService.getFilesByCollaboratorId(action.collaboratorId);
+      }),
+      map((files) => {
+        console.log(files);
+        return FileActions.getFilesByCollaboratorIdSuccess({
+          files: <DocumentFile[]>files,
+        });
+      }),
+      catchError((error) => {
+        return of(
+          FileActions.getFilesByCollaboratorIdFailure({ error: error })
+        );
       })
     );
   });

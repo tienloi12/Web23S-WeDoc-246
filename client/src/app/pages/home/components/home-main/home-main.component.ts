@@ -27,7 +27,7 @@ import {
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class HomeMainComponent implements OnInit, OnDestroy {
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   isSuccessSubscription!: Subscription;
   isSuccess$ = this.store.select('file', 'isSuccess');
@@ -66,6 +66,7 @@ export class HomeMainComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.isSuccessSubscription.unsubscribe();
   }
+
   ngOnInit(): void {
     this.isSuccessSubscription = this.isSuccess$.subscribe((data) => {
       if (data) {

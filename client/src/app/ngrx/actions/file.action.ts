@@ -91,6 +91,22 @@ export const deteleFileFailure = createAction(
   props<{ error: string }>()
 );
 
+// GET FILES BY COLLABORATOR ID
+export const getFilesByCollaboratorId = createAction(
+  '[File] Get Files By Collaborator Id',
+  props<{ collaboratorId: string }>()
+);
+
+export const getFilesByCollaboratorIdSuccess = createAction(
+  '[File] Get Files By Collaborator Id Success',
+  props<{ files: DocumentFile[] }>()
+);
+
+export const getFilesByCollaboratorIdFailure = createAction(
+  '[File] Get Files By Collaborator Id Failure',
+  props<{ error: string }>()
+);
+
 // INVITE COLLABORATOR
 export const inviteCollaborator = createAction(
   '[File] Invite Collaborator',
