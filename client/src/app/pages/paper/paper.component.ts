@@ -26,7 +26,6 @@ import { ActivatedRoute } from '@angular/router';
 export class PaperComponent implements OnInit, OnDestroy {
   file$ = this.fileStore.select('getFile');
   editordoc = '';
-  content!: string | null | undefined;
   constructor(
     public authService: AuthService,
     public fileService: FileService,

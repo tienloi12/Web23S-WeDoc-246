@@ -66,10 +66,22 @@
 }
 
 .file-item {
+  p {
+    font-weight: 400;
+    margin: 0;
+  }
+}
+
+.cursor {
   cursor: pointer;
   color: var(--black);
   p {
     font-weight: 400;
     margin: 0;
   }
+}
+
+.modified {
+  display: flex;
+  align-items: center;
 }

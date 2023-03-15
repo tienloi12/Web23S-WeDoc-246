@@ -22,15 +22,22 @@ import { MatInputModule } from '@angular/material/input';
 
 import {
   createFileReducer,
+  deleteFileReducer,
   // fileReducers,
   getFileReducer,
 } from './ngrx/reducers/file.reducer';
 import { getFilesReducer } from './ngrx/reducers/file.reducer';
 import { FileEffects } from './ngrx/effects/file.effect';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { InviteDialogComponent } from './components/invite-dialog/invite-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, ColabDialogComponent, InviteDialogComponent],
+  declarations: [
+    AppComponent,
+    ColabDialogComponent,
+    DeleteDialogComponent,
+    InviteDialogComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -45,6 +52,7 @@ import { InviteDialogComponent } from './components/invite-dialog/invite-dialog.
         getFiles: getFilesReducer,
         getFile: getFileReducer,
         // file: fileReducers,
+        deleteFile: deleteFileReducer,
       },
 
       {}

@@ -75,6 +75,22 @@ export const updateFileFailure = createAction(
   props<{ error: string }>()
 );
 
+// Delete
+export const deteleFile = createAction(
+  '[File] Delete File',
+  props<{ fileId: string }>()
+);
+
+export const deteleFileSuccess = createAction(
+  '[File] Delete File Success',
+  props<{ msg: string }>()
+);
+
+export const deteleFileFailure = createAction(
+  '[File] Delete File Failure',
+  props<{ error: string }>()
+);
+
 // INVITE COLLABORATOR
 export const inviteCollaborator = createAction(
   '[File] Invite Collaborator',
