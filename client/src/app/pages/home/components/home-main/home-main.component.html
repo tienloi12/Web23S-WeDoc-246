@@ -1,8 +1,6 @@
 <div class="container">
   <div class="template">
-    <div class="desc">
-      <p>Start your document</p>
-    </div>
+    <div class="desc"></div>
     <div class="paper" (click)="newPaper()">
       <div>
         <span class="material-symbols-rounded"> add </span>
@@ -43,15 +41,35 @@
   <div class="file">
     <div class="mess">
       <p>File Name</p>
-      <p>Date Modified</p>
+      <p style="margin-right: 3rem">Date Modified</p>
     </div>
-    <div class="file-item" *ngFor="let item of files$ | async" >
+    <div class="file-item" *ngFor="let item of files$ | async">
       <p class="cursor" (click)="openFile(item.fileId)">
         {{ item.title }}
       </p>
-      <p class="modified">{{ item.createdAt | date : "mediumDate" }}
-        <span (click)="openDialog(item.fileId)" class="material-symbols-outlined cursor"> delete </span>
-      </p>
+      <span style="display: flex; justify-content: center; align-items: center;">
+        <p>
+          {{ item.updatedAt | date : "medium" }}
+        </p>
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          class="material-symbols-outlined"
+          style="margin-left: 1rem"
+        >
+          more_vert
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <span class="material-symbols-outlined"> delete </span>
+            <span>Delete</span>
+          </button>
+          <button mat-menu-item>
+            <span class="material-symbols-outlined"> person_add </span>
+            <span>Invite</span>
+          </button>
+        </mat-menu>
+      </span>
     </div>
   </div>
 </div>

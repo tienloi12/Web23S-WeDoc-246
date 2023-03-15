@@ -27,3 +27,10 @@ export interface GetFilesState {
   error: string;
   files: DocumentFile[];
 }
+
+export interface InviteCollaboratorState {
+  isLoading: boolean;
+  isSuccess: boolean;
+  error: string;
+  file: DocumentFile;
+}

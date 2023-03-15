@@ -154,6 +154,24 @@ export const fileReducers = createReducer(
     error: error,
     loading: false,
     isSuccessful: false,
+  })),
+
+  on(FileActions.inviteCollaborator, (state) => ({ ...state, loading: true })),
+
+  on(FileActions.inviteCollaboratorSuccess, (state) => {
+    let newState = {
+      ...state,
+      loading: false,
+      isSuccessful: true,
+    };
+    return newState;
+  }),
+
+  on(FileActions.inviteCollaboratorFailure, (state, { error }) => ({
+    ...state,
+    error: error,
+    loading: false,
+    isSuccessful: false,
   }))
 );
 

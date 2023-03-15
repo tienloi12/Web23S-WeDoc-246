@@ -1,21 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DeleteFileState, GetFilesState } from 'src/app/ngrx/states/file.state';
 import * as FileActions from 'src/app/ngrx/actions/file.action';
 import { Observable } from 'rxjs';
 import { DocumentFile } from 'src/app/models/file.model';
-
 import { Router } from '@angular/router';
 import { UserState } from 'src/app/ngrx/states/user.state';
 import { UserModel } from 'src/app/models/user.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ColabDialogComponent } from 'src/app/components/colab-dialog/colab-dialog.component';
 import { DeleteDialogComponent } from 'src/app/components/delete-dialog/delete-dialog.component';
+import { InviteDialogComponent } from 'src/app/components/invite-dialog/invite-dialog.component';
 
 @Component({
   selector: 'app-home-main',
   templateUrl: './home-main.component.html',
   styleUrls: ['./home-main.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class HomeMainComponent {
   files$: Observable<DocumentFile[]>;
@@ -53,9 +54,12 @@ export class HomeMainComponent {
     this.router.navigate(['/paper/' + $event]);
   }
 
-  openDialog(fileId: string) {
+  openDialogDelete(fileId: string) {
     this.dialog.open(DeleteDialogComponent);
     // this.store.dispatch(FileActions.deteleFile({ fileId: fileId }));
     // window.location.reload();
+  }
+  openDialog() {
+    const dialogRef = this.dialog.open(InviteDialogComponent);
   }
 }

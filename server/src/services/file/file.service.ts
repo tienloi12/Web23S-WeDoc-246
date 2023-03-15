@@ -68,4 +68,35 @@ export class FileService {
       'unsuccessfully deleted';
     }
   }
+  
+  // INVITE collaborator
+  async inviteCollaborator(file: FileDocument, uid: string) {
+    try {
+      // check if user is already a collaborator
+      let isCollab = file.collaborators.find((collab) => collab == Object(uid));
+
+      if (!isCollab) {
+        if (file.collaborators.length > 0) {
+          let newCollab = file.collaborators;
+          let newFile: File = {
+            fileId: file.fileId,
+            authorId: file.authorId,
+            title: file.title,
+            content: file.content,
+            collaborators: newCollab,
+          };
+          return await this.fileModel
+            .findOneAndUpdate({ _id: file._id }, newFile, { new: true })
+            .exec();
+        } else {
+          return null;
+        }
+      } else {
+        console.log(Object(uid) + ' is already a collaborator');
+        return null;
+      }
+    } catch (error) {
+      return new HttpException(error.message, HttpStatus.BAD_REQUEST) as any;
+    }
+  }
 }

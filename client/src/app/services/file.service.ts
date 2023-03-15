@@ -16,7 +16,14 @@ export class FileService {
   constructor(
     private httpClient: HttpClient,
     private store: Store<{ file: CreateFileState; getFile: GetFileDetailState }>
-  ) {}
+  ) {
+    // this.file$ = store.select('file', 'file');
+    // this.store.select('file', 'file').subscribe((data) => {
+    //   console.log(data.content);
+    //   return data;
+    // });
+    // console.log('file service')
+  }
 
   createFile(file: DocumentFile) {
     return this.httpClient.post('http://localhost:3000/v1/file/create', file);
@@ -47,6 +54,13 @@ export class FileService {
   getFilesByAuthorId(authorId: string) {
     return this.httpClient.get(
       `http://localhost:3000/v1/file/author/${authorId}`
+    );
+  }
+
+  inviteCollaborator(file: DocumentFile, uid: string) {
+    return this.httpClient.put(
+      `http://localhost:3000/v1/file/invite/${uid}`,
+      file
     );
   }
 

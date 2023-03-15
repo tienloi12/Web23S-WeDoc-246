@@ -98,4 +98,19 @@ export class FileEffects {
       })
     );
   });
+
+  inviteCollaborator$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FileActions.inviteCollaborator),
+      switchMap((action) =>
+        this.fileService.inviteCollaborator(action.file, action.uid)
+      ),
+      map((file) => {
+        return FileActions.inviteCollaboratorSuccess();
+      }),
+      catchError((error: string) => {
+        return of(FileActions.inviteCollaboratorFailure({ error }));
+      })
+    );
+  });
 }

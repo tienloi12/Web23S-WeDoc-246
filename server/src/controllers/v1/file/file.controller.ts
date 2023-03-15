@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { FileService } from 'src/services/file/file.service';
-import { File } from 'src/schemas/file.schema';
+import { File, FileDocument } from 'src/schemas/file.schema';
 
 @Controller('v1/file')
 export class FileController {
@@ -46,5 +46,14 @@ export class FileController {
   async deleteFileById(@Param(`id`) id: string) {
     let file = await this.fileService.deleteFileById(id);
     return file;
+  }
+  
+  @Put('invite/:id')
+  async inviteCollaborator(
+    @Body() file: FileDocument,
+    @Param(`id`) uid: string,
+  ) {
+    let data = await this.fileService.inviteCollaborator(file, uid);
+    return data;
   }
 }

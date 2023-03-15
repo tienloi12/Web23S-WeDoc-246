@@ -90,3 +90,18 @@ export const deteleFileFailure = createAction(
   '[File] Delete File Failure',
   props<{ error: string }>()
 );
+
+// INVITE COLLABORATOR
+export const inviteCollaborator = createAction(
+  '[File] Invite Collaborator',
+  props<{ file: DocumentFile; uid: string }>()
+);
+
+export const inviteCollaboratorSuccess = createAction(
+  '[File] Invite Collaborator Success'
+);
+
+export const inviteCollaboratorFailure = createAction(
+  '[File] Invite Collaborator Failure',
+  props<{ error: string }>()
+);

@@ -6,6 +6,8 @@ import { HomeComponent } from './home.component';
 import { HomeMainComponent } from './components/home-main/home-main.component';
 import { SharedComponent } from './components/shared/shared.component';
 import { SavedComponent } from './components/saved/saved.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -14,9 +16,6 @@ import { SavedComponent } from './components/saved/saved.component';
     SharedComponent,
     SavedComponent,
   ],
-  imports: [
-    CommonModule,
-    HomeRoutingModule
-  ]
+  imports: [CommonModule, HomeRoutingModule, MatMenuModule, MatButtonModule],
 })
-export class HomeModule { }
+export class HomeModule {}
