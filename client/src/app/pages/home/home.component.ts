@@ -42,7 +42,9 @@ export class HomeComponent {
   ) {
     this.auth$ = store.select('auth');
     this.user$.subscribe((user) => {
-      console.log(user);
+      if (user._id) {
+        console.log(user);
+      }
     });
   }
 
