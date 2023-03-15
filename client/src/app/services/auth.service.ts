@@ -1,17 +1,13 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   Auth,
   GoogleAuthProvider,
-  onAuthStateChanged,
   signInWithPopup,
   signOut,
 } from '@angular/fire/auth';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { from, Observable } from 'rxjs';
+import { from } from 'rxjs';
 import { UserModel } from '../models/user.model';
-import { AuthState } from '../ngrx/states/auth.state';
 import * as UserActions from '../ngrx/actions/user.action';
 @Injectable({
   providedIn: 'root',
@@ -19,27 +15,8 @@ import * as UserActions from '../ngrx/actions/user.action';
 export class AuthService {
   constructor(
     private auth: Auth,
-    private router: Router,
     private store: Store
   ) {
-    // onAuthStateChanged(this.auth, (user: UserModel | null) => {
-    //   if (user) {
-    //     this.currentUser = {
-    //       uid: user.uid,
-    //       email: user.email,
-    //       displayName: user.displayName,
-    //       photoURL: user.photoURL,
-    //     };
-    //     this.userName = user.displayName;
-    //     this.photoUrl = user.photoURL;
-    //     console.log(this.currentUser);
-    //     this.store.dispatch(CreateUser.getUser({ id: user.uid }));
-    //   } else {
-    //     this.currentUser = null;
-    //     this.userName = null;
-    //     this.photoUrl = null;
-    //   }
-    // });
   }
 
   loginWithGoogle() {
@@ -59,7 +36,6 @@ export class AuthService {
             photoURL: userCredential.user?.photoURL || '',
           };
           this.store.dispatch(UserActions.createUser({ user: user }));
-
           resolve(user);
         } catch (error) {
           reject(error);

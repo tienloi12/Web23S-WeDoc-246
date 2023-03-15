@@ -13,11 +13,9 @@ export class FileEffects {
     return this.actions$.pipe(
       ofType(FileActions.createFile),
       switchMap((action) => {
-        console.log(action);
         return this.fileService.createFile(action.file);
       }),
       map((file) => {
-        console.log(file);
         return FileActions.createFileSuccess({ file: <DocumentFile>file });
       }),
       catchError((error) => of(FileActions.createFileFailure({ error })))
@@ -82,6 +80,21 @@ export class FileEffects {
       }),
       catchError((error) => {
         return of(FileActions.updateFileFailure({ error: error }));
+      })
+    );
+  });
+
+  deleteFile$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FileActions.deteleFile),
+      switchMap((action) => {
+        return this.fileService.deleteFile(action.fileId);
+      }),
+      map((msg) => {
+        return FileActions.deteleFileSuccess({ msg: <string>msg });
+      }),
+      catchError((error) => {
+        return of(FileActions.deteleFileFailure({ error: error }));
       })
     );
   });

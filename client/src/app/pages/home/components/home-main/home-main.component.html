@@ -44,20 +44,31 @@
       <p style="margin-right: 3rem">Date Modified</p>
     </div>
     <div class="file-item" *ngFor="let item of files$ | async">
-      <p (click)="openFile(item.fileId)">
+      <p class="cursor" (click)="openFile(item.fileId)">
         {{ item.title }}
       </p>
-      <span style="display: flex; justify-content: center">
+      <span style="display: flex; justify-content: center; align-items: center">
         <p>
           {{ item.updatedAt | date : "medium" }}
         </p>
-        <span
-          (click)="openDialog()"
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
           class="material-symbols-outlined"
           style="margin-left: 1rem"
         >
           more_vert
-        </span>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <span class="material-symbols-outlined"> delete </span>
+            <span>Delete</span>
+          </button>
+          <button (click)="openDialog()" mat-menu-item>
+            <span class="material-symbols-outlined"> person_add </span>
+            <span>Invite</span>
+          </button>
+        </mat-menu>
       </span>
     </div>
   </div>

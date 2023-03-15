@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DocumentFile } from '../models/file.model';
 import { CreateFileState, GetFileDetailState } from '../ngrx/states/file.state';
-import { Observable } from 'rxjs';
 import * as FileActions from '../ngrx/actions/file.action';
 import { UserModel } from '../models/user.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,9 +13,6 @@ import { UserModel } from '../models/user.model';
 export class FileService {
   content!: string;
   title!: string | null;
-  // saveFile!: any;
-  // file$: Observable<DocumentFile>;
-  // file!: DocumentFile;
   userMain!: UserModel;
   constructor(
     private httpClient: HttpClient,
@@ -30,39 +27,46 @@ export class FileService {
   }
 
   createFile(file: DocumentFile) {
-    return this.httpClient.post('http://localhost:3000/v1/file/create', file);
-  }
-
-  updateFile(fileId: string, file: DocumentFile) {
-    return this.httpClient.put(
-      `http://localhost:3000/v1/file/update/${fileId}`,
+    return this.httpClient.post<DocumentFile>(
+      environment.URL + '/v1/file/create',
       file
     );
   }
 
+  updateFile(fileId: string, file: DocumentFile) {
+    return this.httpClient.put(
+      environment.URL + `/v1/file/update/${fileId}`,
+      file
+    );
+  }
+
+  deleteFile(fileId: string) {
+    console.log(fileId);
+    return this.httpClient.delete(
+      environment.URL + `/v1/file/delete/${fileId}`
+    );
+  }
+
   getFileDetail(fileId: string) {
-    return this.httpClient.get(`http://localhost:3000/v1/file/info/${fileId}`);
+    return this.httpClient.get(environment.URL + `/v1/file/info/${fileId}`);
   }
 
   getFiles() {
-    return this.httpClient.get('http://localhost:3000/v1/file/all');
+    return this.httpClient.get(environment.URL + '/v1/file/all');
   }
 
   getFilesByAuthorId(authorId: string) {
-    return this.httpClient.get(
-      `http://localhost:3000/v1/file/author/${authorId}`
-    );
+    return this.httpClient.get(environment.URL + `/v1/file/author/${authorId}`);
   }
 
   inviteCollaborator(file: DocumentFile, uid: string) {
     return this.httpClient.put(
-      `http://localhost:3000/v1/file/invite/${uid}`,
+      environment.URL + `/v1/file/invite/${uid}`,
       file
     );
   }
 
   save(user: UserModel) {
-    console.log('save');
     this.content = document.querySelector(
       '.ProseMirror.NgxEditor__Content'
     )!.innerHTML;
@@ -83,7 +87,6 @@ export class FileService {
       createdAt: new Date().toString(),
       updatedAt: new Date().toString(),
     };
-    console.log(file);
     this.store.dispatch(
       FileActions.createFile({
         file: file,
@@ -115,13 +118,11 @@ export class FileService {
       createdAt: new Date().toString(),
       updatedAt: new Date().toString(),
     };
-    console.log(file);
     this.store.dispatch(
       FileActions.updateFile({
         fileId: fileId,
         file: file,
       })
     );
-    //update service
   }
 }

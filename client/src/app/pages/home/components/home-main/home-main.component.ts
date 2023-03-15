@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { GetFilesState } from 'src/app/ngrx/states/file.state';
+import { DeleteFileState, GetFilesState } from 'src/app/ngrx/states/file.state';
 import * as FileActions from 'src/app/ngrx/actions/file.action';
 import { Observable } from 'rxjs';
 import { DocumentFile } from 'src/app/models/file.model';
@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { UserState } from 'src/app/ngrx/states/user.state';
 import { UserModel } from 'src/app/models/user.model';
 import { MatDialog } from '@angular/material/dialog';
+import { ColabDialogComponent } from 'src/app/components/colab-dialog/colab-dialog.component';
+import { DeleteDialogComponent } from 'src/app/components/delete-dialog/delete-dialog.component';
 import { InviteDialogComponent } from 'src/app/components/invite-dialog/invite-dialog.component';
 
 @Component({
@@ -27,13 +29,17 @@ export class HomeMainComponent {
       getFiles: GetFilesState;
       getByAuthorId: GetFilesState;
       user: UserState;
+      deleteFile: DeleteFileState;
     }>,
     private router: Router,
     public dialog: MatDialog
   ) {
     this.user$ = store.select('user', 'user');
+    store.select('deleteFile');
     this.store.select('user', 'user').subscribe((data) => {
       if (data) {
+        if (data._id === undefined) return;
+        console.log(data);
         this.user = data;
         store.dispatch(FileActions.getFilesByAuthorId({ authorId: data._id }));
       }
@@ -50,7 +56,12 @@ export class HomeMainComponent {
     this.router.navigate(['/paper/' + $event]);
   }
 
+  openDialogDelete(fileId: string) {
+    this.dialog.open(DeleteDialogComponent);
+    // this.store.dispatch(FileActions.deteleFile({ fileId: fileId }));
+    // window.location.reload();
+  }
   openDialog() {
-    const dialogRef = this.dialog.open(InviteDialogComponent);
+    this.dialog.open(InviteDialogComponent);
   }
 }

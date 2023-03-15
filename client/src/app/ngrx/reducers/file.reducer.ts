@@ -1,5 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { CreateFileState, GetFileDetailState } from '../states/file.state';
+import {
+  CreateFileState,
+  DeleteFileState,
+  GetFileDetailState,
+} from '../states/file.state';
 import * as FileActions from '../actions/file.action';
 import { GetFilesState } from '../states/file.state';
 import { DocumentFile } from 'src/app/models/file.model';
@@ -14,17 +18,14 @@ export const initialState: CreateFileState = {
 export const createFileReducer = createReducer(
   initialState,
   on(FileActions.createFile, (state) => {
-    console.log(state.file);
     let newState = {
       ...state,
       loading: true,
     };
-    console.log(newState);
     return newState;
   }),
 
   on(FileActions.createFileSuccess, (state, action) => {
-    console.log(action);
     let newState = {
       ...state,
       fileId: action.file,
@@ -119,8 +120,6 @@ export const getFilesReducer = createReducer(
   }),
 
   on(FileActions.getFilesByAuthorIdSuccess, (state, action) => {
-    console.log(action);
-
     return {
       ...state,
       isLoading: false,
@@ -136,6 +135,7 @@ export const getFilesReducer = createReducer(
       isLoading: false,
       isSuccess: false,
       error: error,
+      files: [],
     };
   })
 );
@@ -145,14 +145,12 @@ export const fileReducers = createReducer(
   on(FileActions.updateFile, (state) => ({ ...state, loading: true })),
 
   on(FileActions.updateFileSuccess, (state, action) => {
-    console.log(action.file);
     let newState = {
       ...state,
       fileId: action.file,
       loading: false,
       isSuccessful: true,
     };
-    console.log(newState);
     return newState;
   }),
 
@@ -175,6 +173,41 @@ export const fileReducers = createReducer(
   }),
 
   on(FileActions.inviteCollaboratorFailure, (state, { error }) => ({
+    ...state,
+    error: error,
+    loading: false,
+    isSuccessful: false,
+  }))
+);
+
+export const initialDeleteState: DeleteFileState = {
+  isLoading: false,
+  isSuccess: false,
+  error: '',
+  msg: '',
+};
+
+export const deleteFileReducer = createReducer(
+  initialState,
+  on(FileActions.deteleFile, (state) => {
+    let newState = {
+      ...state,
+      loading: true,
+    };
+    return newState;
+  }),
+
+  on(FileActions.deteleFileSuccess, (state, action) => {
+    let newState = {
+      ...state,
+      msg: action.msg,
+      loading: false,
+      isSuccessful: true,
+    };
+    return newState;
+  }),
+
+  on(FileActions.deteleFileFailure, (state, { error }) => ({
     ...state,
     error: error,
     loading: false,

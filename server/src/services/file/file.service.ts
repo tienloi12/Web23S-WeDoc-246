@@ -60,6 +60,15 @@ export class FileService {
     }
   }
 
+  async deleteFileById(fileId: string): Promise<string | null> {
+    try {
+      await this.fileModel.deleteOne({fileId: fileId}).exec();
+      return 'successfully deleted';
+    } catch (error) {
+      'unsuccessfully deleted';
+    }
+  }
+  
   // INVITE collaborator
   async inviteCollaborator(file: FileDocument, uid: string) {
     try {

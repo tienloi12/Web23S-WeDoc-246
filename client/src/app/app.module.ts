@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -22,15 +22,23 @@ import { MatInputModule } from '@angular/material/input';
 
 import {
   createFileReducer,
+  deleteFileReducer,
   // fileReducers,
   getFileReducer,
 } from './ngrx/reducers/file.reducer';
 import { getFilesReducer } from './ngrx/reducers/file.reducer';
 import { FileEffects } from './ngrx/effects/file.effect';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { InviteDialogComponent } from './components/invite-dialog/invite-dialog.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
-  declarations: [AppComponent, ColabDialogComponent, InviteDialogComponent],
+  declarations: [
+    AppComponent,
+    ColabDialogComponent,
+    DeleteDialogComponent,
+    InviteDialogComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -45,6 +53,7 @@ import { InviteDialogComponent } from './components/invite-dialog/invite-dialog.
         getFiles: getFilesReducer,
         getFile: getFileReducer,
         // file: fileReducers,
+        deleteFile: deleteFileReducer,
       },
 
       {}
@@ -55,6 +64,7 @@ import { InviteDialogComponent } from './components/invite-dialog/invite-dialog.
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [],
   bootstrap: [AppComponent],
