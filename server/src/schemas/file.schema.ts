@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
-import { User } from './user.schema';
+import { User, UserDocument } from './user.schema';
 
 export type FileDocument = HydratedDocument<File>;
 
@@ -18,7 +18,7 @@ export class File {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users',
   })
-  authorId: User;
+  authorId: UserDocument;
 
   @Prop({
     required: true,
@@ -33,7 +33,7 @@ export class File {
     default: Array,
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users' }],
   })
-  collaborators: User[];
+  collaborators: UserDocument[];
 }
 
 export const FileSchema = SchemaFactory.createForClass(File);

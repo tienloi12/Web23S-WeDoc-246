@@ -17,6 +17,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ColabDialogComponent } from './components/colab-dialog/colab-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 import {
   createFileReducer,
   // fileReducers,
@@ -24,9 +27,10 @@ import {
 } from './ngrx/reducers/file.reducer';
 import { getFilesReducer } from './ngrx/reducers/file.reducer';
 import { FileEffects } from './ngrx/effects/file.effect';
+import { InviteDialogComponent } from './components/invite-dialog/invite-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, ColabDialogComponent],
+  declarations: [AppComponent, ColabDialogComponent, InviteDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -49,6 +53,8 @@ import { FileEffects } from './ngrx/effects/file.effect';
     BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

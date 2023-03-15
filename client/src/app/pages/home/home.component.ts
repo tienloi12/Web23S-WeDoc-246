@@ -17,19 +17,16 @@ export class HomeComponent {
 
   sideMenu = [
     {
-      // id: 0,
       title: 'Home',
       icon: 'home',
       link: '/main',
     },
     {
-      // id: 1,
       title: 'Share',
       icon: 'share',
       link: '/shared',
     },
     {
-      // id: 2,
       title: 'Save',
       icon: 'save',
       link: '/saved',

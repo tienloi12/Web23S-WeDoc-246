@@ -8,7 +8,7 @@
 .desc {
   grid-column: 1/7;
   width: 100%;
-  height: 2rem;
+  height: 1rem;
   display: flex;
   align-items: center;
   p {
@@ -36,12 +36,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 1rem;
-    margin-bottom: 0;
-  }
-
-  p + p {
-    margin: 0 0 0.5rem 0;
+    margin: 0.5rem 0;
   }
 }
 
@@ -50,6 +45,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-top: 1rem;
 }
 
 .mess,
@@ -60,12 +56,20 @@
   align-items: center;
   height: 2.5rem;
   border-bottom: 1px solid rgba($color: #000000, $alpha: 0.2);
+}
+
+.mess {
+  font-size: 1rem;
   p {
     font-weight: 500;
-    margin: 0;
   }
 }
 
 .file-item {
   cursor: pointer;
+  color: var(--black);
+  p {
+    font-weight: 400;
+    margin: 0;
+  }
 }

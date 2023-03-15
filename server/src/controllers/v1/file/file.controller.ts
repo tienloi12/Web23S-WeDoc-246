@@ -1,6 +1,6 @@
 import { Body, Controller, Post, Get, Param, Put } from '@nestjs/common';
 import { FileService } from 'src/services/file/file.service';
-import { File } from 'src/schemas/file.schema';
+import { File, FileDocument } from 'src/schemas/file.schema';
 
 @Controller('v1/file')
 export class FileController {
@@ -32,5 +32,14 @@ export class FileController {
   async getFilesByAuthorId(@Param(`id`) id: string) {
     let files = await this.fileService.getFilesByAuthorId(id);
     return files;
+  }
+
+  @Put('invite/:id')
+  async inviteCollaborator(
+    @Body() file: FileDocument,
+    @Param(`id`) uid: string,
+  ) {
+    let data = await this.fileService.inviteCollaborator(file, uid);
+    return data;
   }
 }

@@ -1,8 +1,6 @@
 <div class="container">
   <div class="template">
-    <div class="desc">
-      <p>Start your document</p>
-    </div>
+    <div class="desc"></div>
     <div class="paper" (click)="newPaper()">
       <div>
         <span class="material-symbols-rounded"> add </span>
@@ -43,13 +41,24 @@
   <div class="file">
     <div class="mess">
       <p>File Name</p>
-      <p>Date Modified</p>
+      <p style="margin-right: 3rem">Date Modified</p>
     </div>
     <div class="file-item" *ngFor="let item of files$ | async">
       <p (click)="openFile(item.fileId)">
         {{ item.title }}
       </p>
-      <p>{{ item.createdAt | date : "mediumDate" }}</p>
+      <span style="display: flex; justify-content: center">
+        <p>
+          {{ item.updatedAt | date : "medium" }}
+        </p>
+        <span
+          (click)="openDialog()"
+          class="material-symbols-outlined"
+          style="margin-left: 1rem"
+        >
+          more_vert
+        </span>
+      </span>
     </div>
   </div>
 </div>

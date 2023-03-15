@@ -20,7 +20,7 @@ export class UserService {
     );
   }
 
-  getProfileByEmail(email: string | null) {
+  getProfileByEmail(email: string) {
     return this.httpCLient.get<UserModel>(
       `http://localhost:3000/v1/user/${email}`
     );

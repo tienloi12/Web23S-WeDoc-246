@@ -18,7 +18,7 @@ export const createUserFailure = createAction(
 //get user by gmail
 export const getUserByGmail = createAction(
   '[User] Get User By Gmail',
-  props<{ email: string | null }>()
+  props<{ email: string }>()
 );
 export const getUserByGmailSuccess = createAction(
   '[User] Get User Success',
