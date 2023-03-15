@@ -1,39 +1,35 @@
-<div class="container">
-  <div class="sidebar">
-    <div class="logo">
-      <span class="we">We</span>
-      <span class="doc">Doc</span>
-    </div>
-
-    <div class="sidebar-item">
-      <div
-        (click)="select(i)"
-        [class]="
-          sideBarSelected == i ? 'side-item side-item-active' : 'side-item'
-        "
-        *ngFor="let item of sideMenu; let i = index"
-      >
-        <span class="material-symbols-rounded">{{ item.icon }}</span>
-        <span class="side-label"
-          ><b>{{ item.title }}</b></span
+<div class="parent">
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <img src="../../../assets/images/Wedoc.jpg" alt="" />
+      </div>
+      <div class="search">
+        <span class="material-symbols-rounded"> search </span>
+        <input type="text" class="input-search" placeholder="Search" />
+      </div>
+      <div class="tools">
+        <div
+          (click)="select(i)"
+          [class]="sideBarSelected == i ? 'item item-active' : 'item'"
+          *ngFor="let item of sideMenu; let i = index"
         >
+          <span class="material-symbols-rounded">{{ item.icon }}</span>
+          <span class="label">{{ item.title }}</span>
+        </div>
+      </div>
+      <div class="info">
+        <p>{{ (user$ | async)?.displayName }}</p>
+        <img class="image-avatar" [src]="(user$ | async)?.photoURL" alt="" />
       </div>
     </div>
-
-    <div class="sidebar-info">
-      <img class="image-avatar" [src]="(user$ | async)?.photoURL" alt="" />
-      <b>{{ (user$ | async)?.displayName }}</b>
-      <button class="logout" (click)="logOut()">Logout</button>
+  </header>
+  <main class="main-container">
+    <div class="container">
+      <div class="main">
+        <router-outlet></router-outlet>
+      </div>
     </div>
-  </div>
-
-  <div class="navbar">
-    <div class="search">
-      <span class="material-symbols-rounded"> search </span>
-      <input type="text" class="input-search" placeholder="Search" />
-    </div>
-  </div>
-  <div class="main">
-    <router-outlet></router-outlet>
-  </div>
+  </main>
+  <footer class="purple section"><app-footer></app-footer></footer>
 </div>

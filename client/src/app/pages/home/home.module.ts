@@ -9,6 +9,8 @@ import { SavedComponent } from './components/saved/saved.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     HomeMainComponent,
     SharedComponent,
     SavedComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -23,6 +26,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatMenuModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatIconModule,
   ],
 })
 export class HomeModule {}

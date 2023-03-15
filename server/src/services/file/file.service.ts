@@ -86,13 +86,12 @@ export class FileService {
         (collab) => collab == Object(user._id),
       );
       if (!isCollab) {
-        let newCollab = file.collaborators;
         let newFile: File = {
           fileId: file.fileId,
           authorId: file.authorId,
           title: file.title,
           content: file.content,
-          collaborators: newCollab,
+          collaborators: [...file.collaborators, Object(user._id)],
         };
         return await this.fileModel
           .findOneAndUpdate({ _id: file._id }, newFile, { new: true })

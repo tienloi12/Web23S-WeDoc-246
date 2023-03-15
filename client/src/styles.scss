@@ -6,6 +6,7 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   width: 100vw;
   height: 100vh;
@@ -30,7 +31,7 @@ body {
 
 .mat-mdc-snack-bar-container {
   &.snackbar {
-    --mdc-snackbar-container-color: #fff;
+    --mdc-snackbar-container-color: #f6f6f6;
     --mat-mdc-snack-bar-button-color: #673ab7;
     --mdc-snackbar-supporting-text-color: #673ab7;
   }

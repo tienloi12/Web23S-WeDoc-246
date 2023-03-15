@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 import { UserState } from 'src/app/ngrx/states/user.state';
 import { UserModel } from 'src/app/models/user.model';
 import { MatDialog } from '@angular/material/dialog';
-import { ColabDialogComponent } from 'src/app/components/colab-dialog/colab-dialog.component';
 import { DeleteDialogComponent } from 'src/app/components/delete-dialog/delete-dialog.component';
 import { InviteDialogComponent } from 'src/app/components/invite-dialog/invite-dialog.component';
 import {
@@ -71,6 +70,9 @@ export class HomeMainComponent implements OnInit, OnDestroy {
     this.isSuccessSubscription = this.isSuccess$.subscribe((data) => {
       if (data) {
         this.openSnackBar('Invite Successfully!!!');
+        this.store.dispatch(
+          FileActions.getFilesByAuthorId({ authorId: this.user._id })
+        );
       }
     });
     this.errorSubscription = this.error$.subscribe((data) => {
