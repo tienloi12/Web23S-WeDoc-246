@@ -74,3 +74,19 @@ export const updateFileFailure = createAction(
   '[File] Update File Failure',
   props<{ error: string }>()
 );
+
+// Delete
+export const deteleFile = createAction(
+  '[File] Delete File',
+  props<{ fileId: string }>()
+);
+
+export const deteleFileSuccess = createAction(
+  '[File] Delete File Success',
+  props<{ msg: string }>()
+);
+
+export const deteleFileFailure = createAction(
+  '[File] Delete File Failure',
+  props<{ error: string }>()
+);

@@ -45,11 +45,13 @@
       <p>File Name</p>
       <p>Date Modified</p>
     </div>
-    <div class="file-item" *ngFor="let item of files$ | async">
-      <p (click)="openFile(item.fileId)">
+    <div class="file-item" *ngFor="let item of files$ | async" >
+      <p class="cursor" (click)="openFile(item.fileId)">
         {{ item.title }}
       </p>
-      <p>{{ item.createdAt | date : "mediumDate" }}</p>
+      <p class="modified">{{ item.createdAt | date : "mediumDate" }}
+        <span (click)="openDialog(item.fileId)" class="material-symbols-outlined cursor"> delete </span>
+      </p>
     </div>
   </div>
 </div>

@@ -1,4 +1,12 @@
-import { Body, Controller, Post, Get, Param, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Param,
+  Put,
+  Delete,
+} from '@nestjs/common';
 import { FileService } from 'src/services/file/file.service';
 import { File } from 'src/schemas/file.schema';
 
@@ -32,5 +40,11 @@ export class FileController {
   async getFilesByAuthorId(@Param(`id`) id: string) {
     let files = await this.fileService.getFilesByAuthorId(id);
     return files;
+  }
+
+  @Delete('delete/:id')
+  async deleteFileById(@Param(`id`) id: string) {
+    let file = await this.fileService.deleteFileById(id);
+    return file;
   }
 }

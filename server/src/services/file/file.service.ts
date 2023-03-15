@@ -59,4 +59,13 @@ export class FileService {
       return new HttpException(error.message, HttpStatus.BAD_REQUEST) as any;
     }
   }
+
+  async deleteFileById(fileId: string): Promise<string | null> {
+    try {
+      await this.fileModel.deleteOne({fileId: fileId}).exec();
+      return 'successfully deleted';
+    } catch (error) {
+      'unsuccessfully deleted';
+    }
+  }
 }

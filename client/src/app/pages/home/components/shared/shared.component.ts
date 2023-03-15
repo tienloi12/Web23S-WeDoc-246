@@ -15,12 +15,9 @@ export class SharedComponent implements OnInit {
 
   constructor(
     private store: Store<{ getFiles: GetFilesState }>,
-    private router: Router
   ) {
     this.files$ = store.select('getFiles', 'files');
-    this.store.select('getFiles', 'files').subscribe((data) => {
-      console.log(data);
-    });
+    this.store.select('getFiles', 'files');
   }
   ngOnInit(): void {
     this.store.dispatch(FileActions.getFiles());

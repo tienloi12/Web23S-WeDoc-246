@@ -66,6 +66,11 @@
   }
 }
 
-.file-item {
+.cursor {
   cursor: pointer;
+}
+
+.modified {
+  display: flex;
+  align-items: center;
 }

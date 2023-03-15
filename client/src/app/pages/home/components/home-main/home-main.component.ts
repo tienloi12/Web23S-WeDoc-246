@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { GetFilesState } from 'src/app/ngrx/states/file.state';
+import { DeleteFileState, GetFilesState } from 'src/app/ngrx/states/file.state';
 import * as FileActions from 'src/app/ngrx/actions/file.action';
 import { Observable } from 'rxjs';
 import { DocumentFile } from 'src/app/models/file.model';
@@ -8,7 +8,9 @@ import { DocumentFile } from 'src/app/models/file.model';
 import { Router } from '@angular/router';
 import { UserState } from 'src/app/ngrx/states/user.state';
 import { UserModel } from 'src/app/models/user.model';
-import { HttpClient } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { ColabDialogComponent } from 'src/app/components/colab-dialog/colab-dialog.component';
+import { DeleteDialogComponent } from 'src/app/components/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-home-main',
@@ -26,39 +28,34 @@ export class HomeMainComponent {
       getFiles: GetFilesState;
       getByAuthorId: GetFilesState;
       user: UserState;
+      deleteFile: DeleteFileState;
     }>,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {
     this.user$ = store.select('user', 'user');
+    store.select('deleteFile');
     this.store.select('user', 'user').subscribe((data) => {
       if (data) {
         this.user = data;
-        console.log('test');
         store.dispatch(FileActions.getFilesByAuthorId({ authorId: data._id }));
       }
     });
 
     this.files$ = store.select('getFiles', 'files');
-    // this.store.select('getFiles', 'files').subscribe((data) => {
-    //   console.log(data);
-    // });
-
-    // this.store.select('getByAuthorId', 'files').subscribe((data) => {
-    //   console.log(data);
-    // });
   }
 
   newPaper() {
     this.router.navigate(['/paper']);
   }
 
-  // ngOnInit(): void {
-  //   this.store.dispatch(FileActions.getFiles());
-  // }
-
   openFile($event: any) {
-    // console.log($event);
     this.router.navigate(['/paper/' + $event]);
-    //   this.openFile($event);
+  }
+
+  openDialog(fileId: string) {
+    this.dialog.open(DeleteDialogComponent);
+    // this.store.dispatch(FileActions.deteleFile({ fileId: fileId }));
+    // window.location.reload();
   }
 }

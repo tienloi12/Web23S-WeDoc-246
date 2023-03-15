@@ -17,12 +17,8 @@ import {
 import schema from './schema';
 import nodeViews from '../../nodeviews';
 import { FileService } from 'src/app/services/file.service';
-// import { FileState } from 'src/app/ngrx/states/file.state';
 import * as FileActions from 'src/app/ngrx/actions/file.action';
-import { UserState } from 'src/app/ngrx/states/user.state';
-import { UserModel } from 'src/app/models/user.model';
 import { GetFileDetailState } from 'src/app/ngrx/states/file.state';
-import { DocumentFile } from 'src/app/models/file.model';
 import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-paper',
@@ -32,13 +28,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PaperComponent implements OnInit, OnDestroy {
   showSideBar = false;
-  // user$ = this.store.select('user', 'user');
-
   file$ = this.fileStore.select('getFile');
-
-  // file$: Observable<FileState>;
   editordoc = '';
-  content!: string | null | undefined;
   constructor(
     public authService: AuthService,
     public fileService: FileService,
@@ -59,7 +50,6 @@ export class PaperComponent implements OnInit, OnDestroy {
   });
 
   get doc(): AbstractControl {
-    // console.log(this.form.get('editorContent'));
     return this.form.get('editorContent') ?? new FormControl();
   }
 

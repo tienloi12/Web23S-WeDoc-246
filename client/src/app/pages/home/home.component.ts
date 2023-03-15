@@ -44,8 +44,6 @@ export class HomeComponent {
     private store: Store<{ auth: AuthState; user: UserState }>
   ) {
     this.auth$ = store.select('auth');
-    // this.user = history.state.data;
-    // this.router.navigate(['/paper'], { state: { data: this.user } });
   }
 
   logOut() {

@@ -7,6 +7,13 @@ export interface CreateFileState {
   file: DocumentFile;
 }
 
+export interface DeleteFileState {
+  isLoading: boolean;
+  isSuccess: boolean;
+  error: string;
+  msg: string;
+}
+
 export interface GetFileDetailState {
   isLoading: boolean;
   isSuccess: boolean;

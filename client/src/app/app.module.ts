@@ -19,14 +19,16 @@ import { ColabDialogComponent } from './components/colab-dialog/colab-dialog.com
 import { MatButtonModule } from '@angular/material/button';
 import {
   createFileReducer,
+  deleteFileReducer,
   // fileReducers,
   getFileReducer,
 } from './ngrx/reducers/file.reducer';
 import { getFilesReducer } from './ngrx/reducers/file.reducer';
 import { FileEffects } from './ngrx/effects/file.effect';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, ColabDialogComponent],
+  declarations: [AppComponent, ColabDialogComponent, DeleteDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -41,6 +43,7 @@ import { FileEffects } from './ngrx/effects/file.effect';
         getFiles: getFilesReducer,
         getFile: getFileReducer,
         // file: fileReducers,
+        deleteFile: deleteFileReducer,
       },
 
       {}
