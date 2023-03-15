@@ -41,6 +41,9 @@ export class HomeComponent {
     private store: Store<{ auth: AuthState; user: UserState }>
   ) {
     this.auth$ = store.select('auth');
+    this.user$.subscribe((user) => {
+      console.log(user);
+    })
   }
 
   logOut() {

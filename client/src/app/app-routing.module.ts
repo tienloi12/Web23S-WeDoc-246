@@ -7,21 +7,21 @@ const routes: Routes = [
     redirectTo: 'landing',
     pathMatch: 'full',
   },
-  // {
-  //   path: 'paper',
-  //   loadChildren: () =>
-  //     import('./pages/paper/paper.module').then((m) => m.PaperModule),
-  // },
-  // {
-  //   path: 'paper/:id',
-  //   loadChildren: () =>
-  //     import('./pages/paper/paper.module').then((m) => m.PaperModule),
-  // },
-  // {
-  //   path: 'home',
-  //   loadChildren: () =>
-  //     import('./pages/home/home.module').then((m) => m.HomeModule),
-  // },
+  {
+    path: 'paper',
+    loadChildren: () =>
+      import('./pages/paper/paper.module').then((m) => m.PaperModule),
+  },
+  {
+    path: 'paper/:id',
+    loadChildren: () =>
+      import('./pages/paper/paper.module').then((m) => m.PaperModule),
+  },
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./pages/home/home.module').then((m) => m.HomeModule),
+  },
   {
     path: 'landing',
     loadChildren: () =>

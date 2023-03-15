@@ -63,13 +63,13 @@
 .content__login {
     display: flex;
     align-items: center;
+    justify-content: space-around;
 }
 
 .content__login button {
     display: flex;   
     justify-content: space-between;
     align-items: center;   
-    width: 30rem;
     background-color: #ffff;
     padding: 0.8rem 1.25rem;
     font-size: 1.25rem;
