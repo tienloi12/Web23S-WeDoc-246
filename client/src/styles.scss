@@ -35,3 +35,12 @@ body {
     --mdc-snackbar-supporting-text-color: #673ab7;
   }
 }
+.background-color {
+  background-color: var(--primary) !important;
+  color: white;
+  cursor: pointer !important;
+}
+
+.background-color > :hover {
+  color: var(--primary);
+}

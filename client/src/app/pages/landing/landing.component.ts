@@ -26,5 +26,6 @@ export class LandingComponent {
 
   goToIntroduce() {
     this.router.navigate(['/about']);
+    // this.router.navigate(['/introduce']);
   }
 }
