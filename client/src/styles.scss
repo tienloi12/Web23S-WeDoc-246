@@ -27,3 +27,13 @@ body {
   font-family: "Source Sans Pro", sans-serif;
   overflow-x: hidden;
 }
+
+.background-color {
+  background-color: var(--primary) !important;
+  color: white;
+  cursor: pointer !important;
+}
+
+.background-color > :hover {
+  color: var(--primary);
+}
