@@ -30,7 +30,7 @@ export const createFileReducer = createReducer(
       ...state,
       fileId: action.file,
       loading: false,
-      isSuccessful: true,
+      isSuccess: true,
     };
     return newState;
   }),
@@ -39,7 +39,7 @@ export const createFileReducer = createReducer(
     ...state,
     error: error,
     loading: false,
-    isSuccessful: false,
+    isSuccess: false,
   }))
 );
 
@@ -142,14 +142,18 @@ export const getFilesReducer = createReducer(
 
 export const fileReducers = createReducer(
   initialState,
-  on(FileActions.updateFile, (state) => ({ ...state, loading: true })),
+  on(FileActions.updateFile, (state, { type }) => {
+    console.log(type);
+    return { ...state, isLoading: true, isSuccess: false };
+  }),
 
   on(FileActions.updateFileSuccess, (state, action) => {
+    console.log(action.type);
     let newState = {
       ...state,
       fileId: action.file,
-      loading: false,
-      isSuccessful: true,
+      isLoading: false,
+      isSuccess: true,
     };
     return newState;
   }),
@@ -157,27 +161,34 @@ export const fileReducers = createReducer(
   on(FileActions.updateFileFailure, (state, { error }) => ({
     ...state,
     error: error,
-    loading: false,
-    isSuccessful: false,
+    isLoading: false,
+    isSuccess: false,
   })),
 
-  on(FileActions.inviteCollaborator, (state) => ({ ...state, loading: true })),
+  on(FileActions.inviteCollaborator, (state, { type }) => {
+    console.log(type);
+    return { ...state, isLoading: true };
+  }),
 
-  on(FileActions.inviteCollaboratorSuccess, (state) => {
+  on(FileActions.inviteCollaboratorSuccess, (state, { type }) => {
+    console.log(type);
     let newState = {
       ...state,
-      loading: false,
-      isSuccessful: true,
+      isLoading: false,
+      isSuccess: true,
     };
     return newState;
   }),
 
-  on(FileActions.inviteCollaboratorFailure, (state, { error }) => ({
-    ...state,
-    error: error,
-    loading: false,
-    isSuccessful: false,
-  }))
+  on(FileActions.inviteCollaboratorFailure, (state, { type, error }) => {
+    console.log(type, error);
+    return {
+      ...state,
+      error: error,
+      loading: false,
+      isSuccessful: false,
+    };
+  })
 );
 
 export const initialDeleteState: DeleteFileState = {

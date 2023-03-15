@@ -27,3 +27,11 @@ body {
   font-family: "Source Sans Pro", sans-serif;
   overflow-x: hidden;
 }
+
+.mat-mdc-snack-bar-container {
+  &.snackbar {
+    --mdc-snackbar-container-color: #fff;
+    --mat-mdc-snack-bar-button-color: #673ab7;
+    --mdc-snackbar-supporting-text-color: #673ab7;
+  }
+}

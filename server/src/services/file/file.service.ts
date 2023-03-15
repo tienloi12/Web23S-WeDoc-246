@@ -2,10 +2,14 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { File, FileDocument } from 'src/schemas/file.schema';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class FileService {
-  constructor(@InjectModel(File.name) private fileModel: Model<FileDocument>) {}
+  constructor(
+    private userService: UserService,
+    @InjectModel(File.name) private fileModel: Model<FileDocument>,
+  ) {}
 
   // CREATE FILE
   async createFile(file: File): Promise<File | any> {
@@ -62,41 +66,44 @@ export class FileService {
 
   async deleteFileById(fileId: string): Promise<string | null> {
     try {
-      await this.fileModel.deleteOne({fileId: fileId}).exec();
+      await this.fileModel.deleteOne({ fileId: fileId }).exec();
       return 'successfully deleted';
     } catch (error) {
-      'unsuccessfully deleted';
+      ('unsuccessfully deleted');
     }
   }
-  
-  // INVITE collaborator
-  async inviteCollaborator(file: FileDocument, uid: string) {
-    try {
-      // check if user is already a collaborator
-      let isCollab = file.collaborators.find((collab) => collab == Object(uid));
 
-      if (!isCollab) {
-        if (file.collaborators.length > 0) {
-          let newCollab = file.collaborators;
-          let newFile: File = {
-            fileId: file.fileId,
-            authorId: file.authorId,
-            title: file.title,
-            content: file.content,
-            collaborators: newCollab,
-          };
-          return await this.fileModel
-            .findOneAndUpdate({ _id: file._id }, newFile, { new: true })
-            .exec();
-        } else {
-          return null;
-        }
-      } else {
-        console.log(Object(uid) + ' is already a collaborator');
+  // INVITE collaborator
+  async inviteCollaborator(file: FileDocument, email: string) {
+    try {
+      let user = await this.userService.getUserByEmail(email);
+      if (user == null) {
         return null;
       }
+      console.log(user.email + ' is a valid user');
+      // check if user is already a collaborator
+      let isCollab = file.collaborators.find(
+        (collab) => collab == Object(user._id),
+      );
+      if (!isCollab) {
+        let newCollab = file.collaborators;
+        let newFile: File = {
+          fileId: file.fileId,
+          authorId: file.authorId,
+          title: file.title,
+          content: file.content,
+          collaborators: newCollab,
+        };
+        return await this.fileModel
+          .findOneAndUpdate({ _id: file._id }, newFile, { new: true })
+          .exec();
+      } else {
+        console.log(email + ' is already a collaborator');
+        return { error: 'User is already a collaborator' };
+      }
     } catch (error) {
-      return new HttpException(error.message, HttpStatus.BAD_REQUEST) as any;
+      // return new HttpException(error.message, HttpStatus.BAD_REQUEST) as any;
+      return null;
     }
   }
 }

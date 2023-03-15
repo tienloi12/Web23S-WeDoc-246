@@ -59,9 +59,9 @@ export class FileService {
     return this.httpClient.get(environment.URL + `/v1/file/author/${authorId}`);
   }
 
-  inviteCollaborator(file: DocumentFile, uid: string) {
+  inviteCollaborator(file: DocumentFile, email: string | null) {
     return this.httpClient.put(
-      environment.URL + `/v1/file/invite/${uid}`,
+      environment.URL + `/v1/file/invite/${email}`,
       file
     );
   }

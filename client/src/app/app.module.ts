@@ -19,14 +19,16 @@ import { ColabDialogComponent } from './components/colab-dialog/colab-dialog.com
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   createFileReducer,
   deleteFileReducer,
+  fileReducers,
   // fileReducers,
   getFileReducer,
+  getFilesReducer,
 } from './ngrx/reducers/file.reducer';
-import { getFilesReducer } from './ngrx/reducers/file.reducer';
 import { FileEffects } from './ngrx/effects/file.effect';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { InviteDialogComponent } from './components/invite-dialog/invite-dialog.component';
@@ -43,6 +45,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     StoreModule.forRoot(
@@ -52,10 +56,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
         createfile: createFileReducer,
         getFiles: getFilesReducer,
         getFile: getFileReducer,
-        // file: fileReducers,
+        file: fileReducers,
         deleteFile: deleteFileReducer,
       },
-
       {}
     ),
     EffectsModule.forRoot([AuthEffects, UserEffects, FileEffects]),
@@ -64,6 +67,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [],

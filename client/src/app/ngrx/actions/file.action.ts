@@ -94,7 +94,7 @@ export const deteleFileFailure = createAction(
 // INVITE COLLABORATOR
 export const inviteCollaborator = createAction(
   '[File] Invite Collaborator',
-  props<{ file: DocumentFile; uid: string }>()
+  props<{ file: DocumentFile; email: string | null }>()
 );
 
 export const inviteCollaboratorSuccess = createAction(

@@ -2,10 +2,23 @@
   <p>Enter the email of the person you want to invite</p>
   <mat-form-field appearance="fill">
     <mat-label>Email</mat-label>
-    <input matInput />
+    <input matInput title="email" [formControl]="emailControl" />
+    <mat-error *ngIf="emailControl.hasError('email')">
+      Must be <strong>email</strong>
+    </mat-error>
+    <mat-error *ngIf="emailControl.hasError('required')">
+      Missing required <strong>field</strong>
+    </mat-error>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="close()">Close</button>
-  <button mat-button cdkFocusInitial>Invite</button>
+  <button
+    mat-button
+    cdkFocusInitial
+    [disabled]="!emailControl.valid"
+    (click)="invite()"
+  >
+    Invite
+  </button>
 </div>

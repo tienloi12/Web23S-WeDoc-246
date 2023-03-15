@@ -1,8 +1,12 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { DeleteFileState, GetFilesState } from 'src/app/ngrx/states/file.state';
+import {
+  CreateFileState,
+  DeleteFileState,
+  GetFilesState,
+} from 'src/app/ngrx/states/file.state';
 import * as FileActions from 'src/app/ngrx/actions/file.action';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DocumentFile } from 'src/app/models/file.model';
 import { Router } from '@angular/router';
 import { UserState } from 'src/app/ngrx/states/user.state';
@@ -11,6 +15,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ColabDialogComponent } from 'src/app/components/colab-dialog/colab-dialog.component';
 import { DeleteDialogComponent } from 'src/app/components/delete-dialog/delete-dialog.component';
 import { InviteDialogComponent } from 'src/app/components/invite-dialog/invite-dialog.component';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home-main',
@@ -18,18 +27,26 @@ import { InviteDialogComponent } from 'src/app/components/invite-dialog/invite-d
   styleUrls: ['./home-main.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class HomeMainComponent {
+export class HomeMainComponent implements OnInit, OnDestroy {
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  isSuccessSubscription!: Subscription;
+  isSuccess$ = this.store.select('file', 'isSuccess');
+  errorSubscription!: Subscription;
+  error$ = this.store.select('file', 'error');
   files$: Observable<DocumentFile[]>;
   user$: Observable<UserModel>;
 
   user!: UserModel;
 
   constructor(
+    private _snackBar: MatSnackBar,
     private store: Store<{
       getFiles: GetFilesState;
       getByAuthorId: GetFilesState;
       user: UserState;
       deleteFile: DeleteFileState;
+      file: CreateFileState;
     }>,
     private router: Router,
     public dialog: MatDialog
@@ -47,6 +64,32 @@ export class HomeMainComponent {
 
     this.files$ = store.select('getFiles', 'files');
   }
+  ngOnDestroy(): void {
+    this.isSuccessSubscription.unsubscribe();
+  }
+  ngOnInit(): void {
+    this.isSuccessSubscription = this.isSuccess$.subscribe((data) => {
+      if (data) {
+        this.openSnackBar('Invite Successfully!!!');
+      }
+    });
+    this.errorSubscription = this.error$.subscribe((data) => {
+      if (data == 'User not found') {
+        this.openSnackBar(data);
+      } else if (data == 'User is already a collaborator') {
+        this.openSnackBar(data);
+      }
+    });
+  }
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'Close', {
+      duration: 2000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      panelClass: ['snackbar'],
+    });
+  }
 
   newPaper() {
     this.router.navigate(['/paper']);
@@ -61,7 +104,18 @@ export class HomeMainComponent {
     // this.store.dispatch(FileActions.deteleFile({ fileId: fileId }));
     // window.location.reload();
   }
-  openDialog() {
-    this.dialog.open(InviteDialogComponent);
+  opeInviteDialog(file: DocumentFile) {
+    const dialogRef = this.dialog.open(InviteDialogComponent, {
+      autoFocus: false,
+    });
+    dialogRef.afterClosed().subscribe((result: string) => {
+      if (result != undefined || result != null || result != '') {
+        console.log(result);
+        this.store.dispatch(
+          FileActions.inviteCollaborator({ file: file, email: result })
+        );
+        console.log('The dialog was closed');
+      }
+    });
   }
 }

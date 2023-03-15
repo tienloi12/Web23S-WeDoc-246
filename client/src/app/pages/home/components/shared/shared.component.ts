@@ -13,13 +13,11 @@ import * as FileActions from 'src/app/ngrx/actions/file.action';
 export class SharedComponent implements OnInit {
   files$: Observable<DocumentFile[]>;
 
-  constructor(
-    private store: Store<{ getFiles: GetFilesState }>,
-  ) {
+  constructor(private store: Store<{ getFiles: GetFilesState }>) {
     this.files$ = store.select('getFiles', 'files');
     this.store.select('getFiles', 'files');
   }
   ngOnInit(): void {
-    this.store.dispatch(FileActions.getFiles());
+    // this.store.dispatch(FileActions.getFiles());
   }
 }
