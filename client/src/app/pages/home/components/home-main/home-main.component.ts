@@ -11,7 +11,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ColabDialogComponent } from 'src/app/components/colab-dialog/colab-dialog.component';
 import { DeleteDialogComponent } from 'src/app/components/delete-dialog/delete-dialog.component';
 import { InviteDialogComponent } from 'src/app/components/invite-dialog/invite-dialog.component';
-
 @Component({
   selector: 'app-home-main',
   templateUrl: './home-main.component.html',
@@ -55,10 +54,9 @@ export class HomeMainComponent {
   }
 
   openDialogDelete(fileId: string) {
-    this.dialog.open(DeleteDialogComponent);
-    // this.store.dispatch(FileActions.deteleFile({ fileId: fileId }));
-    // window.location.reload();
+    this.dialog.open(DeleteDialogComponent, { data: fileId });
   }
+
   openDialog() {
     const dialogRef = this.dialog.open(InviteDialogComponent);
   }

@@ -60,7 +60,7 @@
           more_vert
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
+          <button mat-menu-item (click)="openDialogDelete(item.fileId)">
             <span class="material-symbols-outlined"> delete </span>
             <span>Delete</span>
           </button>
@@ -73,3 +73,4 @@
     </div>
   </div>
 </div>
+

@@ -30,13 +30,15 @@ import { getFilesReducer } from './ngrx/reducers/file.reducer';
 import { FileEffects } from './ngrx/effects/file.effect';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { InviteDialogComponent } from './components/invite-dialog/invite-dialog.component';
-
+import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
     ColabDialogComponent,
     DeleteDialogComponent,
     InviteDialogComponent,
+    SnackBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +65,8 @@ import { InviteDialogComponent } from './components/invite-dialog/invite-dialog.
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-  ],
+    MatSnackBarModule,
+    ],
   providers: [],
   bootstrap: [AppComponent],
 })
