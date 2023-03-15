@@ -24,6 +24,7 @@
     "@codemirror/lang-javascript": "^6.1.4",
     "@ngrx/effects": "^15.3.0",
     "@ngrx/store": "^15.3.0",
+    "@ngrx/store-devtools": "^15.3.0",
     "codemirror": "^6.0.1",
     "ngx-editor": "^15.3.0",
     "prosemirror-codemirror-6": "^1.0.0",

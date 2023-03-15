@@ -47,7 +47,7 @@
       <p class="cursor" (click)="openFile(item.fileId)">
         {{ item.title }}
       </p>
-      <span style="display: flex; justify-content: center; align-items: center;">
+      <span style="display: flex; justify-content: center; align-items: center">
         <p>
           {{ item.updatedAt | date : "medium" }}
         </p>
@@ -64,7 +64,7 @@
             <span class="material-symbols-outlined"> delete </span>
             <span>Delete</span>
           </button>
-          <button mat-menu-item>
+          <button (click)="openDialog()" mat-menu-item>
             <span class="material-symbols-outlined"> person_add </span>
             <span>Invite</span>
           </button>

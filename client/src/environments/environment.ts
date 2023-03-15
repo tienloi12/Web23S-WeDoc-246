@@ -8,5 +8,5 @@ export const environment = {
     authDomain: 'wedoc-f1743.firebaseapp.com',
     messagingSenderId: '1092312971962',
   },
-  api_url: 'http://localhost:3000',
+  URL: 'http://localhost:3000',
 };

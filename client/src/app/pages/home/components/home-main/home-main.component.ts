@@ -38,6 +38,8 @@ export class HomeMainComponent {
     store.select('deleteFile');
     this.store.select('user', 'user').subscribe((data) => {
       if (data) {
+        if (data._id === undefined) return;
+        console.log(data);
         this.user = data;
         store.dispatch(FileActions.getFilesByAuthorId({ authorId: data._id }));
       }
@@ -60,6 +62,6 @@ export class HomeMainComponent {
     // window.location.reload();
   }
   openDialog() {
-    const dialogRef = this.dialog.open(InviteDialogComponent);
+    this.dialog.open(InviteDialogComponent);
   }
 }

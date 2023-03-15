@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -30,6 +30,7 @@ import { getFilesReducer } from './ngrx/reducers/file.reducer';
 import { FileEffects } from './ngrx/effects/file.effect';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { InviteDialogComponent } from './components/invite-dialog/invite-dialog.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { InviteDialogComponent } from './components/invite-dialog/invite-dialog.
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [],
   bootstrap: [AppComponent],

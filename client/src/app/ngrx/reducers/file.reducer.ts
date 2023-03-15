@@ -1,5 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { CreateFileState, DeleteFileState, GetFileDetailState } from '../states/file.state';
+import {
+  CreateFileState,
+  DeleteFileState,
+  GetFileDetailState,
+} from '../states/file.state';
 import * as FileActions from '../actions/file.action';
 import { GetFilesState } from '../states/file.state';
 import { DocumentFile } from 'src/app/models/file.model';
@@ -131,6 +135,7 @@ export const getFilesReducer = createReducer(
       isLoading: false,
       isSuccess: false,
       error: error,
+      files: [],
     };
   })
 );
@@ -175,7 +180,6 @@ export const fileReducers = createReducer(
   }))
 );
 
-  
 export const initialDeleteState: DeleteFileState = {
   isLoading: false,
   isSuccess: false,
