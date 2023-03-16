@@ -1,5 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { CreateFileState, DeleteFileState, GetFileDetailState } from '../states/file.state';
+import {
+  CreateFileState,
+  DeleteFileState,
+  GetFileDetailState,
+} from '../states/file.state';
 import * as FileActions from '../actions/file.action';
 import { GetFilesState } from '../states/file.state';
 import { DocumentFile } from 'src/app/models/file.model';
@@ -26,7 +30,7 @@ export const createFileReducer = createReducer(
       ...state,
       fileId: action.file,
       loading: false,
-      isSuccessful: true,
+      isSuccess: true,
     };
     return newState;
   }),
@@ -35,7 +39,7 @@ export const createFileReducer = createReducer(
     ...state,
     error: error,
     loading: false,
-    isSuccessful: false,
+    isSuccess: false,
   }))
 );
 
@@ -73,6 +77,7 @@ export const initialGetFilesState: GetFilesState = {
   isSuccess: false,
   error: '',
   files: [],
+  sharedFiles: [],
 };
 
 export const getFilesReducer = createReducer(
@@ -131,20 +136,56 @@ export const getFilesReducer = createReducer(
       isLoading: false,
       isSuccess: false,
       error: error,
+      files: [],
+    };
+  }),
+
+  // Get files by collaborator id
+  on(FileActions.getFilesByCollaboratorId, (state) => {
+    return {
+      ...state,
+      isLoading: true,
+      isSuccess: false,
+      error: '',
+    };
+  }),
+
+  on(FileActions.getFilesByCollaboratorIdSuccess, (state, action) => {
+    console.log(action.type);
+    return {
+      ...state,
+      isLoading: false,
+      isSuccess: true,
+      error: '',
+      sharedFiles: action.files,
+    };
+  }),
+
+  on(FileActions.getFilesByCollaboratorIdFailure, (state, { error }) => {
+    return {
+      ...state,
+      isLoading: false,
+      isSuccess: false,
+      error: error,
+      sharedFiles: [],
     };
   })
 );
 
 export const fileReducers = createReducer(
   initialState,
-  on(FileActions.updateFile, (state) => ({ ...state, loading: true })),
+  on(FileActions.updateFile, (state, { type }) => {
+    console.log(type);
+    return { ...state, isLoading: true, isSuccess: false };
+  }),
 
   on(FileActions.updateFileSuccess, (state, action) => {
+    console.log(action.type);
     let newState = {
       ...state,
       fileId: action.file,
-      loading: false,
-      isSuccessful: true,
+      isLoading: false,
+      isSuccess: true,
     };
     return newState;
   }),
@@ -152,30 +193,36 @@ export const fileReducers = createReducer(
   on(FileActions.updateFileFailure, (state, { error }) => ({
     ...state,
     error: error,
-    loading: false,
-    isSuccessful: false,
+    isLoading: false,
+    isSuccess: false,
   })),
 
-  on(FileActions.inviteCollaborator, (state) => ({ ...state, loading: true })),
+  on(FileActions.inviteCollaborator, (state, { type }) => {
+    console.log(type);
+    return { ...state, isLoading: true };
+  }),
 
-  on(FileActions.inviteCollaboratorSuccess, (state) => {
+  on(FileActions.inviteCollaboratorSuccess, (state, { type }) => {
+    console.log(type);
     let newState = {
       ...state,
-      loading: false,
-      isSuccessful: true,
+      isLoading: false,
+      isSuccess: true,
     };
     return newState;
   }),
 
-  on(FileActions.inviteCollaboratorFailure, (state, { error }) => ({
-    ...state,
-    error: error,
-    loading: false,
-    isSuccessful: false,
-  }))
+  on(FileActions.inviteCollaboratorFailure, (state, { type, error }) => {
+    console.log(type, error);
+    return {
+      ...state,
+      error: error,
+      loading: false,
+      isSuccessful: false,
+    };
+  })
 );
 
-  
 export const initialDeleteState: DeleteFileState = {
   isLoading: false,
   isSuccess: false,

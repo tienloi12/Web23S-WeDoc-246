@@ -26,6 +26,7 @@ export interface GetFilesState {
   isSuccess: boolean;
   error: string;
   files: DocumentFile[];
+  sharedFiles: DocumentFile[];
 }
 
 export interface InviteCollaboratorState {

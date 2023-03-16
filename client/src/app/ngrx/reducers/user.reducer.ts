@@ -12,6 +12,7 @@ export const initialState: UserState = {
 
 export const userReducer = createReducer(
   initialState,
+  // Create User
   on(UserActions.createUser, (state) => ({ ...state, loading: true })),
   on(UserActions.createUserSuccess, (state, action) => {
     let newState = {
@@ -21,7 +22,6 @@ export const userReducer = createReducer(
     };
     return newState;
   }),
-
   on(UserActions.createUserFailure, (state, { error }) => ({
     ...state,
     error: error,
@@ -29,8 +29,8 @@ export const userReducer = createReducer(
     isSuccessful: false,
   })),
 
+  // Get User By Id
   on(UserActions.getUserById, (state) => ({ ...state, loading: true })),
-
   on(UserActions.getUserByIdSuccess, (state, action) => {
     let newState = {
       ...state,
@@ -40,7 +40,6 @@ export const userReducer = createReducer(
     };
     return newState;
   }),
-
   on(UserActions.getUserByIdFailure, (state, { error }) => ({
     ...state,
     error: error,
@@ -48,8 +47,8 @@ export const userReducer = createReducer(
     isSuccessful: false,
   })),
 
+  // Get User By Gmail
   on(UserActions.getUserByGmail, (state) => ({ ...state, loading: true })),
-
   on(UserActions.getUserByGmailSuccess, (state, action) => {
     let newState = {
       ...state,
@@ -59,7 +58,6 @@ export const userReducer = createReducer(
     };
     return newState;
   }),
-
   on(UserActions.getUserByGmailFailure, (state, { error }) => ({
     ...state,
     error: error,
@@ -67,6 +65,7 @@ export const userReducer = createReducer(
     isSuccessful: false,
   })),
 
+  // Clear User
   on(UserActions.clearUser, (state, action) => {
     return {
       ...state,

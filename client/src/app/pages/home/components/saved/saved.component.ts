@@ -18,6 +18,6 @@ export class SavedComponent implements OnInit {
     this.store.select('getFiles', 'files');
   }
   ngOnInit(): void {
-    this.store.dispatch(FileActions.getFiles());
+    // this.store.dispatch(FileActions.getFiles());
   }
 }

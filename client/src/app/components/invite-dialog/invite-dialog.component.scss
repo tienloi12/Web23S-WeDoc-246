@@ -1,0 +1,12 @@
+.mdc-dialog__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-mdc-dialog-actions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

@@ -8,31 +8,12 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-footer',
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.scss'],
 })
-export class HomeComponent {
+export class FooterComponent {
   auth$: Observable<AuthState>;
-
-  sideMenu = [
-    {
-      title: 'Home',
-      icon: 'home',
-      link: '/main',
-    },
-    {
-      title: 'Share',
-      icon: 'share',
-      link: '/shared',
-    },
-    {
-      title: 'Save',
-      icon: 'save',
-      link: '/saved',
-    },
-  ];
-  sideBarSelected: number = 0;
   user$ = this.store.select('user', 'user');
   constructor(
     public authService: AuthService,
@@ -41,17 +22,12 @@ export class HomeComponent {
     private store: Store<{ auth: AuthState; user: UserState }>
   ) {
     this.auth$ = store.select('auth');
-    this.user$.subscribe((user) => {
-      if (user._id) {
-        console.log(user);
-      }
-    });
+  }
+  newPaper() {
+    this.router.navigate(['/paper']);
   }
 
-  ngOnInit() {}
-
-  select(index: number) {
-    this.sideBarSelected = index;
-    this.router.navigate(['/home' + this.sideMenu[index].link]);
+  logOut() {
+    this.store.dispatch({ type: '[Auth] Logout' });
   }
 }

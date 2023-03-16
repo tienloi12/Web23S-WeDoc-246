@@ -99,17 +99,50 @@ export class FileEffects {
     );
   });
 
+  getfilesByCollaboratorId$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FileActions.getFilesByCollaboratorId),
+      switchMap((action) => {
+        return this.fileService.getFilesByCollaboratorId(action.collaboratorId);
+      }),
+      map((files) => {
+        console.log(files);
+        return FileActions.getFilesByCollaboratorIdSuccess({
+          files: <DocumentFile[]>files,
+        });
+      }),
+      catchError((error) => {
+        return of(
+          FileActions.getFilesByCollaboratorIdFailure({ error: error })
+        );
+      })
+    );
+  });
+
   inviteCollaborator$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(FileActions.inviteCollaborator),
       switchMap((action) =>
-        this.fileService.inviteCollaborator(action.file, action.uid)
+        this.fileService.inviteCollaborator(action.file, action.email)
       ),
-      map((file) => {
-        return FileActions.inviteCollaboratorSuccess();
+      map((file: any) => {
+        console.log(file);
+        if (file === null || file === undefined || file === '') {
+          return FileActions.inviteCollaboratorFailure({
+            error: 'User not found',
+          });
+        } else if (file.error === 'User is already a collaborator') {
+          return FileActions.inviteCollaboratorFailure({
+            error: 'User is already a collaborator',
+          });
+        } else {
+          return FileActions.inviteCollaboratorSuccess();
+        }
       }),
       catchError((error: string) => {
-        return of(FileActions.inviteCollaboratorFailure({ error }));
+        return of(
+          FileActions.inviteCollaboratorFailure({ error: 'User not found' })
+        );
       })
     );
   });

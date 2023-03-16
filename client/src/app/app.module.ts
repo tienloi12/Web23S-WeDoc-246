@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,19 +19,23 @@ import { ColabDialogComponent } from './components/colab-dialog/colab-dialog.com
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   createFileReducer,
   deleteFileReducer,
+  fileReducers,
   // fileReducers,
   getFileReducer,
+  getFilesReducer,
 } from './ngrx/reducers/file.reducer';
-import { getFilesReducer } from './ngrx/reducers/file.reducer';
 import { FileEffects } from './ngrx/effects/file.effect';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { InviteDialogComponent } from './components/invite-dialog/invite-dialog.component';
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +48,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     StoreModule.forRoot(
@@ -53,10 +59,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
         createfile: createFileReducer,
         getFiles: getFilesReducer,
         getFile: getFileReducer,
-        // file: fileReducers,
+        file: fileReducers,
         deleteFile: deleteFileReducer,
       },
-
       {}
     ),
     EffectsModule.forRoot([AuthEffects, UserEffects, FileEffects]),
@@ -66,6 +71,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     ],
   providers: [],
   bootstrap: [AppComponent],

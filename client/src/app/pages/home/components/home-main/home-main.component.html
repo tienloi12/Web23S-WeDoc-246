@@ -41,13 +41,16 @@
   <div class="file">
     <div class="mess">
       <p>File Name</p>
-      <p style="margin-right: 3rem">Date Modified</p>
+      <p>Date Modified</p>
+      <span style="width: 60px; height: 48px"></span>
     </div>
     <div class="file-item" *ngFor="let item of files$ | async">
-      <p class="cursor" (click)="openFile(item.fileId)">
-        {{ item.title }}
-      </p>
-      <span style="display: flex; justify-content: center; align-items: center;">
+      <span class="title">
+        <p (click)="openFile(item.fileId)">
+          {{ item.title }}
+        </p>
+      </span>
+      <span class="date">
         <p>
           {{ item.updatedAt | date : "medium" }}
         </p>
@@ -70,6 +73,24 @@
           </button>
         </mat-menu>
       </span>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        class="material-symbols-outlined"
+        style="margin-left: 1rem"
+      >
+        more_vert
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>delete_outline</mat-icon>
+          <span>Delete</span>
+        </button>
+        <button (click)="opeInviteDialog(item)" mat-menu-item>
+          <mat-icon>person_add</mat-icon>
+          <span>Invite</span>
+        </button>
+      </mat-menu>
     </div>
   </div>
 </div>

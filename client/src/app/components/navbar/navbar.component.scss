@@ -7,6 +7,7 @@
   justify-content: center;
   padding: 0 1rem;
 }
+
 .back {
   position: absolute;
   left: 0;
@@ -40,8 +41,6 @@
   &:hover {
     color: var(--secondary);
   }
-  font-size: 0.9rem;
-  font-weight: 500;
 }
 
 p {

@@ -6,6 +6,7 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   width: 100vw;
   height: 100vh;
@@ -26,4 +27,21 @@ body {
 body {
   font-family: "Source Sans Pro", sans-serif;
   overflow-x: hidden;
+}
+
+.mat-mdc-snack-bar-container {
+  &.snackbar {
+    --mdc-snackbar-container-color: #f6f6f6;
+    --mat-mdc-snack-bar-button-color: #673ab7;
+    --mdc-snackbar-supporting-text-color: #673ab7;
+  }
+}
+.background-color {
+  background-color: var(--primary) !important;
+  color: white;
+  cursor: pointer !important;
+}
+
+.background-color > :hover {
+  color: var(--primary);
 }

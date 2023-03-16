@@ -9,6 +9,7 @@ import {
   Toolbar,
   DEFAULT_TOOLBAR,
   toDoc,
+
 } from 'ngx-editor';
 import schema from './schema';
 import nodeViews from '../../nodeviews';
@@ -16,12 +17,13 @@ import { FileService } from 'src/app/services/file.service';
 import * as FileActions from 'src/app/ngrx/actions/file.action';
 import { GetFileDetailState } from 'src/app/ngrx/states/file.state';
 import { ActivatedRoute } from '@angular/router';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-paper',
   templateUrl: './paper.component.html',
   styleUrls: ['./paper.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class PaperComponent implements OnInit, OnDestroy {
   file$ = this.fileStore.select('getFile');
@@ -50,17 +52,21 @@ export class PaperComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    let input = document.querySelector(".NgxEditor__MenuBar");
+    input?.classList.add('background-color');
     this.editor = new Editor({
       schema,
       nodeViews,
       history: true,
       keyboardShortcuts: true,
       inputRules: true,
+
       attributes: { enterkeyhint: 'enter' },
       features: {
         linkOnPaste: true,
         resizeImage: true,
       },
+
     });
     this.fileStore.dispatch(
       FileActions.getFileDetail({

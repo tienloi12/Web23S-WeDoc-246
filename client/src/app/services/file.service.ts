@@ -5,6 +5,7 @@ import { DocumentFile } from '../models/file.model';
 import { CreateFileState, GetFileDetailState } from '../ngrx/states/file.state';
 import * as FileActions from '../ngrx/actions/file.action';
 import { UserModel } from '../models/user.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -26,12 +27,15 @@ export class FileService {
   }
 
   createFile(file: DocumentFile) {
-    return this.httpClient.post('http://localhost:3000/v1/file/create', file);
+    return this.httpClient.post<DocumentFile>(
+      environment.URL + '/v1/file/create',
+      file
+    );
   }
 
   updateFile(fileId: string, file: DocumentFile) {
     return this.httpClient.put(
-      `http://localhost:3000/v1/file/update/${fileId}`,
+      environment.URL + `/v1/file/update/${fileId}`,
       file
     );
   }
@@ -39,27 +43,31 @@ export class FileService {
   deleteFile(fileId: string) {
     console.log(fileId);
     return this.httpClient.delete(
-      `http://localhost:3000/v1/file/delete/${fileId}`
+      environment.URL + `/v1/file/delete/${fileId}`
     );
   }
 
   getFileDetail(fileId: string) {
-    return this.httpClient.get(`http://localhost:3000/v1/file/info/${fileId}`);
+    return this.httpClient.get(environment.URL + `/v1/file/info/${fileId}`);
   }
 
   getFiles() {
-    return this.httpClient.get('http://localhost:3000/v1/file/all');
+    return this.httpClient.get(environment.URL + '/v1/file/all');
   }
 
   getFilesByAuthorId(authorId: string) {
+    return this.httpClient.get(environment.URL + `/v1/file/author/${authorId}`);
+  }
+
+  getFilesByCollaboratorId(collaboratorId: string) {
     return this.httpClient.get(
-      `http://localhost:3000/v1/file/author/${authorId}`
+      environment.URL + `/v1/file/file-colab/${collaboratorId}`
     );
   }
 
-  inviteCollaborator(file: DocumentFile, uid: string) {
+  inviteCollaborator(file: DocumentFile, email: string | null) {
     return this.httpClient.put(
-      `http://localhost:3000/v1/file/invite/${uid}`,
+      environment.URL + `/v1/file/invite/${email}`,
       file
     );
   }
@@ -81,7 +89,7 @@ export class FileService {
       authorName: user.displayName,
       title: this.title,
       content: this.content,
-      collaborators: [user],
+      collaborators: [],
       createdAt: new Date().toString(),
       updatedAt: new Date().toString(),
     };
@@ -112,7 +120,7 @@ export class FileService {
       authorName: user.displayName,
       title: this.title,
       content: this.content,
-      collaborators: [user],
+      collaborators: [],
       createdAt: new Date().toString(),
       updatedAt: new Date().toString(),
     };

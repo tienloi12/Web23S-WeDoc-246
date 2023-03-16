@@ -47,13 +47,20 @@ export class FileController {
     let file = await this.fileService.deleteFileById(id);
     return file;
   }
-  
-  @Put('invite/:id')
+
+  @Get('file-colab/:id')
+  async getFilesByCollaboratorId(@Param(`id`) id: string) {
+    let files = await this.fileService.getFilesByCollaboratorId(id);
+    return files;
+  }
+
+  @Put('invite/:email')
   async inviteCollaborator(
     @Body() file: FileDocument,
-    @Param(`id`) uid: string,
+    @Param('email') email: string,
   ) {
-    let data = await this.fileService.inviteCollaborator(file, uid);
+    console.log(email);
+    let data = await this.fileService.inviteCollaborator(file, email);
     return data;
   }
 }
