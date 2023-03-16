@@ -8,6 +8,8 @@ import { User, UserSchema } from './schemas/user.schema';
 import { FileService } from './services/file/file.service';
 import { File, FileSchema } from './schemas/file.schema';
 import { FileController } from './controllers/v1/file/file.controller';
+import { PaperGateway } from './gateways/paper/paper.gateway';
+import { GatewayModule } from './gateways/gateway.module';
 
 @Module({
   imports: [
@@ -18,6 +20,7 @@ import { FileController } from './controllers/v1/file/file.controller';
       { name: User.name, schema: UserSchema },
       { name: File.name, schema: FileSchema },
     ]),
+    GatewayModule
   ],
   controllers: [AppController, UserController, FileController],
   providers: [AppService, UserService, FileService],
