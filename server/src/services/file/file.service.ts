@@ -17,7 +17,7 @@ export class FileService {
   async createFile(file: File): Promise<File | any> {
     try {
       let data = await this.fileModel.create(file);
-      return data;
+      return { data, message: 'File saved successfully' };
     } catch (error) {
       console.log(error);
       return null;
@@ -69,11 +69,22 @@ export class FileService {
   async deleteFileById(fileId: string): Promise<string | null> {
     try {
       await this.fileModel.deleteOne({ fileId: fileId }).exec();
-      return 'successfully deleted';
+      return 'File deleted successfully';
     } catch (error) {
-      ('unsuccessfully deleted');
+      ('File deleted successfully');
     }
   }
+
+  // INVITE collaborator
+  // async inviteCollaborator(file: FileDocument, uid: string) {
+  //   try {
+  //     // check if user is already a collaborator
+  //     let isCollab = file.collaborators.find((collab) => collab == Object(uid));
+  //     return 'successfully deleted';
+  //   } catch (error) {
+  //     ('unsuccessfully deleted');
+  //   }
+  // }
 
   // GET FILES BY COLLABORATOR ID
   async getFilesByCollaboratorId(
