@@ -54,7 +54,7 @@
         <p>
           {{ item.updatedAt | date : "medium" }}
         </p>
-        <button
+        <!-- <button
           mat-icon-button
           [matMenuTriggerFor]="menu"
           class="material-symbols-outlined"
@@ -63,7 +63,7 @@
           more_vert
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="openDialogDelete(item.fileId)">
+          <button mat-menu-item >
             <span class="material-symbols-outlined"> delete </span>
             <span>Delete</span>
           </button>
@@ -71,7 +71,7 @@
             <span class="material-symbols-outlined"> person_add </span>
             <span>Invite</span>
           </button>
-        </mat-menu>
+        </mat-menu> -->
       </span>
       <button
         mat-icon-button
@@ -82,7 +82,7 @@
         more_vert
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <button mat-menu-item (click)="openDialogDelete(item.fileId)">
           <mat-icon>delete_outline</mat-icon>
           <span>Delete</span>
         </button>
@@ -94,4 +94,3 @@
     </div>
   </div>
 </div>
-

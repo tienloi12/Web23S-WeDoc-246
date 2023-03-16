@@ -14,7 +14,11 @@ import { UserModel } from 'src/app/models/user.model';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from 'src/app/components/delete-dialog/delete-dialog.component';
 import { InviteDialogComponent } from 'src/app/components/invite-dialog/invite-dialog.component';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home-main',
@@ -99,14 +103,24 @@ export class HomeMainComponent implements OnInit, OnDestroy {
   }
 
   openDialogDelete(fileId: string) {
-    this.dialog.open(DeleteDialogComponent, { data: fileId });
-  }
-  openDialog() {
-    const dialogRef = this.dialog.open(InviteDialogComponent);
+    this.dialog.open(DeleteDialogComponent, { data: {
+      fileId: fileId,
+      authorId: this.user._id
+    } });
   }
 
-  opeInviteDialog(item: any) {
-    
+  opeInviteDialog(file: DocumentFile) {
+    const dialogRef = this.dialog.open(InviteDialogComponent, {
+      autoFocus: false,
+    });
+    dialogRef.afterClosed().subscribe((result: string) => {
+      if (result != undefined || result != null || result != '') {
+        console.log(result);
+        this.store.dispatch(
+          FileActions.inviteCollaborator({ file: file, email: result })
+        );
+        console.log('The dialog was closed');
+      }
+    });
   }
 }
-

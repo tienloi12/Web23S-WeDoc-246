@@ -12,7 +12,10 @@ export const initialState: CreateFileState = {
   isLoading: false,
   isSuccess: false,
   error: '',
-  file: <DocumentFile>{},
+  data: {
+    file: <DocumentFile>{},
+    msg: '',
+  },
 };
 
 export const createFileReducer = createReducer(
@@ -28,7 +31,10 @@ export const createFileReducer = createReducer(
   on(FileActions.createFileSuccess, (state, action) => {
     let newState = {
       ...state,
-      fileId: action.file,
+      data: {
+        file: action.file,
+        msg: action.msg,
+      },
       loading: false,
       isSuccess: true,
     };

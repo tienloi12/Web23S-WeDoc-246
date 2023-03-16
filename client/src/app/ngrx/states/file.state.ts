@@ -4,7 +4,10 @@ export interface CreateFileState {
   isLoading: boolean;
   isSuccess: boolean;
   error: string;
-  file: DocumentFile;
+  data: {
+    file: DocumentFile,
+    msg: string,
+  }
 }
 
 export interface DeleteFileState {

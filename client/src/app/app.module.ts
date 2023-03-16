@@ -71,8 +71,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
+
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    ],
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

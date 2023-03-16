@@ -17,7 +17,7 @@ export class DeleteDialogComponent {
   ) {}
 
   yes() {
-    this.store.dispatch(FileActions.deteleFile({ fileId: this.data }));
+    this.store.dispatch(FileActions.deteleFile({ fileId: this.data.fileId }));
     window.location.reload();
   }
 }
