@@ -2,12 +2,14 @@ import { DocumentFile } from 'src/app/models/file.model';
 
 export interface CreateFileState {
   isLoading: boolean;
-  isSuccess: boolean;
+  isInviteSuccess: boolean;
+  isCreateSuccess: boolean;
+  isUpdateSuccess: boolean;
   error: string;
   data: {
-    file: DocumentFile,
-    msg: string,
-  }
+    file: DocumentFile;
+    msg: string;
+  };
 }
 
 export interface DeleteFileState {

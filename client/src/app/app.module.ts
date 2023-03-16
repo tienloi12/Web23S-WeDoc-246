@@ -32,7 +32,6 @@ import {
 import { FileEffects } from './ngrx/effects/file.effect';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { InviteDialogComponent } from './components/invite-dialog/invite-dialog.component';
-import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -42,7 +41,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     ColabDialogComponent,
     DeleteDialogComponent,
     InviteDialogComponent,
-    SnackBarComponent,
   ],
   imports: [
     BrowserModule,

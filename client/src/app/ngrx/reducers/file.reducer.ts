@@ -10,7 +10,9 @@ import { DocumentFile } from 'src/app/models/file.model';
 
 export const initialState: CreateFileState = {
   isLoading: false,
-  isSuccess: false,
+  isInviteSuccess: false,
+  isCreateSuccess: false,
+  isUpdateSuccess: false,
   error: '',
   data: {
     file: <DocumentFile>{},
@@ -36,7 +38,7 @@ export const createFileReducer = createReducer(
         msg: action.msg,
       },
       loading: false,
-      isSuccess: true,
+      isCreateSuccess: true,
     };
     return newState;
   }),
@@ -45,7 +47,7 @@ export const createFileReducer = createReducer(
     ...state,
     error: error,
     loading: false,
-    isSuccess: false,
+    isCreateSuccess: false,
   }))
 );
 
@@ -182,7 +184,7 @@ export const fileReducers = createReducer(
   initialState,
   on(FileActions.updateFile, (state, { type }) => {
     console.log(type);
-    return { ...state, isLoading: true, isSuccess: false };
+    return { ...state, isLoading: true, isUpdateSuccess: false };
   }),
 
   on(FileActions.updateFileSuccess, (state, action) => {
@@ -191,7 +193,7 @@ export const fileReducers = createReducer(
       ...state,
       fileId: action.file,
       isLoading: false,
-      isSuccess: true,
+      isUpdateSuccess: true,
     };
     return newState;
   }),
@@ -200,7 +202,7 @@ export const fileReducers = createReducer(
     ...state,
     error: error,
     isLoading: false,
-    isSuccess: false,
+    isUpdateSuccess: false,
   })),
 
   on(FileActions.inviteCollaborator, (state, { type }) => {
@@ -213,7 +215,7 @@ export const fileReducers = createReducer(
     let newState = {
       ...state,
       isLoading: false,
-      isSuccess: true,
+      isInviteSuccess: true,
     };
     return newState;
   }),
@@ -224,7 +226,7 @@ export const fileReducers = createReducer(
       ...state,
       error: error,
       loading: false,
-      isSuccessful: false,
+      isInviteSuccess: false,
     };
   })
 );

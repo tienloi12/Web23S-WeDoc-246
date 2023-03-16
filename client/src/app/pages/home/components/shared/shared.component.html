@@ -16,7 +16,7 @@
   <div class="line"></div>
   <div *ngFor="let file of files$ | async" class="file">
     <div class="item">
-      <div class="item-file-name">
+      <div class="item-file-name" (click)="openFile(file.fileId)">
         {{ file.title }}
       </div>
       <div class="item-type">pdf</div>

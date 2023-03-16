@@ -16,11 +16,14 @@ export class SharedComponent implements OnInit, OnDestroy {
   user$ = this.store.select('user', 'user');
   files$ = this.store.select('getFiles', 'sharedFiles');
   constructor(
+    private router: Router,
     private store: Store<{ getFiles: GetFilesState; user: UserState }>
   ) {}
+
   ngOnDestroy(): void {
     this.userSubscribtion.unsubscribe();
   }
+
   ngOnInit(): void {
     this.store.select('getFiles', 'sharedFiles');
     this.userSubscribtion = this.user$.subscribe((user) => {
@@ -35,5 +38,9 @@ export class SharedComponent implements OnInit, OnDestroy {
     this.files$.subscribe((files) => {
       console.log(files);
     });
+  }
+
+  openFile($event: any) {
+    this.router.navigate(['/paper/' + $event]);
   }
 }

@@ -26,11 +26,6 @@ export class HomeComponent {
       icon: 'share',
       link: '/shared',
     },
-    {
-      title: 'Save',
-      icon: 'save',
-      link: '/saved',
-    },
   ];
   sideBarSelected: number = 0;
   user$ = this.store.select('user', 'user');

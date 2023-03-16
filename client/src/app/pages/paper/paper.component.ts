@@ -9,15 +9,22 @@ import {
   Toolbar,
   DEFAULT_TOOLBAR,
   toDoc,
-
 } from 'ngx-editor';
 import schema from './schema';
 import nodeViews from '../../nodeviews';
 import { FileService } from 'src/app/services/file.service';
 import * as FileActions from 'src/app/ngrx/actions/file.action';
-import { GetFileDetailState } from 'src/app/ngrx/states/file.state';
+import {
+  CreateFileState,
+  GetFileDetailState,
+} from 'src/app/ngrx/states/file.state';
 import { ActivatedRoute } from '@angular/router';
-import { style } from '@angular/animations';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 import {
   ySyncPlugin,
@@ -48,10 +55,24 @@ export class PaperComponent implements OnInit, OnDestroy {
   user$ = this.fileStore.select('user');
   userInfo!: any;
   editordoc = '';
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  isCreateSuccessSubscription!: Subscription;
+  isUpdateSuccessSubscription!: Subscription;
+  isCreateSuccess$ = this.fileStore.select('createFile', 'isCreateSuccess');
+  isUpdateSuccess$ = this.fileStore.select('file', 'isUpdateSuccess');
+
   constructor(
+    private _snackBar: MatSnackBar,
     public authService: AuthService,
     public fileService: FileService,
-    private fileStore: Store<{ getFile: GetFileDetailState, user: UserState }>,
+    private fileStore: Store<{
+      getFile: GetFileDetailState;
+      createFile: CreateFileState;
+      file: CreateFileState;
+      user: UserState;
+    }>,
     private activedRoute: ActivatedRoute
   ) {}
 
@@ -77,6 +98,15 @@ export class PaperComponent implements OnInit, OnDestroy {
     return this.form.get('editorContent') ?? new FormControl();
   }
 
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'Close', {
+      duration: 2000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      panelClass: ['snackbar'],
+    });
+  }
+
   ngOnInit(): void {
     this.user$.subscribe((user) => {
       this.userInfo = user.user;
@@ -91,7 +121,6 @@ export class PaperComponent implements OnInit, OnDestroy {
       history: true,
       keyboardShortcuts: true,
       inputRules: true,
-
       attributes: { enterkeyhint: 'enter' },
       features: {
         linkOnPaste: true,
@@ -102,7 +131,6 @@ export class PaperComponent implements OnInit, OnDestroy {
         ySyncPlugin(this.type),
         yCursorPlugin(this.provider.awareness, {
           cursorBuilder: (user: any) => {
-            console.log(user);
             const cursor = document.createElement('span');
             cursor.setAttribute(
               'style',
@@ -155,16 +183,44 @@ export class PaperComponent implements OnInit, OnDestroy {
         fileId: this.activedRoute.snapshot.params['id'],
       })
     );
-    this.file$.subscribe((file: any) => {
-      if (file) {
+    this.file$.subscribe((file) => {
+      if (file.file) {
         this.editor.setContent(toDoc(file.file.content));
         let title = document.querySelector('#title') as HTMLInputElement;
         title.value = file.file.title;
       }
     });
+
+    this.isCreateSuccessSubscription = this.isCreateSuccess$.subscribe(
+      (isCreateSuccess) => {
+        if (isCreateSuccess) {
+          this.openSnackBar('Create file success');
+          this.fileStore.dispatch(
+            FileActions.getFileDetail({
+              fileId: this.activedRoute.snapshot.params['id'],
+            })
+          );
+        }
+      }
+    );
+
+    this.isUpdateSuccessSubscription = this.isUpdateSuccess$.subscribe(
+      (isUpdateSuccess) => {
+        if (isUpdateSuccess) {
+          this.openSnackBar('Update file success');
+          this.fileStore.dispatch(
+            FileActions.getFileDetail({
+              fileId: this.activedRoute.snapshot.params['id'],
+            })
+          );
+        }
+      }
+    );
   }
 
   ngOnDestroy(): void {
     this.editor.destroy();
+    this.isCreateSuccessSubscription.unsubscribe();
+    this.isUpdateSuccessSubscription.unsubscribe();
   }
 }

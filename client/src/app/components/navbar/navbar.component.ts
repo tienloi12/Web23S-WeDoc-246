@@ -17,7 +17,6 @@ import * as FileActions from 'src/app/ngrx/actions/file.action';
 import { UserState } from 'src/app/ngrx/states/user.state';
 import { UserModel } from 'src/app/models/user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SnackBarComponent } from '../snack-bar/snack-bar.component';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -33,8 +32,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private router: Router,
     public dialog: MatDialog,
     private fileService: FileService,
-    private store: Store<{ createFile: CreateFileState; user: UserState,}>,
-    private _snackBar: MatSnackBar,
+    private store: Store<{ createFile: CreateFileState; user: UserState }>,
+    private _snackBar: MatSnackBar
   ) {}
   ngOnDestroy(): void {
     this.userSubcription.unsubscribe();
@@ -66,16 +65,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   save() {
     this.fileService.save(this.user);
-    this._snackBar.openFromComponent(SnackBarComponent, {
-      duration: 2*1000,
-    });
   }
 
   update() {
     this.fileService.update(this.user);
-    this._snackBar.openFromComponent(SnackBarComponent, {
-      duration: 2 * 1000,
-    });
-    //update func
   }
 }
