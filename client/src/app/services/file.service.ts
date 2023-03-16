@@ -85,8 +85,7 @@ export class FileService {
     let file!: DocumentFile;
     file = {
       fileId: Date.now().toString(),
-      authorId: user._id,
-      authorName: user.displayName,
+      authorId: user,
       title: this.title,
       content: this.content,
       collaborators: [],
@@ -116,8 +115,7 @@ export class FileService {
     let file!: DocumentFile;
     file = {
       fileId: fileId,
-      authorId: user._id,
-      authorName: user.displayName,
+      authorId: user,
       title: this.title,
       content: this.content,
       collaborators: [],

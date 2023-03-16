@@ -25,6 +25,13 @@
           <li *ngFor="let user of file.collaborators">
             <img class="overlap-ava" [src]="user.photoURL" title="ava" />
           </li>
+          <li>
+            <img
+              class="overlap-ava"
+              [src]="file.authorId.photoURL"
+              title="ava"
+            />
+          </li>
         </ul>
       </div>
       <div class="item-date-created">

@@ -9,8 +9,7 @@ import { UserModel } from './user.model';
 
 export interface DocumentFile {
   fileId: string;
-  authorId: string;
-  authorName: string;
+  authorId: UserModel;
   title: string;
   content: string;
   collaborators: UserModel[];

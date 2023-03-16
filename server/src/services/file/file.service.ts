@@ -83,6 +83,7 @@ export class FileService {
       let data = await this.fileModel
         .find({ collaborators: { $eq: Object(collaboratorId) } })
         .populate('collaborators', 'photoURL', this.userModel)
+        .populate('authorId', 'photoURL', this.userModel)
         .exec();
       return data;
     } catch (error) {
