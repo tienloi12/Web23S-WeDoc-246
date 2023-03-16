@@ -16,7 +16,7 @@ export class DeleteDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  yes() {
+  confirm() {
     this.store.dispatch(FileActions.deteleFile({ fileId: this.data.fileId }));
     window.location.reload();
   }
