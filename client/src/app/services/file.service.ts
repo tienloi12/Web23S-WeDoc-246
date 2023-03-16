@@ -13,6 +13,10 @@ import { environment } from 'src/environments/environment';
 export class FileService {
   content!: string;
   title!: string | null;
+  authorId!: UserModel;
+  collaborators!: UserModel[];
+  createAt!: string;
+
   userMain!: UserModel;
   constructor(
     private httpClient: HttpClient,
@@ -115,11 +119,11 @@ export class FileService {
     let file!: DocumentFile;
     file = {
       fileId: fileId,
-      authorId: user,
+      authorId: this.authorId,
       title: this.title,
       content: this.content,
-      collaborators: [],
-      createdAt: new Date().toString(),
+      collaborators: this.collaborators,
+      createdAt: this.createAt,
       updatedAt: new Date().toString(),
     };
     this.store.dispatch(
