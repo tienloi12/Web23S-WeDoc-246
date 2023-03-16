@@ -30,7 +30,7 @@ export class HomeMainComponent implements OnInit, OnDestroy {
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   isSuccessSubscription!: Subscription;
-  isSuccess$ = this.store.select('file', 'isSuccess');
+  isSuccess$ = this.store.select('file', 'isInviteSuccess');
   errorSubscription!: Subscription;
   error$ = this.store.select('file', 'error');
   files$: Observable<DocumentFile[]>;
@@ -103,10 +103,12 @@ export class HomeMainComponent implements OnInit, OnDestroy {
   }
 
   openDialogDelete(fileId: string) {
-    this.dialog.open(DeleteDialogComponent, { data: {
-      fileId: fileId,
-      authorId: this.user._id
-    } });
+    this.dialog.open(DeleteDialogComponent, {
+      data: {
+        fileId: fileId,
+        authorId: this.user._id,
+      },
+    });
   }
 
   opeInviteDialog(file: DocumentFile) {

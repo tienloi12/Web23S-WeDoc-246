@@ -9,15 +9,22 @@ import {
   Toolbar,
   DEFAULT_TOOLBAR,
   toDoc,
-
 } from 'ngx-editor';
 import schema from './schema';
 import nodeViews from '../../nodeviews';
 import { FileService } from 'src/app/services/file.service';
 import * as FileActions from 'src/app/ngrx/actions/file.action';
-import { GetFileDetailState } from 'src/app/ngrx/states/file.state';
+import {
+  CreateFileState,
+  GetFileDetailState,
+} from 'src/app/ngrx/states/file.state';
 import { ActivatedRoute } from '@angular/router';
-import { style } from '@angular/animations';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-paper',
@@ -28,10 +35,23 @@ import { style } from '@angular/animations';
 export class PaperComponent implements OnInit, OnDestroy {
   file$ = this.fileStore.select('getFile');
   editordoc = '';
+
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  isCreateSuccessSubscription!: Subscription;
+  isUpdateSuccessSubscription!: Subscription;
+  isCreateSuccess$ = this.fileStore.select('createFile', 'isCreateSuccess');
+  isUpdateSuccess$ = this.fileStore.select('file', 'isUpdateSuccess');
+
   constructor(
+    private _snackBar: MatSnackBar,
     public authService: AuthService,
     public fileService: FileService,
-    private fileStore: Store<{ getFile: GetFileDetailState }>,
+    private fileStore: Store<{
+      getFile: GetFileDetailState;
+      createFile: CreateFileState;
+      file: CreateFileState;
+    }>,
     private activedRoute: ActivatedRoute
   ) {}
 
@@ -51,8 +71,17 @@ export class PaperComponent implements OnInit, OnDestroy {
     return this.form.get('editorContent') ?? new FormControl();
   }
 
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'Close', {
+      duration: 2000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      panelClass: ['snackbar'],
+    });
+  }
+
   ngOnInit(): void {
-    let input = document.querySelector(".NgxEditor__MenuBar");
+    let input = document.querySelector('.NgxEditor__MenuBar');
     input?.classList.add('background-color');
     this.editor = new Editor({
       schema,
@@ -60,19 +89,18 @@ export class PaperComponent implements OnInit, OnDestroy {
       history: true,
       keyboardShortcuts: true,
       inputRules: true,
-
       attributes: { enterkeyhint: 'enter' },
       features: {
         linkOnPaste: true,
         resizeImage: true,
       },
-
     });
     this.fileStore.dispatch(
       FileActions.getFileDetail({
         fileId: this.activedRoute.snapshot.params['id'],
       })
     );
+
     this.file$.subscribe((file) => {
       if (file) {
         this.editor.setContent(toDoc(file.file.content));
@@ -80,9 +108,37 @@ export class PaperComponent implements OnInit, OnDestroy {
         title.value = file.file.title;
       }
     });
+
+    this.isCreateSuccessSubscription = this.isCreateSuccess$.subscribe(
+      (isCreateSuccess) => {
+        if (isCreateSuccess) {
+          this.openSnackBar('Create file success');
+          this.fileStore.dispatch(
+            FileActions.getFileDetail({
+              fileId: this.activedRoute.snapshot.params['id'],
+            })
+          );
+        }
+      }
+    );
+
+    this.isUpdateSuccessSubscription = this.isUpdateSuccess$.subscribe(
+      (isUpdateSuccess) => {
+        if (isUpdateSuccess) {
+          this.openSnackBar('Update file success');
+          this.fileStore.dispatch(
+            FileActions.getFileDetail({
+              fileId: this.activedRoute.snapshot.params['id'],
+            })
+          );
+        }
+      }
+    );
   }
 
   ngOnDestroy(): void {
     this.editor.destroy();
+    this.isCreateSuccessSubscription.unsubscribe();
+    this.isUpdateSuccessSubscription.unsubscribe();
   }
 }
