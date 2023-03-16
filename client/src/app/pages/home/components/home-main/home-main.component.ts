@@ -103,10 +103,12 @@ export class HomeMainComponent implements OnInit, OnDestroy {
   }
 
   openDialogDelete(fileId: string) {
-    this.dialog.open(DeleteDialogComponent);
-    // this.store.dispatch(FileActions.deteleFile({ fileId: fileId }));
-    // window.location.reload();
+    this.dialog.open(DeleteDialogComponent, { data: {
+      fileId: fileId,
+      authorId: this.user._id
+    } });
   }
+
   opeInviteDialog(file: DocumentFile) {
     const dialogRef = this.dialog.open(InviteDialogComponent, {
       autoFocus: false,

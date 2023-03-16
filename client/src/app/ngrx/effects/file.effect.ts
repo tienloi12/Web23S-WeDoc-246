@@ -16,7 +16,7 @@ export class FileEffects {
         return this.fileService.createFile(action.file);
       }),
       map((file) => {
-        return FileActions.createFileSuccess({ file: <DocumentFile>file });
+        return FileActions.createFileSuccess({ file: <DocumentFile>file, msg: 'File created successfully' });
       }),
       catchError((error) => of(FileActions.createFileFailure({ error })))
     );

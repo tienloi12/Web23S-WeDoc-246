@@ -8,7 +8,7 @@ export const createFile = createAction(
 
 export const createFileSuccess = createAction(
   '[File] Create File Success',
-  props<{ file: DocumentFile }>()
+  props<{ file: DocumentFile, msg: string }>()
 );
 
 export const createFileFailure = createAction(
