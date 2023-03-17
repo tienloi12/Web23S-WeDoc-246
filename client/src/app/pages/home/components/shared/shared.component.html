@@ -1,43 +1,25 @@
 <div class="shared-container">
   <div class="shared-title">
-    <div class="shared-file-name">
-      <b>File Name</b>
-    </div>
-    <div class="shared-type">
-      <b>Type</b>
-    </div>
-    <div class="shared-shared">
-      <b>Shared</b>
-    </div>
-    <div class="shared-date-created">
-      <b>Date Created</b>
-    </div>
+    <b>File Name</b>
+    <b class="title">Shared</b>
+    <b>Date Modified</b>
   </div>
-  <div class="line"></div>
   <div *ngFor="let file of files$ | async" class="file">
-    <div class="item">
-      <div class="item-file-name" (click)="openFile(file.fileId)">
-        {{ file.title }}
-      </div>
-      <div class="item-type">pdf</div>
-      <div class="cover-overlap-ava">
-        <ul>
-          <li *ngFor="let user of file.collaborators">
-            <img class="overlap-ava" [src]="user.photoURL" title="ava" />
-          </li>
-          <li>
-            <img
-              class="overlap-ava"
-              [src]="file.authorId.photoURL"
-              title="ava"
-            />
-          </li>
-        </ul>
-      </div>
-      <div class="item-date-created">
-        {{ file.updatedAt | date : "medium" }}
-      </div>
+    <div class="file-name" (click)="openFile(file.fileId)">
+      {{ file.title }}
     </div>
-    <div class="line-card"></div>
+    <div class="cover-overlap-ava">
+      <ul>
+        <li *ngFor="let user of file.collaborators">
+          <img class="overlap-ava" [src]="user.photoURL" title="ava" />
+        </li>
+        <li>
+          <img class="overlap-ava" [src]="file.authorId.photoURL" title="ava" />
+        </li>
+      </ul>
+    </div>
+    <div class="date-created">
+      {{ file.updatedAt | date : "medium" }}
+    </div>
   </div>
 </div>

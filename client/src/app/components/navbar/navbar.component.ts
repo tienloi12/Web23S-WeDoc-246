@@ -47,9 +47,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   @Input()
-  sidebarOpen = false;
-
-  @Input()
   title = 'Untitled';
 
   @Output()

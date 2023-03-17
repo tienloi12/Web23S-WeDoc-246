@@ -43,7 +43,6 @@ import { DecorationAttrs } from 'prosemirror-view';
 
 const ydoc = new Y.Doc();
 
-
 @Component({
   selector: 'app-paper',
   templateUrl: './paper.component.html',
@@ -58,6 +57,8 @@ export class PaperComponent implements OnInit, OnDestroy {
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
+  userSubscription!: Subscription;
+  fileSubscription!: Subscription;
   isCreateSuccessSubscription!: Subscription;
   isUpdateSuccessSubscription!: Subscription;
   isCreateSuccess$ = this.fileStore.select('createFile', 'isCreateSuccess');
@@ -76,9 +77,15 @@ export class PaperComponent implements OnInit, OnDestroy {
     private activedRoute: ActivatedRoute
   ) {}
 
-  provider = new WebsocketProvider('ws://localhost:3000', 'paper', ydoc, {
-    params: { docId: this.activedRoute.snapshot.params['id']},
-  });
+  provider = new WebsocketProvider(
+    // 'wss://wedoc-5nhuptbdaq-uc.a.run.app',
+    'ws://localhost:3000',
+    'paper',
+    ydoc,
+    {
+      params: { docId: this.activedRoute.snapshot.params['id'] },
+    }
+  );
 
   type = ydoc.getXmlFragment('prosemirror');
 
@@ -108,12 +115,14 @@ export class PaperComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.user$.subscribe((user) => {
+    this.userSubscription = this.user$.subscribe((user) => {
       this.userInfo = user.user;
-      this.provider.awareness.setLocalStateField('user', {name:  user.user.displayName ?? 'Anonymous', color: '#' + Math.floor(Math.random() * 16777215).toString(16)});
-      
-    })
-    let input = document.querySelector(".NgxEditor__MenuBar");
+      this.provider.awareness.setLocalStateField('user', {
+        name: user.user.displayName ?? 'Anonymous',
+        color: '#' + Math.floor(Math.random() * 16777215).toString(16),
+      });
+    });
+    let input = document.querySelector('.NgxEditor__MenuBar');
     input?.classList.add('background-color');
     this.editor = new Editor({
       schema,
@@ -163,12 +172,12 @@ export class PaperComponent implements OnInit, OnDestroy {
             return cursor;
           },
           selectionBuilder: (user: any) => {
-            const selection : DecorationAttrs = {
+            const selection: DecorationAttrs = {
               style: `background-color: ${user.color}`,
-            }
+            };
             // selection.insertBefore(document.createTextNode(user.name), null);
             return selection;
-          }
+          },
         }),
         yUndoPlugin(),
         keymap({
@@ -178,12 +187,14 @@ export class PaperComponent implements OnInit, OnDestroy {
         }),
       ],
     });
+
     this.fileStore.dispatch(
       FileActions.getFileDetail({
         fileId: this.activedRoute.snapshot.params['id'],
       })
     );
-    this.file$.subscribe((file) => {
+
+    this.fileSubscription = this.file$.subscribe((file) => {
       if (file.file) {
         this.editor.setContent(toDoc(file.file.content));
         let title = document.querySelector('#title') as HTMLInputElement;
@@ -220,6 +231,8 @@ export class PaperComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.editor.destroy();
+    this.userSubscription.unsubscribe();
+    this.fileSubscription.unsubscribe();
     this.isCreateSuccessSubscription.unsubscribe();
     this.isUpdateSuccessSubscription.unsubscribe();
   }

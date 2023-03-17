@@ -8,5 +8,6 @@ export const environment = {
     authDomain: 'wedoc-f1743.firebaseapp.com',
     messagingSenderId: '1092312971962',
   },
-  URL: 'http://localhost:3000',
+  hostingURL: 'http://localhost:3000',
+  // hostingURL: 'https://wedoc-5nhuptbdaq-uc.a.run.app',
 };

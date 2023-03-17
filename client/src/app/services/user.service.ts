@@ -12,18 +12,21 @@ export class UserService {
   constructor(private httpCLient: HttpClient) {}
 
   post(user: UserModel) {
-    return this.httpCLient.post(environment.URL + '/v1/user/create', user);
+    return this.httpCLient.post(
+      environment.hostingURL + '/v1/user/create',
+      user
+    );
   }
 
   getProfile(uid: string) {
     return this.httpCLient.get<UserModel>(
-      environment.URL + `/v1/user/info/${uid}`
+      environment.hostingURL + `/v1/user/info/${uid}`
     );
   }
 
   getProfileByEmail(email: string) {
     return this.httpCLient.get<UserModel>(
-      environment.URL + `/v1/user/${email}`
+      environment.hostingURL + `/v1/user/${email}`
     );
   }
 }
