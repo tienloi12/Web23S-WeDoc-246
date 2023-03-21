@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.store.dispatch(UserActions.getUserById({ id: user.uid }));
-        // this.router.navigate(['/home/main']);
+        this.router.navigate(['/home/main']);
       } else {
         this.store.dispatch(UserActions.clearUser());
         this.router.navigate(['/landing']);

@@ -21,9 +21,8 @@ export class LandingComponent {
   }
 
   loginWithGoogle() {
-    this.store.dispatch(AuthActions.login());
+  this.store.dispatch(AuthActions.login());
   }
-
   goToIntroduce() {
     this.router.navigate(['/about']);
     // this.router.navigate(['/introduce']);
